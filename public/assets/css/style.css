@@ -1,0 +1,450 @@
+img{
+	max-width: 100%;
+}
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+a{
+    text-decoration-line: none !important;
+}
+
+input:focus, textarea:focus{
+	outline: none;
+}
+.top_head{
+    margin: 0;
+     padding: 0;
+     text-align: right;
+}
+.top_head li{
+    list-style: none;
+    display: inline;
+    padding: 0 10px;
+}
+.top_head li a{
+    color: black;
+    font-weight: 500;
+    font-size: 17px;
+    position: relative;display: inline-block;
+}
+.top_head li a i{
+    font-size: 24px;
+}
+.notification_circle{
+    background: #00c9ff;
+    color: white;
+    width: 21px;
+    height: 21px;
+    display: inline-block;
+    border-radius: 100px;
+    text-align: center;
+    font-size: 11px;
+    position: absolute;
+    right: -10px;
+    top: -5px;
+    border: 2px solid white;
+}
+.signin_btn .btn{
+    background:#00c9ff;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    padding: 7px 17px;
+}
+.signup_btn .btn{
+    background:#0000ff;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    padding: 7px 17px;
+}
+.header{
+    background: #0000ff;
+}
+.langugae_btn{
+        color: blue !important;
+    background: white;
+    border-radius: 5px;
+        padding: 8px 10px;
+}
+.lng_row .dropdown-item{
+        padding: 6px 8px;
+}
+.header .nav-item .nav-link {
+    color: white;
+    font-weight: 500;
+    font-size: 15px;
+}
+.slider_box{
+    background-image: url('../images/slider_bg.png');
+    background-size: cover;
+    padding: 65px;
+}
+.slider_box h1{
+    font-weight: 700;
+    font-size: 40px;
+    color: #343039;
+}
+.slider_box p .orignl{
+    color: #00c9ff;
+    font-size: 20px;
+}
+.slider_box p .old{
+    position: relative;
+    display: inline-block;
+}
+.slider_box p .old:before{
+   content: '';
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #343039;
+    z-index: 1024;
+}
+.slider_box p{
+    font-size: 18px;
+    font-weight: 500;
+    color: #343039;
+}
+.slider_box .btn{
+    border: 2px solid #00c9ff;
+    color: #00c9ff;
+    font-weight: 500;
+    padding: 10px 30px;
+}
+.swiper-pagination-bullet {
+    width: 20px !important;
+    height: 5px !important;
+    display: inline-block;
+    border-radius: 10px !important;
+    background: #343039 !important;
+    opacity: 1 !important;
+}
+.quiz_slider .swiper-button-next{
+    background-image: url('../images/next.png');
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+}
+.quiz_slider .swiper-button-prev{
+    background-image: url('../images/prev.png');
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #00c9ff !important;
+}
+.bg_section{
+	background-color: #e5f9ff;
+}
+.quiz_slider h2{
+    color: #00c9ff;
+    font-size: 25px;
+}
+.mobile_sec {
+    background: #00c9ff;
+    z-index: 1;
+    overflow: hidden;
+    position: relative;
+}
+.mobile_sec:before {
+    background: #fff none repeat scroll 0 0;
+    height: 50%;
+    top: 70%;
+}
+.mobile_sec:before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    -webkit-transform: skewY(
+188deg
+);
+    transform: skewY(
+188deg
+);
+    width: 100%;
+    z-index: 0;
+}
+.mobile_sec p{
+    font-size: 20px;
+    color: white;
+    font-weight: 400;
+}
+.mobile_sec h4{
+    font-size: 33px;
+    color: white;
+    font-weight: 700;
+}
+.mobile_sec1 h5{
+    color: #000000;
+    font-size: 36px;
+    font-weight: 700;
+}
+.mobile_sec1 p{
+    color: #000000;
+    font-size: 18px;
+    font-weight: 500;
+}
+.mobile_sec1 h6{
+    font-size: 19px;
+    color: #0000ff;
+    font-weight: 600;
+}
+.benifits_section{
+    background-color: #0000ff;
+}
+.benifits_section p{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+.benifits_section h2 {
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+}
+.built_sec h5{
+    color: #000000;
+    font-size: 36px;
+    font-weight: 700;
+}
+.built_sec li{
+    font-size: 22px;
+    margin-bottom: 35px;
+}
+.built_sec li::marker{
+    color: #00c9ff;
+}
+.connected_sec{
+    background-color: #00c9ff1f;
+}
+.connected_sec h5 {
+    color: #000000;
+    font-size: 36px;
+    font-weight: 700;
+}
+.icon_box{
+    min-width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.connected_sec li{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 7px;
+    background: white;
+    width: 100%;
+    padding: 15px 0px 15px 48px;
+    list-style: none;
+    position: relative;
+    border-radius: 4px;
+}
+.connected_sec li:before{
+    background-color: #00c9ff;
+    width: 13px;
+    height: 13px;
+    content: '';
+    position: absolute;
+    left: 20px;
+    border-radius: 100px;
+    top: 24px;
+}
+
+.quiz_section_title p{
+    font-weight: 500;
+}
+.quiz_section_box{
+   background-color: #00c9ff30;
+    padding: 21px 17px;
+}
+.quiz_slider .swiper-button-next:after{
+    content: unset;
+}
+.quiz_slider .swiper-button-prev:after{
+    content: unset;
+}
+.quiz_slider .swiper-button-prev, .quiz_slider .swiper-container-rtl .swiper-button-next{
+        left: auto;
+    right: 46px;
+}
+.quiz_section_box h6{
+        font-size: 19px;
+    color: #000000;
+    font-weight: 500;
+
+}
+.quiz_footer{
+    display: flex;
+    justify-content: space-between;
+}
+.ans{
+        color: #00c9ff;
+    font-weight: 500;
+    font-size: 17px;
+}
+.qstn{
+     color: #0000ff;
+    font-weight: 500;
+    font-size: 15px;
+    background: #fff;
+    padding: 3px 6px;
+    border-radius: 5px;
+}
+.downld_sec{
+    background-color: #00c9ff;
+}
+.downld_sec h5{
+    color: #fff;
+    font-size: 24px;
+    font-weight: 700;
+}
+.downld_sec p{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 32px;
+}
+.Signup_box {
+    background: #fff;
+    width: 100%;
+    max-width: 70%;
+    margin: auto;
+    padding: 28px;
+}
+.Signup_box h5 {
+    font-weight: 600;
+}
+.Signup_box .input103 {
+    display: block;
+    border: 0;
+    height: 46px;
+    border-radius: 0;
+    border-bottom: 1px solid #e9e9e9;
+    font-weight: 500;
+    font-size: 14px;
+}
+.Signup_box textarea {
+    height: 92px !important;
+}
+footer{
+    background-color: #000025;
+}
+footer li {
+    display: inline;
+    padding: 0 25px;
+}
+footer li a{
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+}
+footer .fa{
+    width: 45px;
+    height: 45px;
+    border: 2px solid white;
+    border-radius: 100px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+.footer_btm p{
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 16px;
+    display: inline;
+    font-weight: 500;
+    color: #ffffff6e;
+}
+.footer_btm li {
+    display: inline;
+    padding: 0px 0px 0 22px;
+}
+.camera_box input[type=file]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 196px;
+    height: 146px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.camera_box img{
+    height: 200px;
+    width: 200px;
+}
+.react-tel-input .flag-dropdown {
+    background-color: white !important;
+    border-radius: 0px !important;
+    border-bottom: 1px solid  #e9e9e9 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.custom-phone-input{
+    color: #35cede !important;
+    padding-top: 8px;
+    border-bottom: 1px solid #e9e9e9;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 10px 0px;
+}
+
+.PhoneInputInput{
+    border:none;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+}
+
+.ee{
+    color: #35cede !important;
+    padding-top: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 8%;
+    height: 46px;
+    width: 92%;
+    background-color: white;
+    border-radius: 0px; 
+    border-bottom: 1px solid #e9e9e9;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: black;
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: black;
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: black;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: black;
+}
+
+.input_row{
+    padding-left: 12px;
+}
