@@ -6,13 +6,24 @@ var configHeaders = {
     headers: authHeader()
 }
 
+var formDataHeaders ={
+    headers: {
+        'deviceType': 'w',
+        'appVersion': '1.0',
+        "Content-Type": "application/x-www-form-urlencoded",
+        'Access-Control-Allow-Origin': '*',
+        // 'token': accessToken,
+        'timezone': 'Asia/Kolkata'
+    }
+}
 export const userService = {
     logIn,
     signUp,
     getQuizes,
     getQuiz,
     // logout,
-    // sendOtp,
+    calculateBMI,
+    submitQuiz,
     // verifyOtp,
     // createProfile,
     // getNewContest,
@@ -29,12 +40,12 @@ export const userService = {
 
 function logIn(params) {
     let url = `${config.apiUrl}/userLogin`;
-    return axios.post(url, params)
+    return axios.post(url, params, configHeaders)
 }
 
 function signUp(params) {
     let url = `${config.apiUrl}/userSignUp`;
-    return axios.post(url, params)
+    return axios.post(url, params, configHeaders)
 }
 
 // function logout() {
@@ -52,6 +63,15 @@ function getQuiz(quizeId) {
     return axios.get(url, configHeaders);
 }
 
+function calculateBMI(params) {
+    let url = `${config.apiUrl}/calculateBMI`;
+    return axios.post(url, params, configHeaders);
+}
+
+function submitQuiz(params) {
+    let url = `${config.apiUrl}/quiz/submit`;
+    return axios.post(url, params, configHeaders);
+}
 
 function handleError(error) {
     console.log("errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", error);

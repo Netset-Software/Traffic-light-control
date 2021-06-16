@@ -15,21 +15,24 @@ const SignIn = () => {
     } else if (password === '') {
       toast.error("Please Enter Password")
     } else {
-      let params = new URLSearchParams({
+      let params = {
         'email': email,
         'password': password,
         'loginType': 'Standard',
-        'deviceInfo': 'web'
-      });
+        'deviceInfo': { "token": '', "deviceType": 'web' }
+      };
       userService.logIn(params).then((response) => {
-        localStorage.setItem('access_token', 'dfkjehdujl');
-        localStorage.setItem('remember_me', rememberMe);
-        setTimeout(() => {
-          window.location.href = '/';
-        }, 2000);        
+        if (response.data.status == 200){
+          localStorage.setItem('user_id', response.data.data[0]._id);
+          localStorage.setItem('remember_me', rememberMe);
+          toast.success("Successfully Signed-In");
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 2000);
+        }else{
+          toast.error("Incorrect Email or Password");
+        }       
       }).catch((error) => {
-        userService.handleError(error);
-        console.log("error ", error);
       });
     }
   }
