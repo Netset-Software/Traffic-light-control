@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { userService } from '../../services'
+import 'react-phone-number-input/style.css';
+import PhoneInput from 'react-phone-number-input';
+import { userService } from '../../services';
+import Loader from './Loader';
+
 
 const Signup = () => {
 
@@ -31,6 +33,7 @@ const Signup = () => {
   const [recieveNotificationAndPromotions, setRecieveNotificationAndPromotions] = useState(false);
   const [acceptPrivacyTerms, setAcceptPrivacyTerms] = useState(false);
   const [isFormValidate, setIsFormValidate] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const heightList = ["4", "4'1", "4'2", "4'3", "4'4", "4'5", "4'6", "4'7", "4'8", "4'9", "4'10", "4'11", "5", "5'1", "5'2", "5'3", "5'4", "5'5", "5'6", "5'7", "5'8", "5'9", "5'10", "5'11", "6", "6'1", "6'2", "6'3", "6'4", "6'5", "6'6", "6'7", "6'8", "6'9", "6'10", "6'11", "7"];
 
@@ -63,7 +66,7 @@ const Signup = () => {
     }else{
      setTimeout(() => {
           setCurrentStep(2);
-        }, 500);
+        }, 100);
     }
   }
 
@@ -162,21 +165,27 @@ const Signup = () => {
   }
 
   function createProfile() {
+    setIsLoading(true);
     userService.signUp(getParams()).then((response) => {
       let status = response.data.status;
       if (status == 200){
+        localStorage.setItem('user_id', response.data.data[0]._id);
         toast.success("Profile Created Successfully");
         setTimeout(() => {
-          window.location.href = '/signin';
+          window.location.href = '/';
         }, 2000);
       }else if(status == 202){
+        setIsLoading(false);
         toast.error("Profile Already Exist");
       }else{
+        setIsLoading(false);
         toast.error("Some Error Occur");
       }
       
     }).catch((error) => {
-      userService.handleError(error);
+      setIsLoading(false);
+      toast.error("Some Error Occur");
+      // userService.handleError(error);
       console.log("error ", error);
     });
   }
@@ -215,6 +224,7 @@ const Signup = () => {
 
   return (
     <>
+      {isLoading && <Loader/>}
       {currentStep === 1 ?
         <section className="bg_section py-5 signup_section">
           <div className="container">

@@ -1,49 +1,71 @@
+
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Form, fieldset } from 'react-bootstrap';
 import Timer from './common/Timer'
 import { userService } from '../services'
+import { toast } from 'react-toastify';
+import Loader from './common/Loader'
+import { config } from '../config/config'
 
 const Quiz = (props) => {
 
     const [currentStep, setCurrentStep] = useState(1);
     const [showHide, setShowHide] = useState(false);
-    // const time = new Date();
-    // time.setSeconds(time.getSeconds() + 120);
     const [quizId, setQuizId] = useState({});
     const [quizData, setQuizData] = useState({});
     const [quizTime, setQuizTime] = useState('');
     const [totalQuestions, setTotalQuestions] = useState(0);
-    const [collectedAnswer, setCollectedAnswer] = useState([]);
+    const [collectedAnswer, setCollectedAnswer] = useState({});
+    const [answerList, setAnswerList] = useState([]);
     const [rightAnswers, setRightAnswers] = useState(0);
-    const [showhowResultWithAnswer, setShowResultWithAnswer] = useState(false);
-    const [isSubmit, setIsSubmit] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isAutoSubmit, setIsAutoSubmit] = useState(true);
+    const [quizCompletionTime, setQuizCompletionTime] = useState('');
+    const [maxQuizTime, setMaxQuizTime] = useState(0);
 
 
 
     useEffect(() => {
+        if (localStorage.getItem('done') === "true") window.location.href = '/';
+        localStorage.setItem('done', true);
         let query = new URLSearchParams(window.location.search);
         setQuizId(query.get('id'));
         getQuizData(query.get('id'));
     }, []);
 
     function getQuizData(id) {
+        setIsLoading(true);
         userService.getQuiz(id).then((response) => {
-            let data = response.data.data;
-            let tmpArry = [];
-            setQuizData(data);
-            setTotalQuestions(data.questions.length);
-            for(let i = 0; i < data.questions.length; i++){
-                tmpArry.push({isRight: false, answerIndex: -1});
+            if (response.data.status === 200){
+                let data = response.data.data;
+                let tmpArry = [];
+                let tmpArry2 = [];
+                setQuizData(data);
+                setTotalQuestions(data.questions.length);
+                for(let i = 0; i < data.questions.length; i++){
+                    tmpArry.push({quesId: data.questions[i]._id, answer: 0});
+                    tmpArry2.push(false);
+                }
+                setAnswerList(tmpArry2);
+                setCollectedAnswer({quizId: id, questions:tmpArry});
+                setIsLoading(false);
+                setTimeout(() => {
+                    let time = new Date();
+                    setMaxQuizTime(12);
+                    setQuizTime(time.setSeconds(time.getSeconds() + 12));
+                }, 300);
+            }else{
+                setIsLoading(false);
+                setQuizData({});
+                setQuizTime(0);
+                toast.error("Some Error Occur");
             }
-            setCollectedAnswer(tmpArry);
-            setTimeout(() => {
-                let time = new Date();
-                setQuizTime(time.setSeconds(time.getSeconds() + 120));
-            }, 300);
         }).catch((error) => {
+            setIsLoading(false);
             setQuizData({});
             setQuizTime(0);
+            toast.error("Some Error Occur");
             console.log("error ", error);
         });
     }
@@ -88,108 +110,68 @@ const Quiz = (props) => {
         } else {
             return (
                 <div className="next_btn text-center my-4">
-                    {/* <a className="btn" onClick={() => calculateResult()}>SUBMIT</a> */}
-                    <a className="btn" onClick={() => submitQuiz()}>SUBMIT</a>
+                    <a className="btn" onClick={() => onSubmitBeforeTimeout()}>SUBMIT</a>
                 </div>)
         }
     }
 
-
-    function submitQuiz() {
-        // userService.submitQuiz().then((response) => {
-            
-        // }).catch((error) => {
-        // });
+    function getFormatedTime(timeInSeconds){
+        let diff = maxQuizTime - timeInSeconds;
+        let tmpTime = (diff/60).toFixed(0) + ':' + (diff%60).toFixed(0);
+        setQuizCompletionTime(tmpTime);
+       return tmpTime;
     }
 
     function onTimeExpire() {
-        calculateResult();
+        alert("Your Time is Up.")
+        window.location.href = '/';
+        // if (isAutoSubmit) calculateResult(getFormatedTime(0));
     }
 
-    function calculateResult() {
-        setIsSubmit(true);
+    function onSubmitBeforeTimeout(){
+        document.getElementById("pause-timer").click();
+        let leftSeconds = Number(document.getElementById('pause-timer').innerHTML);
+        setIsAutoSubmit(false);
+        calculateResult(getFormatedTime(leftSeconds));
+    }
+
+    function calculateResult(completionTime){
+        setIsLoading(true);
         let tmpArry = [];
-        collectedAnswer.map((item, i) => {if (item.isRight) tmpArry.push(true)});
+        answerList.map((item, i) => {if (item) tmpArry.push(true)});
         setRightAnswers(tmpArry.length);
-        handleModalShowHide1();
+        submitQuiz(tmpArry.length, completionTime);
     }
 
-    function handleAnswerOptions(isRight, questionNo, answerIndex) {
-        let tmpArry = collectedAnswer;
-        tmpArry[questionNo] = {isRight: isRight, answerIndex: answerIndex};
-        setCollectedAnswer(tmpArry);
+    function submitQuiz(score, timeToComplete) {
+        collectedAnswer.score = score;
+        collectedAnswer.timeToComplete = timeToComplete;
+        collectedAnswer.userId = localStorage.getItem('user_id');
+        userService.submitQuiz(collectedAnswer).then((response) => {
+            setIsLoading(false);
+            if (response.data.status === 200){
+                handleModalShowHide1();
+            }else{
+                toast.error("Some Error Occur");
+            }  
+        }).catch((error) => {
+            setIsLoading(false);
+            toast.error("Some Error Occur");
+        });
     }
 
-
-    const Result = () => {
-        return (
-            <section className="py-4">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-sm-6 reuslt_title">
-                            <h1 className="mb-0 ">BIG4 Quiz Results</h1>
-                            <h2 className="mb-0 mt-3">Score {rightAnswers} of {totalQuestions}</h2>
-                            <p>You have won 5% discount on your next purchase.</p>
-                        </div>
-                        <div className="col-sm-6 text-right">
-                            <div className="signin_btn">
-                                <a className="btn" href="/redeem">REDEEM</a>
-                            </div>
-                        </div>
-                    </div>
-                    {quizData.questions && quizData.questions.length > 0 && quizData.questions.map((question, i) => {
-
-
-                        return (<div className="row mb-4">
-                            <div className="col-sm-12">
-                                <label className="qstn_label">Question {i + 1}</label>
-                            </div>
-                            <div className="col-sm-12 text-left">
-                                <div className="qstns_box">
-                                    <h4>{question.title}</h4>
-                                    <div className="answer_box1 mt-1 py-2">
-                                        <ul className="m-0 p-0">
-                                            {question.answers.map((answer, j) => {
-                                                    let ansClass = collectedAnswer[i] ? "correct_ans" : "wrong_ans";
-                                                    let imageSrc = require(collectedAnswer[i] ? "../images/check.png" : "../images/remove.png").default
-                                                return (<li className={ansClass}>
-                                                    <span><img src={imageSrc} className="mr-2" alt="img" />{answer.value}.</span>
-                                                    <span><label class="qstn_label">YOUR ANSWER</label></span>
-                                                </li>)
-                                            })}
-
-
-                                            {/* <li className="correct_ans">
-                                                <span><img src={require("../images/check.png").default} className="mr-2" alt="img" />Dreaming of a mobile companion.</span>
-                                                <span><label class="qstn_label">CORRECT ANSWER</label></span>
-                                            </li>
-                                            <li className="wrong_ans">
-                                                <span><img src={require("../images/remove.png").default} className="mr-2" alt="img" />Dreaming of a mobile companion.</span>
-                                                <span> <label class="wrong_label">YOUR ANSWER</label></span>
-                                            </li>
-                                            <li><span><img src={require("../images/uncheck.png").default} className="mr-2" alt="img" />Dreaming of a mobile companion. </span></li> */}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        )
-                    })}
-                </div>
-            </section>
-
-        );
-    }
-
-    function showResultsWithAnswer() {
-        setTimeout(() => {
-            setShowResultWithAnswer(true);
-        }, 1500);
+    function handleAnswerOptions(answerId, questionId, index, isRight) {
+        let tmp = collectedAnswer
+        let tmp2 = answerList;
+        tmp.questions[index] = {quesId: questionId, answer: answerId};
+        tmp2[index] = isRight;
+        setCollectedAnswer(tmp);
+        setAnswerList(tmp2);
     }
 
     return (
         <div>
-            {showhowResultWithAnswer ? <Result /> :
+            {isLoading && <Loader/>}
                 <React.Fragment>
                     <section className="quiz_section py-4">
                         <div className="container">
@@ -205,7 +187,7 @@ const Quiz = (props) => {
                                             <div className="col-sm-6 mob_col">
                                                 <div className="time_box">
                                                     <p>Time Left</p>
-                                                    {quizTime && <Timer expiryTimestamp={quizTime} onTimeExpire={() => onTimeExpire()} isSubmit={isSubmit}/>}
+                                                    {quizTime && <Timer expiryTimestamp={quizTime} onTimeExpire={() => onTimeExpire()} />}
                                                     {/* <h6>00 : 00</h6> */}
                                                 </div>
                                             </div>
@@ -269,13 +251,12 @@ const Quiz = (props) => {
                                     </div>
                                     <div className="col-md-6 result">
                                         <h6>Time Spent</h6>
-                                        <p>1:23</p>
+                                        <p>{quizCompletionTime}</p>
                                     </div>
                                 </div>
                                 <div className="row pb-2 mt-3">
                                     <div className="col-md-6 mb-3 redeem_btn">
-                                        <a className="btn" onClick={() => showResultsWithAnswer()}>REDEEM</a>
-                                        {/* <a className="btn" href="/result">REDEEM</a>showResultsWithAnswer */}
+                                        <a className="btn" href={"/result?id="+ quizId}>REDEEM</a>
 
                                     </div>
                                     <div className="col-md-6 mb-3 share_btn">
@@ -291,7 +272,6 @@ const Quiz = (props) => {
                     </Modal>
 
                 </React.Fragment>
-            }
         </div>
 
     );
@@ -310,20 +290,87 @@ const Quiz = (props) => {
                             <Form.Label as="legend">
                             </Form.Label>
                             {props.questionInfo.answers.map((option, i) => {
-                                return (<Form.Check
-                                    type="radio"
-                                    label={option.value}
-                                    name="formHorizontalRadios"
-                                    id="formHorizontalRadios1"
-                                    onClick={() => handleAnswerOptions(option.isRight, props.step - 1, i)}
-                                />)
+                                if (option.type && option.type === 'image'){
+                                    
+                                   return (
+                                       <div className="col-sm-4 row" style={{ margin: '20px 0px 10px -15px' }}>
+                                           <Form.Check
+                                               type="radio"
+                                               name="formHorizontalRadios"
+                                               id="formHorizontalRadios1"
+                                            //    defaultChecked={status}
+                                               onClick={() => handleAnswerOptions(option._id, props.questionInfo._id, props.step - 1, option.isRight)}
+                                           />
+                                           <div className="select_image" style={{ margin: '0px 8px' }}>
+                                               <img src={config.imageUrl + option.value} alt="img" className="img-type-answer-option" style={{ margin: '-34px ​0px 12px 28px !important' }} />
+                                           </div>
+                                       </div>
+                            )
+                                }else{
+                                    return (<Form.Check
+                                        type="radio"
+                                        label={option.value}
+                                        name="formHorizontalRadios"
+                                        id="formHorizontalRadios1"
+                                        // defaultChecked={status}
+                                        onClick={() => handleAnswerOptions(option._id, props.questionInfo._id, props.step -1, option.isRight)}
+                                    />)
+
+                                }
                             })}
                         </Form.Group>
                     </fieldset>
                 </div>
             </div>
-        );
+        );     
     }
 
 }
 export default Quiz;
+
+
+    // function Step2(props) {
+    //     if (props.currentStep !== 2) {
+    //         return null
+    //     }
+    //     return (
+    //         <div className="qstns_box">
+    //             <h4>What are some things you can do to help support your brain health?</h4>
+    //             <p className="mb-0 text-secondary mt-3">Choose Answer</p>
+    //             <div className="answer_box mt-2 py-4">
+    //                 <div className="row">
+    //                     <div className="col-sm-4 text-center">
+    //                         <div className="select_image">
+    //                             <img src={require("../images/quizimg.png").default} alt="img" />
+    //                             <span> <Form.Check
+    //                                 type="radio"
+    //                                 name="formHorizontalRadios"
+    //                                 id="formHorizontalRadios1"
+    //                             /></span>
+    //                         </div>
+    //                     </div>
+    //                     <div className="col-sm-4 text-center">
+    //                         <div className="select_image">
+    //                             <img src={require("../images/quizimg2.png").default} alt="img" />
+    //                             <span> <Form.Check
+    //                                 type="radio"
+    //                                 name="formHorizontalRadios"
+    //                                 id="formHorizontalRadios1"
+    //                             /></span>
+   //                         </div>
+    //                     </div>
+    //                     <div className="col-sm-4 text-center">
+    //                         <div className="select_image">
+    //                             <img src={require("../images/quizimg3.png").default} alt="img" />
+    //                             <span> <Form.Check
+    //                                 type="radio"
+    //                                 name="formHorizontalRadios"
+    //                                 id="formHorizontalRadios1"
+    //                             /></span>
+    //                         </div>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     );
+    // }

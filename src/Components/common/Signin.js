@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { userService } from '../../services'
 import { toast } from 'react-toastify';
+import Loader from './Loader'
 
 
 const SignIn = () => {
@@ -8,13 +9,15 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
+  
   function onLogIn() {
     if (email === '') {
       toast.error("Please Enter Email")
     } else if (password === '') {
       toast.error("Please Enter Password")
     } else {
+      setIsLoading(true);
       let params = {
         'email': email,
         'password': password,
@@ -30,6 +33,7 @@ const SignIn = () => {
             window.location.href = '/';
           }, 2000);
         }else{
+          setIsLoading(false);
           toast.error("Incorrect Email or Password");
         }       
       }).catch((error) => {
@@ -39,6 +43,7 @@ const SignIn = () => {
 
   return (
     <>
+    {isLoading && <Loader/>}
       <section className="bg_section py-5">
         <div className="container">
           <div className="row">

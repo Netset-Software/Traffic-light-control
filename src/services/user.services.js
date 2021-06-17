@@ -1,76 +1,62 @@
 import { config } from '../config/config'
 import axios from 'axios';
-import { authHeader } from '../helpers';
+import { formDataHeader, jsonHeaders } from '../helpers';
 
-var configHeaders = {
-    headers: authHeader()
+var configFormDataHeaders = {
+    headers: formDataHeader()
 }
 
-var formDataHeaders ={
-    headers: {
-        'deviceType': 'w',
-        'appVersion': '1.0',
-        "Content-Type": "application/x-www-form-urlencoded",
-        'Access-Control-Allow-Origin': '*',
-        // 'token': accessToken,
-        'timezone': 'Asia/Kolkata'
-    }
+var configJsonHeaders = {
+    headers: jsonHeaders()
 }
+
+var user_id = localStorage.getItem('user_id');
+
 export const userService = {
     logIn,
     signUp,
     getQuizes,
     getQuiz,
-    // logout,
     calculateBMI,
     submitQuiz,
-    // verifyOtp,
-    // createProfile,
-    // getNewContest,
-    // getCategoriesList,
-    // getSubCategoriesList,
-    // getLiveContest,
-    // getOldContest,
-    // getExpireSoonContest,
-    // getContestDetail,
-    // addPost,
-    // pinPost,
+    getQuizResult,
+
 };
 
 
 function logIn(params) {
     let url = `${config.apiUrl}/userLogin`;
-    return axios.post(url, params, configHeaders)
+    return axios.post(url, params, configJsonHeaders)
 }
 
 function signUp(params) {
     let url = `${config.apiUrl}/userSignUp`;
-    return axios.post(url, params, configHeaders)
+    return axios.post(url, params, configFormDataHeaders)
 }
 
-// function logout() {
-//     let url = `${config.apiUrl}/users/logout`;
-//     return GET(url, true)
-// }
-
 function getQuizes() {
-    let url = `${config.apiUrl}/quiz`;
-    return axios.get(url, configHeaders);
+    let url = `${config.apiUrl}/quiz?userId=${user_id}`;
+    return axios.get(url, configFormDataHeaders);
 }
 
 function getQuiz(quizeId) {
-    let url = `${config.apiUrl}/quiz/${quizeId}`;
-    return axios.get(url, configHeaders);
+    let url = `${config.apiUrl}/quiz/${quizeId}?userId=${user_id}`;
+    return axios.get(url, configFormDataHeaders);
 }
 
 function calculateBMI(params) {
     let url = `${config.apiUrl}/calculateBMI`;
-    return axios.post(url, params, configHeaders);
+    return axios.post(url, params, configFormDataHeaders);
 }
 
 function submitQuiz(params) {
     let url = `${config.apiUrl}/quiz/submit`;
-    return axios.post(url, params, configHeaders);
+    return axios.post(url, params, configJsonHeaders);
+}
+
+function getQuizResult(quizeId) {
+    let url = `${config.apiUrl}/quiz/${quizeId}/user/${user_id}`;
+    return axios.get(url, configFormDataHeaders);
 }
 
 function handleError(error) {

@@ -4,7 +4,11 @@ import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Modal } from 'react-bootstrap';
 import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
 import {userService, handleError} from '../services'
-import Quiz from './Quiz';
+import { toast } from 'react-toastify';
+import Loader from './common/Loader'
+import Geocode from "react-geocode";
+
+
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -13,28 +17,99 @@ const Home = () => {
     const [showHide, setShowHide] = useState(false);
     const [allQuizes, setAllQuizes] = useState([]);
     const [selectedQuizId, setSelectedQuizId] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [isUserLogin, setIsUserLogin] = useState(false);
 
 
     useEffect(() => {
-        getAllQuizes();
+        let user_id = localStorage.getItem('user_id');
+        if (user_id){
+            setIsUserLogin(true);
+            getAllQuizes();
+            // setCurrentLocation();
+        }
     }, []);
 
+    // function setCurrentLocation() {
+    //     if (navigator.geolocation) {
+    //     //   setShowLoader(false);
+    //       console.log("gelocation----");
+    //       navigator.geolocation.getCurrentPosition(showPosition, error_location);
+    //     } else {
+    //     //   openModalverifilocation();
+    //     }
+    //   }
+    
+    //   function showPosition(position) {
+    //     var lat = position.coords.latitude;
+    //     var lng = position.coords.longitude;
+    //     console.log(lat, lng);
+    //     Geocode.setApiKey("AIzaSyBsv-OafO1eNJncye_hAAAlAvE--OjmmJ8");
+    //     Geocode.fromLatLng(lat, lng).then(
+    //       response => {
+    //           debugger
+    //         // const address = response.results[0].formatted_address;
+    //         let state = response.results[0].address_components[3].long_name
+    //         // verifyState(state.toLowerCase());
+    //       },
+    //       error => {
+    //         // openModalverifilocation();
+    //         console.error("errorrrr geocode", error);
+    //       }
+    //     );
+    //   }
+    
+    //   function error_location(err) {
+    //     console.warn(`ERROR(${err.code}): ${err.message}`);
+    //     if (err.message == "User denied Geolocation") {
+    //       alert("Please enable location settings");
+    //     }
+    //     if (err.code == 2 || err.code == "2") {
+    //       alert("We can't locate your position, please try again!");
+    //     }
+    //   }
+
     function getAllQuizes() {
+        setIsLoading(true);
         userService.getQuizes().then((response) => {
-            setAllQuizes(response.data.data);
+            setIsLoading(false);
+            if (response.data.status == 200){
+                setAllQuizes(response.data.data);
+              }else{
+                toast.error("Some Error Occur");
+              } 
         }).catch((error) => {
+            setIsLoading(false);
             setAllQuizes([]);
             console.log("error ", error);
         });
     }
 
-    function handleModalShowHide(id) {
-        setSelectedQuizId(id)
-        setShowHide(!showHide);
+    function handleModalShowHide(id, status) {
+        if (status === 'NEW'){
+            setSelectedQuizId(id);
+            setShowHide(!showHide);
+        }else if(status === 'QUIT'){
+            toast.warning("You have Already Quited that Quiz")
+        }else if(status === 'COM'){
+            toast.warning("You have Already Completed that Quiz")
+        }else{
+            toast.error("Something Went Wrong");
+        }
+    }
+
+    function startQuiz(){
+        if (localStorage.getItem('user_id')){
+            localStorage.setItem('done', false);
+            window.location.href = "/quiz?id=" + selectedQuizId;
+        }else{
+            toast.error("Please sign-up before to get participate into quiz")
+        }
     }
 
     return (
         <>
+            {isLoading && <Loader/>}
             <section className="banner py-4">
                 <div className="container">
                     <div className="row">
@@ -43,7 +118,6 @@ const Home = () => {
                                 pagination={{ clickable: true }}
                                 slidesPerView={1}
                                 autoplay={{ delay: 3000 }}
-
                             >
                                 <SwiperSlide>
                                     <div className="slider_box">
@@ -106,7 +180,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
+            { isUserLogin &&
             <section className="quiz_slider py-4">
                 <div className="container">
                     <div className="row">
@@ -148,7 +222,7 @@ const Home = () => {
                                             <div className="quiz_section_box">
                                                 <h6>{quiz.name}</h6>
                                                 <div className="quiz_footer mt-3">
-                                                    <button className="ans bg-transparent border-0" onClick={() => handleModalShowHide(quiz._id)}><u>Answer this quiz</u></button>
+                                                    <button className="ans bg-transparent border-0" onClick={() => handleModalShowHide(quiz._id, quiz.quiz_done_status)}><u>Answer this quiz</u></button>
                                                     <span className="qstn"> {quiz.questions.length} Questions</span>
                                                 </div>
                                             </div>
@@ -207,7 +281,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
+            }
             <section className="mobile_sec my-4 py-5">
                 <div className="container">
                     <div className="row">
@@ -390,12 +464,12 @@ const Home = () => {
                         <div className="row mt-4">
                             <aside className="col-sm-6">
                                 <span className="not_btn">
-                                    <button className="btn" onClick={() => handleModalShowHide('')}>NOT NOW</button>
+                                    <button className="btn" onClick={() => handleModalShowHide('', 'NEW')}>NOT NOW</button>
                                 </span>
                             </aside>
                             <aside className="col-sm-6">
                                 <span className="start_btn">
-                                    <a className="btn" href={"/quiz?id=" + selectedQuizId}>START QUIZ</a>
+                                    <a className="btn" onClick={() => startQuiz()} >START QUIZ</a>
                                 </span>
                             </aside>
                         </div>

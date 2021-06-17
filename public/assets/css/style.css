@@ -448,3 +448,36 @@ textarea:-ms-input-placeholder {
 .input_row{
     padding-left: 12px;
 }
+.loader{
+    position: fixed;
+    z-index: 1025;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000ab;
+    overflow: hidden;
+  }
+  .loader img{
+    width: 100px;
+  }
+
+  #pause-timer{
+    position: absolute;
+    margin-left: -155px;
+    background-color: white;
+    color:white;
+    height: 0px;
+    width: 0px;
+    font-size: 0px;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .img-type-answer-option{
+    max-width: 160px;
+    max-height: 160px;
+    
+  }
