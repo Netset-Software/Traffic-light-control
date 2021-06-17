@@ -35,79 +35,7 @@ const Home = () => {
 
     return (
         <>
-            <section className="banner py-4">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <Swiper
-                                pagination={{ clickable: true }}
-                                slidesPerView={1}
-                                autoplay={{ delay: 3000 }}
-
-                            >
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                            </Swiper>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="quiz_slider py-4">
+        <section className="quiz_slider py-4">
                 <div className="container">
                     <div className="row">
                         <aside className="col-md-12 col-sm-12 mb-2">
@@ -208,6 +136,80 @@ const Home = () => {
                 </div>
             </section>
 
+            <section className="banner pt-0 pb-4">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <Swiper
+                                pagination={{ clickable: true }}
+                                slidesPerView={1}
+                                autoplay={{ delay: 3000 }}
+
+                            >
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                            </Swiper>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+
             <section className="mobile_sec my-4 py-5">
                 <div className="container">
                     <div className="row">
@@ -264,14 +266,14 @@ const Home = () => {
                                     <img src={require("../images/dummy.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
-                                    <p>Track your blood glucose and learn how it can affect your health.</p>
+                                    <p>Track your blood pressure and learn how to improve it.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-6 mb-4">
                             <div className="d-flex align-items-center">
                                 <div className="icon_box">
-                                    <img src={require("../images/dummy.png").default} alt="img" />
+                                    <img src={require("../images/bloodglucose.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
                                     <p>Track your blood glucose and learn how it can affect your health.</p>
@@ -281,20 +283,20 @@ const Home = () => {
                         <div className="col-md-6 mb-4">
                             <div className="d-flex align-items-center">
                                 <div className="icon_box">
-                                    <img src={require("../images/dummy.png").default} alt="img" />
+                                    <img src={require("../images/chl.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
-                                    <p>Track your blood glucose and learn how it can affect your health.</p>
+                                    <p>Track your cholesterol and learn the benefits of maintaining a healthy level.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-6 mb-4">
                             <div className="d-flex align-items-center">
                                 <div className="icon_box">
-                                    <img src={require("../images/dummy.png").default} alt="img" />
+                                    <img src={require("../images/bmi1.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
-                                    <p>Track your blood glucose and learn how it can affect your health.</p>
+                                    <p>Track your BMI and learn how to reach or maintain a healthy BMI.</p>
                                 </div>
                             </div>
                         </div>

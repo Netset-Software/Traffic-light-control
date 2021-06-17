@@ -237,20 +237,24 @@ const Signup = () => {
                   <h5>SIGN UP</h5>
                   <p className="text-secondary">Please fill with your details</p>
                   <form className="py-4">
-                    <div className="row">
-                      <aside className="col-md-6 mb-3">
+                    <div className="row frist_step  ">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>First Name</label>
                         <div className="input_row">
+                         
                           <span><img src={require("../../../src/images/user.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="First Name" className="input103 w-100" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Middle Name</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/user.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Middle Name" className="input103 w-100" value={middleName} onChange={(e) => setMiddleName(e.target.value)} />
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Last Name</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/user.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Last Name" className="input103 w-100" value={lastName} onChange={(e) => setLastName(e.target.value)} />
@@ -261,8 +265,10 @@ const Signup = () => {
                           <span><img src={require("../../../src/images/telephone.png").default} alt="img" /></span>
                             <input type="" name="" placeholder="000-000-0000" className="input103 w-100" onChange={(e) => setPhoneNumber(e.target.value)}/>
                           </div>
-                      </aside> */}
-                      <aside className="col-md-6 mb-3">
+                      </aside> */} 
+                      <aside className="col-md-6 mb-3 text-left" >
+                      <label>Phone Number</label>
+                      <div className="input_row">
                         <PhoneInput
                           placeholder="Phone Number"
                           value={phoneNumber}
@@ -270,27 +276,31 @@ const Signup = () => {
                           className="custom-phone-input"
                           onChange={(value) => setPhoneNumber(value)}
                         />
-
+                      </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Email Address</label>
                         <div className="input_row">
                           <span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
                           <input type="" name="" placeholder="Email Address" className="input103 w-100" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Password</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/padlock.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Password" className="input103 w-100" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Address</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/state.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Address" className="input103 w-100" value={address} onChange={(e) => setAddress(e.target.value)} />
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>ZIP Code</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/zip.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Enter ZIP Code" className="input103 w-100" value={zip} onChange={(e) => setZip(e.target.value)} />
@@ -361,14 +371,15 @@ const Signup = () => {
                   <h5>SIGN UP</h5>
                   <p className="text-secondary">Please fill with your details</p>
                   <form className="pt-4 pb-2">
-                    <div className="row">
-                      <aside className="col-md-6 mb-3">
+                    <div className="row frist_step">
+                      <aside className="col-md-6 mb-3 text-left">
+                        <label>Age</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/age.png").default} alt="img" /></span>
                           <Form>
                             <Form.Group controlId="exampleForm.ControlSelect1" className="input103">
                               <Form.Control as="select" value={age} onChange={(e) => setAge(e.target.value)}>
-                                <option default>Age</option>
+                                <option default className="dflt">Age</option>
                                 {range(18, 100).map((val) => {
                                   return (<option>{val}</option>)
                                 })}
@@ -378,7 +389,8 @@ const Signup = () => {
                           </Form>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Gender</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/gender.png").default} alt="img" /></span>
                           <Form>
@@ -393,7 +405,8 @@ const Signup = () => {
                           </Form>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Height</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/height.png").default} alt="img" /></span>
                           <Form>
@@ -408,7 +421,8 @@ const Signup = () => {
                           </Form>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Weight</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/weight.png").default} alt="img" /></span>
                           <Form>
@@ -423,15 +437,18 @@ const Signup = () => {
                           </Form>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
                         <div className="row">
+                        
                           <aside className="col-md-6">
+                          <label>Low BP</label>
                             <div className="input_row">
                               <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
                               <input type="" name="" placeholder="Low BP" className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
                             </div>
                           </aside>
-                          <aside className="col-md-6">
+                          <aside className="col-md-6 text-left">
+                          <label>High BP</label>
                             <div className="input_row">
                               <span></span>
                               <input type="" name="" placeholder="High BP" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
@@ -439,19 +456,22 @@ const Signup = () => {
                           </aside>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Glucose</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/glucose.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Glucose" className="input103 w-100" value={glucose} onChange={(e) => setGlucose(e.target.value)}/>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Cholesterol</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/cholesterol.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Cholesterol" className="input103 w-100" value={cholesterol} onChange={(e) => setCholesterol(e.target.value)}/>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>BMI</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/bmi.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="BMI" className="input103 w-100" value={bmi ? Number(bmi).toFixed(2) : ''} />

@@ -32,12 +32,28 @@ input:focus, textarea:focus{
 }
 .input_row{
     position: relative;
+    border: 1px solid #e9e9e9;
+    border-radius: 8px;
 }
 .input_row span{
     position: absolute;
-    left: 0;
-    top: 11px;
+    left: 10px;
+    top: 9px;
 }
+.Signup_box label{
+    color: black;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 13px;
+    letter-spacing: .5px;
+}
+.dflt{
+    color: lightgrey;
+}
+select:default {
+    color: green;
+  }
 .input_row i{
     font-size: 18px;
     color: #00c9ff;
@@ -71,13 +87,25 @@ input:focus, textarea:focus{
     padding: 7px 17px;
 }
 .header{
-    background: #0000ff;
+    background: #00c9ff;
 }
+.table1 table{
+    width: 100%;
+    margin-top: 20px;
+}
+.table1 table, .table1 th, .table1 td {
+    border: 1px solid #c2c2c2;
+    text-align: center;
+    padding: 10px;
+  }
 .langugae_btn{
         color: blue !important;
     background: white;
     border-radius: 5px;
         padding: 8px 10px;
+}
+.faq_section li{
+    margin-bottom: 5px;
 }
 .lng_row .dropdown-item{
         padding: 6px 8px;
@@ -227,6 +255,12 @@ input:focus, textarea:focus{
 .built_sec li{
     font-size: 22px;
     margin-bottom: 35px;
+}
+.css-tlfecz-indicatorContainer{
+    padding: 4px !important;
+}
+.css-1gtu0rj-indicatorContainer{
+    padding: 4px !important;
 }
 .built_sec li::marker{
     color: #00c9ff;
@@ -405,12 +439,12 @@ input:focus, textarea:focus{
     border: 0;
     height: 46px;
     border-radius: 0;
-    border-bottom: 1px solid #e9e9e9;
-    font-weight: 500;
-    font-size: 16px;
+    /* border-bottom: 1px solid #e9e9e9; */
+    font-size: 15px;
     padding: 0 0 0 29px;
     margin-bottom: 0;
 }
+
 .back{
     font-size: 18px;
 }
@@ -439,9 +473,8 @@ color: #00c9ff;
 .input_row select{
     border: 0;
     padding: 0;
-    font-weight: 500;
-    font-size: 16px;
-    color: black;
+    /* font-size: 16px; */
+    color: grey;
     height: calc(1.5em + 0.75rem + 7px);
     background-color: transparent;
 }
@@ -719,6 +752,29 @@ iframe{
     color: #414141db;
     font-weight: 500;
 }
+.Signup_box .frist_step .input103{
+    font-weight: 400;
+    background-color: transparent;
+}
+
+
+
+
+.Signup_box .frist_step .input103::-webkit-input-placeholder , .Signup_box .frist_step .PhoneInputInput::-webkit-input-placeholder{
+    color: grey;
+  }
+  .Signup_box .frist_step .input103::-moz-placeholder , .Signup_box .frist_step .PhoneInputInput::-webkit-input-placeholder{
+    color: grey;
+  }
+  .Signup_box .frist_step .input103:-ms-input-placeholder , .Signup_box .frist_step .PhoneInputInput::-webkit-input-placeholder{ 
+    color: grey;
+  }
+  .Signup_box .frist_step .input103:-moz-placeholder , .Signup_box .frist_step .PhoneInputInput::-webkit-input-placeholder{ 
+    color: grey;
+  }
+
+
+
 .Signup_box .input103::-webkit-input-placeholder {
     color: black;
   }
@@ -1077,11 +1133,12 @@ header .signup_btn .btn {
     justify-content: space-between;
 }
 .lng_box{
-    min-width: 160px;
+    min-width: 173px;
     z-index: 1025;
     position: relative;
     margin: auto 0;
 }
+
 
 .lng-icon{
     position: absolute;
@@ -1090,7 +1147,10 @@ header .signup_btn .btn {
     left: 8px;
 }
 .lng_box .css-g1d714-ValueContainer{
-    padding: 0 0px 0 33px;
+    padding: 0 0px 0 26px;
+}
+.css-1wa3eu0-placeholder{
+    font-size: 14px;
 }
 .lng_box .css-1hwfws3{
     padding: 0 0px 0 33px;
@@ -1336,3 +1396,4 @@ header .signup_btn .btn {
 
     }
 }
+
