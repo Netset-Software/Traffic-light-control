@@ -46,7 +46,7 @@ const Header = () => {
                                 <li>
                                     <a href="/offer">OFFERS</a>
                                 </li>
-                                <li>
+                                {isUserPresent && <li>
                                     <a href="/#">
                                         <i className="fa fa-bell-o" aria-hidden="true"></i>
                                         <span className="notification_circle">
@@ -54,11 +54,13 @@ const Header = () => {
                                 </span>
                                     </a>
                                 </li>
-                                <li>
+                                }
+                                {isUserPresent && <li>
                                     <a href="/#">
                                         <i className="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </li>
+                                }
                                 {isUserPresent && <li className="signin_btn pl-2 pr-0">
                                     <a className="btn" onClick={() => onLogOut()}>LOG OUT</a>
                                 </li>

@@ -34,11 +34,27 @@ const Signup = () => {
   const [acceptPrivacyTerms, setAcceptPrivacyTerms] = useState(false);
   const [isFormValidate, setIsFormValidate] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [signUpType, setSignUpType] = useState("Standard");
+  const [fbId, setFbId] = useState("");
+  const [isEmailAlreadyExist, setIsEmailAlreadyExist] = useState(false);
 
   const heightList = ["4", "4'1", "4'2", "4'3", "4'4", "4'5", "4'6", "4'7", "4'8", "4'9", "4'10", "4'11", "5", "5'1", "5'2", "5'3", "5'4", "5'5", "5'6", "5'7", "5'8", "5'9", "5'10", "5'11", "6", "6'1", "6'2", "6'3", "6'4", "6'5", "6'6", "6'7", "6'8", "6'9", "6'10", "6'11", "7"];
 
   useEffect(() => {
-    // alert('ew');
+    let socialLogin = localStorage.getItem('socialLogin');
+    if (socialLogin !== null && socialLogin.length > 0){
+      socialLogin = JSON.parse(socialLogin);
+      if (socialLogin.signUpType === 'Facebook' || socialLogin.signUpType === 'Google'){
+        setSignUpType(socialLogin.signUpType);
+        setEmail(socialLogin.email);
+        setFbId(socialLogin.fbId);
+        setPassword(Math.floor(Math.random() * 1000000000));
+        setIsEmailAlreadyExist(socialLogin.email.length > 0 ? true : false);
+      }
+      // else{
+      //   toast.error("Something went Wrong");
+      // }
+    }
   }, []);
 
   function validateStep1() {
@@ -71,7 +87,6 @@ const Signup = () => {
   }
 
   function validateStep2() {
-    setIsFormValidate(false);
     if (age === 'Age') {
       toast.error('Please Select Age');
     } else if (gender === 'Gender') {
@@ -101,7 +116,6 @@ const Signup = () => {
     }else if (!acceptPrivacyTerms){
       toast.error('Please Accept Terms and Condtions');
     }else {
-      setIsFormValidate(true);
       if (bmi === '' || bmi === 'null'){
         toast.error('we are calculating a BMI. Please wait...');
       }else{
@@ -146,7 +160,7 @@ const Signup = () => {
     formData.append('cholesterol',cholesterol);
     formData.append('bmi',bmi);
     formData.append('recieveNotificationAndPromotions',recieveNotificationAndPromotions ? 1 : 0);
-    formData.append('signUpType','Standard');
+    formData.append('signUpType',signUpType);
     formData.append('userOffSet','');
     formData.append('dayNumber','');
     formData.append('metricsDate',month + '-' + date + '-' + year);
@@ -154,7 +168,7 @@ const Signup = () => {
     formData.append('numberOfPrescribeMedications','');
     formData.append('reminderForMedicines','');
     formData.append('reminderForMedicinesTime','');
-    formData.append('fbId','');
+    formData.append('fbId',fbId);
     formData.append('medicationTimers','');
     formData.append('weightMeasurement','');
     formData.append('appleId','');
@@ -206,6 +220,7 @@ const Signup = () => {
   }
 
   function calculateBMI(h, w) {
+    setIsLoading(true);
     let arry = h.split("'");
     let params = new URLSearchParams({
       'foot': arry[0],
@@ -213,8 +228,8 @@ const Signup = () => {
       'weight': w,
     });
     userService.calculateBMI(params).then((response) => {
+      setIsLoading(false);
       setBmi(response.data.data);
-      if (isFormValidate) createProfile();
     }).catch((error) => {
       setBmi('');
       // userService.handleError(error);
@@ -282,18 +297,19 @@ const Signup = () => {
                         />
 
                       </aside>
-                      <aside className="col-md-6 mb-3">
+                      {!isEmailAlreadyExist && <aside className="col-md-6 mb-3">
                         <div className="input_row">
                           <span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
                           <input type="" name="" placeholder="Email Address" className="input103 w-100" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
-                      </aside>
-                      <aside className="col-md-6 mb-3">
+                      </aside>}
+                      {!isEmailAlreadyExist && <aside className="col-md-6 mb-3">
                         <div className="input_row">
                           <span><img src={require("../../../src/images/padlock.png").default} alt="img" /></span>
-                          <input type="" name="" placeholder="Password" className="input103 w-100" value={password} onChange={(e) => setPassword(e.target.value)} />
+                          <input type="password" name="" placeholder="Password" className="input103 w-100" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                       </aside>
+                      }
                       <aside className="col-md-6 mb-3">
                         <div className="input_row">
                           <span><img src={require("../../../src/images/state.png").default} alt="img" /></span>

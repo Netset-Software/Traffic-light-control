@@ -7,7 +7,7 @@ export function formDataHeader() {
         // "Content-Type": "multipart/form-data",
                 // "Content-Type": "application/json",
 
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'true',
         // 'token': accessToken,
         'timezone': 'Asia/Kolkata'
     };
@@ -19,7 +19,7 @@ export function jsonHeaders() {
         'deviceType': 'w',
         'appVersion': '1.0',
         "Content-Type": "application/json",
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'true',
         'timezone': 'Asia/Kolkata'
     };
 }

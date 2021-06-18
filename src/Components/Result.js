@@ -54,7 +54,7 @@ const Result = () => {
                 question.answers.map((answer, j) => {
                     console.log(answer._id === answerArry[i], answer._id, answerArry[i]);
                     if (answer._id === answerArry[i]) {
-                        setRightAnswers(rightAnswers + 1);
+                        if (answer.isRight) setRightAnswers(rightAnswers + 1);
                         tmpQuizData.questions[i].answers[j].userAnswer = true;
                     } else {
                         tmpQuizData.questions[i].answers[j].userAnswer = false;
@@ -96,7 +96,7 @@ const Result = () => {
                                 <div className="answer_box1 mt-1 py-2">
                                     <ul className="m-0 p-0">
                                         {question.answers.map((answer, j) => {
-                                            let ansClass = (answer.isRight && answer.userAnswer) || (answer.isRight && answer.userAnswer) ? "correct_ans" : !answer.isRight && answer.userAnswer ? 'wrong_ans' : "";
+                                            let ansClass = (answer.isRight && answer.userAnswer) || (answer.isRight && !answer.userAnswer) ? "correct_ans" : !answer.isRight && answer.userAnswer ? 'wrong_ans' : "";
                                             let checkImageSrc = require((answer.isRight && answer.userAnswer) || (answer.isRight && !answer.userAnswer) ? "../images/check.png" : !answer.isRight && answer.userAnswer ? "../images/remove.png" : "../images/uncheck.png").default
                                             let sideLable = (answer.isRight && answer.userAnswer) || (!answer.isRight && answer.userAnswer) ? "YOUR ANSWER" : answer.isRight && !answer.userAnswer ? "CORRECT ANSWER" : '';
                                             let sideLableClass = (answer.isRight && answer.userAnswer) || (answer.isRight && !answer.userAnswer) ? "qstn_label" : "wrong_label";

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { userService } from '../../services'
 import { toast } from 'react-toastify';
 import Loader from './Loader'
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import {config} from '../../config/config'
 
 
 const SignIn = () => {
@@ -31,7 +34,7 @@ const SignIn = () => {
           toast.success("Successfully Signed-In");
           setTimeout(() => {
             window.location.href = '/';
-          }, 2000);
+          }, 1000);
         }else{
           setIsLoading(false);
           toast.error("Incorrect Email or Password");
@@ -39,6 +42,105 @@ const SignIn = () => {
       }).catch((error) => {
       });
     }
+  }
+
+   //for facebook Login 
+   const responseFacebook = (response) => {
+    console.log("response fackbook", response);
+    if (!response.status) {
+      // const formData = new URLSearchParams();
+      // formData.append('email', response.email);
+      // formData.append('social_media_id', response.id);
+      // formData.append('profile_image', response.picture.data.url);
+      // formData.append('f_name', response.name);
+      // // formData.append('l_name', response.name);
+      // formData.append('register_type', "F");
+      // socialLogin(formData.toString())
+      // const params = {
+      //   signUpType: "Facebook",
+      //   screenNumber: 3,
+      //   email: response.email,
+      //   fbId: response.id,
+      //   deviceInfo: { token: '', deviceType: 'web' },
+      //   appleId: ""
+      // }
+
+      const formData = new URLSearchParams();
+      formData.append('signUpType', "Facebook");
+      formData.append('screenNumber', 5);
+      formData.append('email', response.email);
+      formData.append('fbId', response.id);
+      formData.append('deviceInfo', "{ token: '', deviceType: 'web' }");
+      formData.append('appleId', "");
+      formData.append('metricsDate', getDate());
+      let socialLoginData = {signUpType: "Facebook", screenNumber: 5, email: response.email, fbId: response.id}
+      socialLogin(formData, socialLoginData);
+    }
+
+  }
+
+  function getDate(){
+    var date = new Date().getDate(); //Current Date
+        var year = new Date().getFullYear(); //Current Year
+        var month = new Date().getMonth() + 1
+        var day = new Date().getDay() + 1
+        return month + '-' + date + '-' + year;
+  }
+
+  function responseGoogle(response) {
+    console.log("google response",response);
+    if(response.profileObj){
+        // const formData = new URLSearchParams();
+        // formData.append('name',response.profileObj.name);
+        // formData.append('email',response.profileObj.email);
+        // formData.append('social_media_id',response.profileObj.googleId);
+        // formData.append('profile_image',response.profileObj.imageUrl);
+        // socialLogin(formData.toString())
+      // const params = {
+      //   signUpType: "Google",
+      //   screenNumber: 3,
+      //   email: response.profileObj.email,
+      //   fbId: "",
+      //   deviceInfo: { token: '', deviceType: 'web' },
+      //   appleId: ""
+      // }
+      // socialLogin(params);
+      const formData = new URLSearchParams();
+      formData.append('signUpType', "Google");
+      formData.append('screenNumber', 5);
+      formData.append('email', response.profileObj.email);
+      formData.append('fbId', '');
+      formData.append('deviceInfo', "{ token: '', deviceType: 'web' }");
+      formData.append('appleId', "");
+      formData.append('metricsDate', getDate());
+      let socialLoginData = {signUpType: "Google", screenNumber: 5, email: response.profileObj.email, fbId: ''}
+
+      socialLogin(formData, socialLoginData);
+    }
+  }
+  //for social login
+  const socialLogin = (params, socialLoginData) => {
+    setIsLoading(true);
+    userService.socialLogin(params).then(function (response) {
+      localStorage.clear();
+      if (response.data.status == 200){
+        localStorage.setItem('user_id', response.data.data[0]._id);
+        toast.success("Successfully Signed-In");
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1000);
+      }else if(response.data.status === 202){
+        setIsLoading(false);
+        localStorage.setItem('socialLogin', JSON.stringify(socialLoginData));
+        // toast.error("Profile Already Exist");
+        window.location.href = '/signup'
+      }else{
+        setIsLoading(false);
+        toast.error("Some Error Occur");
+      }
+    }).catch(function (error) {
+      console.log("social loginn error", error);
+    })
   }
 
   return (
@@ -91,12 +193,29 @@ const SignIn = () => {
                       <div className="row">
                         <aside className="col-sm-6">
                           <span className="google_btn">
-                            <button className="btn">GOOGLE</button>
+                            {/* <button className="btn">GOOGLE</button> */}
+                            <GoogleLogin
+                              clientId={config.googleClientId}
+                              render={renderProps => (
+                                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn" >GOOGLE</button>
+                              )}
+                              buttonText="Login"
+                              onSuccess={responseGoogle}
+                              onFailure={responseGoogle}
+                              cookiePolicy={'single_host_origin'}
+                            />
                           </span>
                         </aside>
                         <aside className="col-sm-6">
                           <span className="facebook_btn">
-                            <button className="btn">FACEBOOK</button>
+                            {/* <button className="btn">FACEBOOK</button> */}
+                            <FacebookLogin
+                              appId={config.fbAppId}
+                              cssClass="btn"
+                              fields="name,email,picture"
+                              callback={responseFacebook}
+                              textButton="FACEBOOK"
+                            />
                           </span>
                         </aside>
                       </div>

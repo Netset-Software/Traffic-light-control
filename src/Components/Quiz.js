@@ -52,8 +52,8 @@ const Quiz = (props) => {
                 setIsLoading(false);
                 setTimeout(() => {
                     let time = new Date();
-                    setMaxQuizTime(12);
-                    setQuizTime(time.setSeconds(time.getSeconds() + 12));
+                    setMaxQuizTime(120);
+                    setQuizTime(time.setSeconds(time.getSeconds() + 120));
                 }, 300);
             }else{
                 setIsLoading(false);
@@ -76,7 +76,11 @@ const Quiz = (props) => {
 
 
     const _next = () => {
-        setCurrentStep(currentStep >= totalQuestions - 1 ? totalQuestions : currentStep + 1);
+        if (collectedAnswer.questions[currentStep-1].answer === 0){
+            toast.error("Please Answer the Question")
+        }else{
+            setCurrentStep(currentStep >= totalQuestions - 1 ? totalQuestions : currentStep + 1);
+        }
     }
 
     // const _next = () => {

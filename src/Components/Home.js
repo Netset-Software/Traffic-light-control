@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Modal } from 'react-bootstrap';
 import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
-import {userService, handleError} from '../services'
+import {userService} from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
 import Geocode from "react-geocode";
@@ -30,48 +30,63 @@ const Home = () => {
         }
     }, []);
 
-    // function setCurrentLocation() {
-    //     if (navigator.geolocation) {
-    //     //   setShowLoader(false);
-    //       console.log("gelocation----");
-    //       navigator.geolocation.getCurrentPosition(showPosition, error_location);
-    //     } else {
-    //     //   openModalverifilocation();
-    //     }
-    //   }
+    function setCurrentLocation() {
+        if (navigator.geolocation) {
+            setIsLoading(true);
+            console.log("gelocation----");
+            navigator.geolocation.getCurrentPosition(showPosition, error_location);
+        } else {
+        //   openModalverifilocation();
+        }
+      }
     
-    //   function showPosition(position) {
-    //     var lat = position.coords.latitude;
-    //     var lng = position.coords.longitude;
-    //     console.log(lat, lng);
-    //     Geocode.setApiKey("AIzaSyBsv-OafO1eNJncye_hAAAlAvE--OjmmJ8");
-    //     Geocode.fromLatLng(lat, lng).then(
-    //       response => {
-    //           debugger
-    //         // const address = response.results[0].formatted_address;
-    //         let state = response.results[0].address_components[3].long_name
-    //         // verifyState(state.toLowerCase());
-    //       },
-    //       error => {
-    //         // openModalverifilocation();
-    //         console.error("errorrrr geocode", error);
-    //       }
-    //     );
-    //   }
-    
-    //   function error_location(err) {
-    //     console.warn(`ERROR(${err.code}): ${err.message}`);
-    //     if (err.message == "User denied Geolocation") {
-    //       alert("Please enable location settings");
-    //     }
-    //     if (err.code == 2 || err.code == "2") {
-    //       alert("We can't locate your position, please try again!");
-    //     }
-    //   }
 
-    function getAllQuizes() {
+
+      function showPosition(position) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        // console.log(lat, lng);
+        // Geocode.setApiKey("AIzaSyBsv-OafO1eNJncye_hAAAlAvE--OjmmJ8");
+        // Geocode.fromLatLng(lat, lng).then(
+        //   response => {
+        //       debugger
+        //     // const address = response.results[0].formatted_address;
+        //     let state = response.results[0].address_components[3].long_name
+        //     // verifyState(state.toLowerCase());
+        //   },
+        //   error => {
+        //     // openModalverifilocation();
+        //     console.error("errorrrr geocode", error);
+        //   }
+        // );
+
+        userService.getCurrentLocation(lat, lng).then((response) => {
+            let city = response.data.results[0].address_components[0].long_name;
+            // getAllQuizes(city);
+            getAllQuizes("Sahibzada Ajit Singh Nagar");
+        }).catch((error) => {
+            setIsLoading(false);
+            // setAllQuizes([]);
+            toast.error("We can't locate your position, please try again!");
+            console.log("error ", error);
+        });
+
+      }
+    
+      function error_location(err) {
+        setIsLoading(false);
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+        if (err.message == "User denied Geolocation") {
+          alert("Please enable location settings");
+        }
+        if (err.code == 2 || err.code == "2") {
+          alert("We can't locate your position, please try again!");
+        }
+      }
+
+    function getAllQuizes(city) {
         setIsLoading(true);
-        userService.getQuizes().then((response) => {
+        userService.getQuizes(city).then((response) => {
             setIsLoading(false);
             if (response.data.status == 200){
                 setAllQuizes(response.data.data);
@@ -180,7 +195,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-            { isUserLogin &&
+            { isUserLogin && allQuizes.length > 0 &&
             <section className="quiz_slider py-4">
                 <div className="container">
                     <div className="row">

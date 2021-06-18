@@ -15,11 +15,14 @@ var user_id = localStorage.getItem('user_id');
 export const userService = {
     logIn,
     signUp,
+    forgotPassword,
     getQuizes,
     getQuiz,
     calculateBMI,
     submitQuiz,
     getQuizResult,
+    getCurrentLocation,
+    socialLogin,
 
 };
 
@@ -29,13 +32,25 @@ function logIn(params) {
     return axios.post(url, params, configJsonHeaders)
 }
 
+function socialLogin(params) {
+    let url =  `${config.apiUrl}/userSignUp`;
+    return axios.post(url, params, configFormDataHeaders)
+}
+
 function signUp(params) {
     let url = `${config.apiUrl}/userSignUp`;
     return axios.post(url, params, configFormDataHeaders)
 }
 
-function getQuizes() {
+function forgotPassword(params) {
+    let url = `${config.apiUrl}/forgotPassword`;
+    return axios.post(url, params, configJsonHeaders)
+}
+
+function getQuizes(city) {
+    // let url = `${config.apiUrl}/quiz?userId=${user_id}&location=${city}`;
     let url = `${config.apiUrl}/quiz?userId=${user_id}`;
+
     return axios.get(url, configFormDataHeaders);
 }
 
@@ -57,6 +72,11 @@ function submitQuiz(params) {
 function getQuizResult(quizeId) {
     let url = `${config.apiUrl}/quiz/${quizeId}/user/${user_id}`;
     return axios.get(url, configFormDataHeaders);
+}
+
+function getCurrentLocation(lat, lng) {
+    let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&result_type=administrative_area_level_2&sensor=true&key=AIzaSyAyiC-K1_Bxfbh6jCaG3zs_Y_5PxrsXUGE`;
+    return axios.get(url, jsonHeaders);   
 }
 
 function handleError(error) {
