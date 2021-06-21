@@ -19,6 +19,7 @@ const Home = () => {
     const [selectedQuizId, setSelectedQuizId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isUserLogin, setIsUserLogin] = useState(false);
+    const [isPlayedFirstTime, setIsPlayedFirstTime] = useState(true);
 
 
     useEffect(() => {
@@ -89,7 +90,14 @@ const Home = () => {
         userService.getQuizes(city).then((response) => {
             setIsLoading(false);
             if (response.data.status == 200){
-                setAllQuizes(response.data.data);
+                let quizesData = response.data.data;
+                setAllQuizes(quizesData);
+                for(let i = 0; i < quizesData; i++ ){
+                    if (quizesData[i] === 'COM'){
+                        setIsPlayedFirstTime(true);
+                        break;
+                    }
+                }
               }else{
                 toast.error("Some Error Occur");
               } 
@@ -107,7 +115,8 @@ const Home = () => {
         }else if(status === 'QUIT'){
             toast.warning("You have Already Quited that Quiz")
         }else if(status === 'COM'){
-            toast.warning("You have Already Completed that Quiz")
+            window.location.href = "/result?id=" + id;
+            // toast.warning("You have Already Completed that Quiz")
         }else{
             toast.error("Something Went Wrong");
         }
@@ -203,7 +212,11 @@ const Home = () => {
                         <aside className="col-md-12 col-sm-12 mb-2">
                             <div className="quiz_section_title">
                                 <h2 className="">BIG4 QUIZ</h2>
-                                <p>Play the BIG4 Quiz in Your Location! By answering the questions in a given time and get a chance to win the rewards.</p>
+                                { isPlayedFirstTime ? 
+                                    <p>Play the BIG4 Quiz in Your Location! By answering the questions in a given time and get a chance to win the rewards.</p>
+                                :
+                                    <p>Do you want to play more ?We will get back to you soon with new challenges</p>
+                                }
                             </div>
 
                         </aside>
@@ -238,7 +251,7 @@ const Home = () => {
                                             <div className="quiz_section_box">
                                                 <h6>{quiz.name}</h6>
                                                 <div className="quiz_footer mt-3">
-                                                    <button className="ans bg-transparent border-0" onClick={() => handleModalShowHide(quiz._id, quiz.quiz_done_status)}><u>Answer this quiz</u></button>
+                                                    <button className="ans bg-transparent border-0" onClick={() => handleModalShowHide(quiz._id, quiz.quiz_done_status)}><u>{quiz.quiz_done_status === 'COM' ? "Check your answers" : "Answer this quiz"}</u></button>
                                                     <span className="qstn"> {quiz.questions.length} Questions</span>
                                                 </div>
                                             </div>

@@ -12,6 +12,7 @@ const Result = () => {
     const [rightAnswers, setRightAnswers] = useState(0);
     const [totalQuestions, setTotalQuestions] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [score, setScore] = useState('');
 
     useEffect(() => {
         let query = new URLSearchParams(window.location.search);
@@ -30,6 +31,7 @@ const Result = () => {
             if (response.data.status === 200) {
                 setQuizResult(response.data.data);
                 setData(response.data.data);
+                setScore(response.data.data.score);
             } else {
                 setIsLoading(false);
                 toast.error("Some Error Occur");
@@ -74,8 +76,12 @@ const Result = () => {
                 <div className="row">
                     <div className="col-sm-6 reuslt_title">
                         <h1 className="mb-0 ">BIG4 Quiz Results</h1>
-                        <h2 className="mb-0 mt-3">Score {rightAnswers} of {totalQuestions} </h2>
-                        <p>You have won {rightAnswers === totalQuestions ? 10 : 5}% discount on your next purchase.</p>
+                        {/* <h2 className="mb-0 mt-3">Score {rightAnswers} of {totalQuestions} </h2> */}
+                        <h2 className="mb-0 mt-3">Score {score} of {totalQuestions} </h2>
+
+                        {/* <p>You have won {rightAnswers === totalQuestions ? 10 : 5}% discount on your next purchase.</p> */}
+                        <p>You have won {Number(score) === totalQuestions ? 10 : 5}% discount on your next purchase.</p>
+
                     </div>
                     {/* <div className="col-sm-6 text-right">
                         <div className="signin_btn">
@@ -100,6 +106,17 @@ const Result = () => {
                                             let checkImageSrc = require((answer.isRight && answer.userAnswer) || (answer.isRight && !answer.userAnswer) ? "../images/check.png" : !answer.isRight && answer.userAnswer ? "../images/remove.png" : "../images/uncheck.png").default
                                             let sideLable = (answer.isRight && answer.userAnswer) || (!answer.isRight && answer.userAnswer) ? "YOUR ANSWER" : answer.isRight && !answer.userAnswer ? "CORRECT ANSWER" : '';
                                             let sideLableClass = (answer.isRight && answer.userAnswer) || (answer.isRight && !answer.userAnswer) ? "qstn_label" : "wrong_label";
+                                            // return (<li className={ansClass}>
+                                            //     <span>
+                                            //         <img src={checkImageSrc} className="mr-2" alt="img" />
+                                            //         {answer.type && answer.type === 'image' ?
+                                            //             <div className="select_image" style={{ margin: '0px 8px' }}>
+                                            //                 <img src={config.imageUrl + answer.value} alt="img" className="img-type-answer-option" style={{ margin: '-34px ​0px 12px 28px !important' }} />
+                                            //             </div>
+                                            //             : answer.value}</span>
+
+                                            //     {(answer.isRight || answer.userAnswer) && <span><label class={sideLableClass}>{sideLable}</label></span>}
+                                            // </li>)
                                             return (<li className={ansClass}>
                                                 <span>
                                                     <img src={checkImageSrc} className="mr-2" alt="img" />

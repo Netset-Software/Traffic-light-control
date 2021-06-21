@@ -97,10 +97,10 @@ const Header = () => {
                                     </Navbar.Collapse>
 
                                 </Navbar>
-                                <div className="lng_box">
+                                {/* <div className="lng_box">
                                     <span className="lng-icon"><img src={require("../../images/lang.png").default} alt="img" width="14px" /></span>
                                     <Select options={Language} placeholder='Select Language' />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

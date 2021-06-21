@@ -103,7 +103,7 @@ const Signup = () => {
       toast.error('Invalid Low BP');
     } else if (!/^\d+(\.\d+)?$/.test(highBP) || /^[0.]+$/.test(highBP)) {
       toast.error('Invalid High BP');
-    }else if (highBP <= lowBP ) {
+    }else if (Number(highBP) <= Number(lowBP) ) {
       toast.error('Invalid High and Low BP ');
     } else if (glucose === '') {
       toast.error('Please Enter Glucose');
@@ -457,7 +457,7 @@ const Signup = () => {
                             <Form.Group controlId="exampleForm.ControlSelect1" className="input103">
                               <Form.Control as="select"  value={weight} onChange={(e) => handleHeightWeight(e.target.value, 'Weight')}>
                                 <option>Weight</option>
-                                {range(40, 400).map((val) => {
+                                {range(10, 400).map((val) => {
                                   return (<option>{val}</option>)
                                 })}
                               </Form.Control>

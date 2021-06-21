@@ -48,7 +48,7 @@ const SignIn = () => {
    const responseFacebook = (response) => {
     console.log("response fackbook", response);
     if (!response.status) {
-      const formData = new URLSearchParams();
+      const formData = new FormData();
       formData.append('signUpType', "Facebook");
       formData.append('screenNumber', 5);
       formData.append('email', response.email);
@@ -73,7 +73,7 @@ const SignIn = () => {
   function responseGoogle(response) {
     console.log("google response",response);
     if(response.profileObj){
-      const formData = new URLSearchParams();
+      const formData = new FormData();
       formData.append('signUpType', "Google");
       formData.append('screenNumber', 5);
       formData.append('email', response.profileObj.email);

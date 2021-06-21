@@ -368,7 +368,11 @@ select:default {
 }
 .select_image {
     position: relative;
-    display: inline-block;
+    /* display: inline-block; */
+}
+.answer_box1 .select_image{
+    height: 160px;
+    width: 160px;
 }
 .select_image input[type=radio] {
     box-sizing: border-box;

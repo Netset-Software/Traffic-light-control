@@ -448,6 +448,23 @@ textarea:-ms-input-placeholder {
 .input_row{
     padding-left: 12px;
 }
+.select_image{
+    position: relative;
+    display: inline-block;
+    height: 200px;
+    margin: 10px 0;
+    overflow: hidden;
+    border: 1px solid grey;
+    border-radius: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.select_image img{
+    width: 100%;
+    height: auto;
+}
 .loader{
     position: fixed;
     z-index: 1025;

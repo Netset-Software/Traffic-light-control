@@ -77,7 +77,7 @@ const Quiz = (props) => {
 
     const _next = () => {
         if (collectedAnswer.questions[currentStep-1].answer === 0){
-            toast.error("Please Answer the Question")
+            toast.error("Please choose the answer")
         }else{
             setCurrentStep(currentStep >= totalQuestions - 1 ? totalQuestions : currentStep + 1);
         }
@@ -127,16 +127,24 @@ const Quiz = (props) => {
     }
 
     function onTimeExpire() {
-        alert("Your Time is Up.")
-        window.location.href = '/';
+        if (collectedAnswer.questions[0].answer === 0){
+            alert("Your Time is Up.")
+            window.location.href = '/';
+        }else{
+            if (isAutoSubmit) calculateResult(getFormatedTime(0));
+        }
         // if (isAutoSubmit) calculateResult(getFormatedTime(0));
     }
 
     function onSubmitBeforeTimeout(){
-        document.getElementById("pause-timer").click();
-        let leftSeconds = Number(document.getElementById('pause-timer').innerHTML);
-        setIsAutoSubmit(false);
-        calculateResult(getFormatedTime(leftSeconds));
+        if (collectedAnswer.questions[currentStep-1].answer === 0){
+            toast.error("Please choose the answer")
+        }else{
+            document.getElementById("pause-timer").click();
+            let leftSeconds = Number(document.getElementById('pause-timer').innerHTML);
+            setIsAutoSubmit(false);
+            calculateResult(getFormatedTime(leftSeconds));
+        }
     }
 
     function calculateResult(completionTime){
@@ -243,7 +251,7 @@ const Quiz = (props) => {
                                     <img src={require("../images/check2.png").default} alt="img" />
                                 </div>
                                 <h4 className="mt-3">Congratulations!</h4>
-                                <p className="pb-0 mb-3">You have won 5% discount on your next purchase.</p>
+                                <p className="pb-0 mb-3">You have won {rightAnswers === totalQuestions ? 10 : 5}% discount on your next purchase.</p>
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -260,11 +268,14 @@ const Quiz = (props) => {
                                 </div>
                                 <div className="row pb-2 mt-3">
                                     <div className="col-md-6 mb-3 redeem_btn">
-                                        <a className="btn" href={"/result?id="+ quizId}>REDEEM</a>
+                                        <a className="btn" href="/offer">REDEEM</a>
 
                                     </div>
                                     <div className="col-md-6 mb-3 share_btn">
                                         <button className="btn">SHARE</button>
+                                    </div>
+                                    <div className="col-md-12 mb-2 share_btn">
+                                        <a className="btn"  href={"/result?id="+ quizId}>Check your Answers</a>
                                     </div>
                                     <div className="col-md-12 mb-2 home_btn">
                                         <a className="btn" href="/">GO TO HOME</a>
@@ -288,29 +299,30 @@ const Quiz = (props) => {
             <div className="qstns_box">
                 <h4>{props.questionInfo.title}</h4>
                 <p className="mb-0 text-secondary mt-3">Choose Answer</p>
+                {(props.questionInfo.answers[0].type === 'text') ?
                 <div className="answer_box mt-2">
                     <fieldset>
                         <Form.Group>
                             <Form.Label as="legend">
                             </Form.Label>
                             {props.questionInfo.answers.map((option, i) => {
-                                if (option.type && option.type === 'image'){
+                            //     if (option.type && option.type === 'image'){
                                     
-                                   return (
-                                       <div className="col-sm-4 row" style={{ margin: '20px 0px 10px -15px' }}>
-                                           <Form.Check
-                                               type="radio"
-                                               name="formHorizontalRadios"
-                                               id="formHorizontalRadios1"
-                                            //    defaultChecked={status}
-                                               onClick={() => handleAnswerOptions(option._id, props.questionInfo._id, props.step - 1, option.isRight)}
-                                           />
-                                           <div className="select_image" style={{ margin: '0px 8px' }}>
-                                               <img src={config.imageUrl + option.value} alt="img" className="img-type-answer-option" style={{ margin: '-34px ​0px 12px 28px !important' }} />
-                                           </div>
-                                       </div>
-                            )
-                                }else{
+                            //        return (
+                            //            <div className="col-sm-4 row" style={{ margin: '20px 0px 10px -15px' }}>
+                            //                <Form.Check
+                            //                    type="radio"
+                            //                    name="formHorizontalRadios"
+                            //                    id="formHorizontalRadios1"
+                            //                 //    defaultChecked={status}
+                            //                    onClick={() => handleAnswerOptions(option._id, props.questionInfo._id, props.step - 1, option.isRight)}
+                            //                />
+                            //                <div className="select_image" style={{ margin: '0px 8px' }}>
+                            //                    <img src={config.imageUrl + option.value} alt="img" className="img-type-answer-option" style={{ margin: '-34px ​0px 12px 28px !important' }} />
+                            //                </div>
+                            //            </div>
+                            // )
+                            //     }else{
                                     return (<Form.Check
                                         type="radio"
                                         label={option.value}
@@ -320,12 +332,31 @@ const Quiz = (props) => {
                                         onClick={() => handleAnswerOptions(option._id, props.questionInfo._id, props.step -1, option.isRight)}
                                     />)
 
-                                }
-                            })}
+                                // }
+                            })}      
                         </Form.Group>
                     </fieldset>
+            </div>
+            :
+            <div className="answer_box mt-2 py-4">
+                <div className="row">
+                {props.questionInfo.answers.map((option, i) => {
+                    return(<div className="col-sm-3 text-center">
+                        <div className="select_image">
+                            <img src={config.imageUrl + option.value} alt="img" style={{objectFit: 'cover'}}/>
+                            <span> <Form.Check
+                                type="radio"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios1"
+                                onClick={() => handleAnswerOptions(option._id, props.questionInfo._id, props.step - 1, option.isRight)}
+                            /></span>
+                        </div>
+                    </div>)
+                    })}
                 </div>
             </div>
+           }
+       </div>
         );     
     }
 
