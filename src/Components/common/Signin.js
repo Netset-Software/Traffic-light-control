@@ -48,23 +48,6 @@ const SignIn = () => {
    const responseFacebook = (response) => {
     console.log("response fackbook", response);
     if (!response.status) {
-      // const formData = new URLSearchParams();
-      // formData.append('email', response.email);
-      // formData.append('social_media_id', response.id);
-      // formData.append('profile_image', response.picture.data.url);
-      // formData.append('f_name', response.name);
-      // // formData.append('l_name', response.name);
-      // formData.append('register_type', "F");
-      // socialLogin(formData.toString())
-      // const params = {
-      //   signUpType: "Facebook",
-      //   screenNumber: 3,
-      //   email: response.email,
-      //   fbId: response.id,
-      //   deviceInfo: { token: '', deviceType: 'web' },
-      //   appleId: ""
-      // }
-
       const formData = new URLSearchParams();
       formData.append('signUpType', "Facebook");
       formData.append('screenNumber', 5);
@@ -90,21 +73,6 @@ const SignIn = () => {
   function responseGoogle(response) {
     console.log("google response",response);
     if(response.profileObj){
-        // const formData = new URLSearchParams();
-        // formData.append('name',response.profileObj.name);
-        // formData.append('email',response.profileObj.email);
-        // formData.append('social_media_id',response.profileObj.googleId);
-        // formData.append('profile_image',response.profileObj.imageUrl);
-        // socialLogin(formData.toString())
-      // const params = {
-      //   signUpType: "Google",
-      //   screenNumber: 3,
-      //   email: response.profileObj.email,
-      //   fbId: "",
-      //   deviceInfo: { token: '', deviceType: 'web' },
-      //   appleId: ""
-      // }
-      // socialLogin(params);
       const formData = new URLSearchParams();
       formData.append('signUpType', "Google");
       formData.append('screenNumber', 5);

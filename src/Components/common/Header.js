@@ -98,8 +98,8 @@ const Header = () => {
 
                                 </Navbar>
                                 <div className="lng_box">
-                                    <span className="lng-icon"><img src={require("../../images/lang.png").default} alt="img" /></span>
-                                    <Select options={Language} />
+                                    <span className="lng-icon"><img src={require("../../images/lang.png").default} alt="img" width="14px" /></span>
+                                    <Select options={Language} placeholder='Select Language' />
                                 </div>
                             </div>
                         </div>

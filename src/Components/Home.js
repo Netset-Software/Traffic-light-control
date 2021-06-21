@@ -125,7 +125,7 @@ const Home = () => {
     return (
         <>
             {isLoading && <Loader/>}
-            <section className="banner py-4">
+            <section className="banner pt-0 pb-4">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -133,6 +133,7 @@ const Home = () => {
                                 pagination={{ clickable: true }}
                                 slidesPerView={1}
                                 autoplay={{ delay: 3000 }}
+
                             >
                                 <SwiperSlide>
                                     <div className="slider_box">
@@ -353,14 +354,14 @@ const Home = () => {
                                     <img src={require("../images/dummy.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
-                                    <p>Track your blood glucose and learn how it can affect your health.</p>
+                                    <p>Track your blood pressure and learn how to improve it.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-6 mb-4">
                             <div className="d-flex align-items-center">
                                 <div className="icon_box">
-                                    <img src={require("../images/dummy.png").default} alt="img" />
+                                    <img src={require("../images/bloodglucose.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
                                     <p>Track your blood glucose and learn how it can affect your health.</p>
@@ -370,20 +371,20 @@ const Home = () => {
                         <div className="col-md-6 mb-4">
                             <div className="d-flex align-items-center">
                                 <div className="icon_box">
-                                    <img src={require("../images/dummy.png").default} alt="img" />
+                                    <img src={require("../images/chl.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
-                                    <p>Track your blood glucose and learn how it can affect your health.</p>
+                                    <p>Track your cholesterol and learn the benefits of maintaining a healthy level.</p>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-6 mb-4">
                             <div className="d-flex align-items-center">
                                 <div className="icon_box">
-                                    <img src={require("../images/dummy.png").default} alt="img" />
+                                    <img src={require("../images/bmi1.png").default} alt="img" />
                                 </div>
                                 <div className="ml-3">
-                                    <p>Track your blood glucose and learn how it can affect your health.</p>
+                                    <p>Track your BMI and learn how to reach or maintain a healthy BMI.</p>
                                 </div>
                             </div>
                         </div>

@@ -92,7 +92,7 @@ const Footer = () => {
                                 </li>
                                 <li>
                                     <a href="/#">
-                                        <p>Copyright Notice</p>
+                                        <p>Term of Use</p>
                                     </a>
                                 </li>
                             </ul>
