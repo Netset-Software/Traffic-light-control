@@ -134,77 +134,6 @@ const Home = () => {
     return (
         <>
             {isLoading && <Loader/>}
-            <section className="banner pt-0 pb-4">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <Swiper
-                                pagination={{ clickable: true }}
-                                slidesPerView={1}
-                                autoplay={{ delay: 3000 }}
-
-                            >
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-6">
-                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
-                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
-                                            </div>
-                                            <div className="col-md-6">
-                                                <img src={require("../images/med1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                            </Swiper>
-                        </div>
-                    </div>
-                </div>
-            </section>
             { isUserLogin && allQuizes.length > 0 &&
             <section className="quiz_slider py-4">
                 <div className="container">
@@ -311,6 +240,76 @@ const Home = () => {
                 </div>
             </section>
             }
+            <section className="banner pt-0 pb-4">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <Swiper
+                                pagination={{ clickable: true }}
+                                slidesPerView={1}
+                                autoplay={{ delay: 3000 }}
+                            >
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                                <SwiperSlide>
+                                    <div className="slider_box">
+                                        <div className="row align-items-center">
+                                            <div className="col-md-6">
+                                                <h1>WOW Life Science Omega-3 Fish Oil</h1>
+                                                <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
+                                                <button className="btn  mt-3">SHOP NOW</button>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <img src={require("../images/med1.png").default} alt="img" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SwiperSlide>
+                            </Swiper>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section className="mobile_sec my-4 py-5">
                 <div className="container">
                     <div className="row">

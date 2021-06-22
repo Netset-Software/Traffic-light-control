@@ -649,7 +649,7 @@ color: #00c9ff;
     background-color: #fff;
     display: block;
     padding: 7px 11px;
-    margin-bottom: 13px;
+    /* margin-bottom: 13px; */
     font-size: 18px;
 }
 .faq_section .accordion .card-header:after {
