@@ -111,6 +111,10 @@ const SignIn = () => {
     })
   }
 
+  const handleKeypress = e => {
+    if (e.charCode === 13) onLogIn();
+  }
+
   return (
     <>
     {isLoading && <Loader/>}
@@ -126,13 +130,13 @@ const SignIn = () => {
                     <aside className="col-md-12 mb-3">
                       <div className="input_row">
                         <span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-                        <input type="text" name="" placeholder="Email Address" className="input103 w-100" onChange={(e) => setEmail(e.target.value)}/>
+                        <input onKeyPress={handleKeypress} type="text" name="" placeholder="Email Address" className="input103 w-100" onChange={(e) => setEmail(e.target.value)}/>
                       </div>
                     </aside>
                     <aside className="col-md-12 mb-3">
                       <div className="input_row">
                         <span><img src={require("../../../src/images/padlock.png").default} alt="img" /></span>
-                        <input type="password" name="" placeholder="Password" className="input103 w-100" onChange={(e) => setPassword(e.target.value)}/>
+                        <input onKeyPress={handleKeypress} type="password" name="" placeholder="Password" className="input103 w-100" onChange={(e) => setPassword(e.target.value)}/>
                       </div>
                     </aside>
                     <aside className="col-md-12 my-2">
@@ -165,7 +169,7 @@ const SignIn = () => {
                             <GoogleLogin
                               clientId={config.googleClientId}
                               render={renderProps => (
-                                <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn" >GOOGLE</button>
+                                <a onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn" >GOOGLE</a>
                               )}
                               buttonText="Login"
                               onSuccess={responseGoogle}

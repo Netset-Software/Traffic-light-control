@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { Navbar, Nav } from 'react-bootstrap'
 import { toast } from 'react-toastify';
-import Loader from './Loader'
+import Loader from './Loader';
 
 const Header = () => {
 
@@ -46,21 +46,19 @@ const Header = () => {
                                 <li>
                                     <a href="/offer">OFFERS</a>
                                 </li>
-                                {isUserPresent && <li>
-                                    <a href="/#">
+                                <li>
+                                    <a href={isUserPresent ? '/' : '/signin'}>
                                         <i className="fa fa-bell-o" aria-hidden="true"></i>
                                         <span className="notification_circle">
                                             2
                                 </span>
                                     </a>
                                 </li>
-                                }
-                                {isUserPresent && <li>
-                                    <a href="/#">
+                                <li>
+                                    <a href={isUserPresent ? '/' : '/signin'}>
                                         <i className="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </li>
-                                }
                                 {isUserPresent && <li className="signin_btn pl-2 pr-0">
                                     <a className="btn" onClick={() => onLogOut()}>LOG OUT</a>
                                 </li>

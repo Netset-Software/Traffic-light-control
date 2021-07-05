@@ -9,7 +9,7 @@ const Foodoption = () => {
                         <div className="col-md-12 text-center">
                             <div>
                                 <h2>Checkout Food <span>Options</span></h2>
-                                <p>Please note that foods suggested below are completely planted-based; please consult with your health care provider to see if they recommend a different one. This list contains great plant-based protein.</p>
+                                <p>Please note that foods suggested below are completely plant-based; please consult with your health care provider to see if they recommend a different one. This list contains great plant-based protein.</p>
                             </div>
                         </div>
                     </div>

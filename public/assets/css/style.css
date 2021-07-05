@@ -400,6 +400,7 @@ footer .fa{
     border-left: none;
     border-right: none;
     padding: 10px 0px;
+    height: 46px;
 }
 
 .PhoneInputInput{
@@ -430,19 +431,19 @@ footer .fa{
 
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
-  color: black;
+  color: rgb(118, 118, 118);
 }
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: black;
+  color: rgb(118, 118, 118);
 }
 input::-moz-placeholder,
 textarea::-moz-placeholder {
-  color: black;
+  color: rgb(118, 118, 118);
 }
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
-  color: black;
+  color: rgb(118, 118, 118);
 }
 
 .input_row{
@@ -476,12 +477,12 @@ textarea:-ms-input-placeholder {
     align-items: center;
     background: #000000ab;
     overflow: hidden;
-  }
-  .loader img{
+}
+.loader img{
     width: 100px;
-  }
+}
 
-  #pause-timer{
+#pause-timer{
     position: absolute;
     margin-left: -155px;
     background-color: white;
@@ -491,10 +492,25 @@ textarea:-ms-input-placeholder {
     font-size: 0px;
     cursor: pointer;
     opacity: 0;
-  }
+}
 
-  .img-type-answer-option{
+.img-type-answer-option{
     max-width: 160px;
     max-height: 160px;
-    
-  }
+}
+
+.PhoneInputInput{
+    display: none;
+}
+
+.phone-number-mask{
+    margin-left: 40px;
+    padding-top: 8px;
+    border-bottom: 1px solid #e9e9e9;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 10px 0px;
+    height: 46px;
+    font-size: 15px;
+}

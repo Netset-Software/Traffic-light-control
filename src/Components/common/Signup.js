@@ -5,6 +5,8 @@ import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
 import { userService } from '../../services';
 import Loader from './Loader';
+import MaskedInput from 'react-text-mask'
+import TextInputMask from 'react-masked-text';
 
 
 const Signup = () => {
@@ -73,13 +75,17 @@ const Signup = () => {
       toast.error("Invalid Email");
     }else if (password === ''){
       toast.error('Please Enter Password');
-    }else if (address === ''){
-      toast.error('Please Enter Address');
-    }else if (zip === ''){
+    }
+    // else if (address === ''){
+    //   toast.error('Please Enter Address');
+    // }
+    else if (zip === ''){
       toast.error('Please Enter Zip');
-    }else if (profilePic === ''){
-      toast.error('Please Select Profile Picture');
-    }else{
+    }
+    // else if (profilePic === ''){
+    //   toast.error('Please Select Profile Picture');
+    // }
+    else{
      setTimeout(() => {
           setCurrentStep(2);
         }, 100);
@@ -294,6 +300,15 @@ const Signup = () => {
                       <aside className="col-md-6 mb-3 text-left" >
                       <label>Phone Number</label>
                       <div className="input_row">
+                        <MaskedInput
+                          mask={[/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                          placeholder="Phone Number"
+                          guide={false}
+                          className="phone-number-mask"
+                          onChange={(e) => setPhoneNumber(e.target.value)}
+                          style={{position: 'absolute'}}
+                          maxLength={12}
+                        />
                         <PhoneInput
                           placeholder="Phone Number"
                           value={phoneNumber}
