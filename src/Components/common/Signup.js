@@ -483,20 +483,24 @@ const Signup = () => {
                       <aside className="col-md-6 mb-3 text-left">
                         <div className="row">
                         
-                          <aside className="col-md-6">
-                          <label>Low BP</label>
+                          <aside className="col-md-12">
+                          <label>BLOOD PRESSURE</label>
                             <div className="input_row">
                               <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
-                              <input type="" name="" placeholder="Low BP" className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
+                              <div className="bp_input">
+                              <input type="" name="" placeholder="Top Number " className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
+                              <span>/</span>
+                              <input type="" name="" placeholder="Bottom Number" className="input103 w-100 bpinp" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
+                              </div>
                             </div>
                           </aside>
-                          <aside className="col-md-6 text-left">
-                          <label>High BP</label>
+                          {/* <aside className="col-md-6 text-left">
+                          <label></label>
                             <div className="input_row">
                               <span></span>
-                              <input type="" name="" placeholder="High BP" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
+                              <input type="" name="" placeholder="BN" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
                             </div>
-                          </aside>
+                          </aside> */}
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">

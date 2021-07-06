@@ -7,7 +7,8 @@ const Contact = () => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-md-12 mb-4">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27438.699513236297!2d76.71961416681145!3d30.722970117310027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0c79abeb01%3A0x346da2110b9f5ddb!2sMy%20Office!5e0!3m2!1sen!2sin!4v1622796804357!5m2!1sen!2sin" width="100%" height="450" title="This is a unique title" ></iframe>
+
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1454654.8570527704!2d-94.3060957619638!3d44.59451438412115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4d585b9a60780b9b%3A0x2a2c99b10fea20f!2sMinnesota%2C%20USA!5e0!3m2!1sen!2sin!4v1625484970759!5m2!1sen!2sin" width="100%" height="450"  allowfullscreen="" loading="lazy"></iframe>
             </div>
             <div className="col-md-8">
               <div>

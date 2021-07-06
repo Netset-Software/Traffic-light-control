@@ -6,7 +6,7 @@ const About = () => {
             <section className="about_sec py-5">
                 <div className="container">
                     <div className="row align-items-center">
-                        <div className="col-md-6 mb-4 text-left">
+                        <div className="col-md-8 mb-4 text-left">
                             <h3>About</h3>
                             <p className="pt-3">Back in February 2014, a physician recognized
                             as a “Champion of Health and Wellness”
@@ -19,7 +19,7 @@ const About = () => {
                             drinking, exercising, stress management,
                                 and socializing in a seamless way.</p>
                         </div>
-                        <div className="col-md-6 mb-3 text-center">
+                        <div className="col-md-4 mb-3 text-center">
                             <img src={require("../images/stethoscope.png").default} alt="img" />
                         </div>
 

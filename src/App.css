@@ -235,7 +235,7 @@ select:default {
     font-weight: 600;
 }
 .benifits_section{
-    background-color: #0000ff;
+    background-color: #00c9ff;
 }
 .benifits_section p{
     color: #fff;
@@ -502,10 +502,26 @@ color: #00c9ff;
     min-width: 140px;
     margin: 0 5px;
 }
+.bp_input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.bp_input .input103{
+    font-size: 14px;
+    border-left: 1px solid lightgrey;
+}
+.bp_input .input103:first-child{
+    border-left: 0;
+}
+.bpinp{
+    padding: 0 0 0 11px !important;
+   
+}
 .about_sec h3{
     font-size: 40px;
     font-weight: 700;
-    color: #80808057;
+    color: #000000;
 }
 .about_sec p{
     font-size: 19px;
