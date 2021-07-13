@@ -41,7 +41,7 @@ const Header = () => {
                         <aside className="col-md-9 m-auto">
                             <ul class="top_head">
                                 <li>
-                                    <a href="/#">SHOP</a>
+                                    <a href="/shop">SHOP</a>
                                 </li>
                                 <li>
                                     <a href="/offer">OFFERS</a>

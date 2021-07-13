@@ -10,6 +10,11 @@ import Contact from './Components/Contact';
 import Quiz from './Components/Quiz';
 import Result from './Components/Result';
 import Redeem from './Components/Redeem';
+import Shop from './Components/Shop';
+import Product from './Components/Product';
+import Product_search from './Components/Product_search';
+import My_favorites from './Components/My_favorites';
+import Reviews from './Components/Reviews';
 
 import Offer from './Components/Offer';
 import SignIn from './Components/common/Signin';
@@ -41,6 +46,11 @@ function App() {
             <Route  path="/result" component={Result} />
             <Route  path="/redeem" component={Redeem} />
             <Route  path="/Offer" component={Offer} />
+            <Route  path="/shop" component={Shop} />
+            <Route  path="/product" component={Product} />
+            <Route  path="/product_search" component={Product_search} />
+            <Route  path="/my_favorites" component={My_favorites} />
+            <Route  path="/Reviews" component={Reviews} />
       </Switch>
       <Footer />
     </Router>
