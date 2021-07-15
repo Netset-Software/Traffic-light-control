@@ -25,6 +25,7 @@ import Forgotpassword from './Components/common/Forgotpassword';
 import {BrowserRouter as Router, Switch, Route} from'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Product_details from './Components/Product_details';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route  path="/product_search" component={Product_search} />
             <Route  path="/my_favorites" component={My_favorites} />
             <Route  path="/Reviews" component={Reviews} />
+            <Route  path="/Product_details" component={Product_details} />
       </Switch>
       <Footer />
     </Router>

@@ -76,7 +76,109 @@ const Product = () => {
                             <div className="review-left-side text-center">
                                 <img src={require("../images/omega.png").default} alt="img"/>
                             </div>
+                        </div>
+                        <div className="col-md-9">
+                            <div className="review-detail-rightside">
+                                 <h2>WOW Life Science Omega-3 Fish Oil</h2>
+                                 <h6><span>NUTRITION & FITNESS SUPPLEMENTS</span></h6>
+                                 <h5><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><span><a href="/reviews">(1.2k reviews)</a></span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            <section className="review-list-area">
+                <div className="container">
+                    <h3>Reviews</h3>
+                    <div className="media">
+                        <img className="d-flex mr-3" src={require("../images/last_para.png").default} alt="image"/>
+                        <div className="media-body">
+                            <div className="d-flex">
+                            <h5 className="mt-0">Jhon Smith</h5>
+                            <span className="review-time">20 Min</span>
+                            </div>
+                            <h6><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i></h6>
+                            <p>If you’re looking for the supreme quality zinc supplement, HK Vitals Zinc is one of the best
+                                options out there.</p>
+                        </div>
+                    </div>
+
+                    <div className="media">
+                        <img className="d-flex mr-3" src={require("../images/last_para.png").default} alt="image"/>
+                        <div className="media-body">
+                            <div className="d-flex">
+                            <h5 className="mt-0">Jhon Smith</h5>
+                            <span className="review-time">20 Min</span>
+                            </div>
+                            <h6><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i></h6>
+                            <p>If you’re looking for the supreme quality zinc supplement, HK Vitals Zinc is one of the best
+                                options out there.</p>
+                        </div>
+                    </div>
+
+                    <div className="media">
+                        <img className="d-flex mr-3" src={require("../images/last_para.png").default} alt="image"/>
+                        <div className="media-body">
+                            <div className="d-flex">
+                            <h5 className="mt-0">Jhon Smith</h5>
+                            <span className="review-time">20 Min</span>
+                            </div>
+                            <h6><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i></h6>
+                            <p>If you’re looking for the supreme quality zinc supplement, HK Vitals Zinc is one of the best
+                                options out there.</p>
+                        </div>
+                    </div>
+
+                    <div className="media">
+                        <img className="d-flex mr-3" src={require("../images/last_para.png").default} alt="image"/>
+                        <div className="media-body">
+                            <div className="d-flex">
+                            <h5 className="mt-0">Jhon Smith</h5>
+                            <span className="review-time">20 Min</span>
+                            </div>
+                            <h6><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i></h6>
+                            <p>If you’re looking for the supreme quality zinc supplement, HK Vitals Zinc is one of the best
+                                options out there.</p>
+                        </div>
+                    </div>
+
+                    <div className="media">
+                        <img className="d-flex mr-3" src={require("../images/last_para.png").default} alt="image"/>
+                        <div className="media-body">
+                            <div className="d-flex">
+                            <h5 className="mt-0">Jhon Smith</h5>
+                            <span className="review-time">20 Min</span>
+                            </div>
+                            <h6><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i></h6>
+                            <p>If you’re looking for the supreme quality zinc supplement, HK Vitals Zinc is one of the best
+                                options out there.</p>
+                        </div>
+                    </div>
+
+                    <div className="media">
+                        <img className="d-flex mr-3" src={require("../images/last_para.png").default} alt="image"/>
+                        <div className="media-body">
+                            <div className="d-flex">
+                            <h5 className="mt-0">Jhon Smith</h5>
+                            <span className="review-time">20 Min</span>
+                            </div>
+                            <h6><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i></h6>
+                            <p>If you’re looking for the supreme quality zinc supplement, HK Vitals Zinc is one of the best
+                                options out there.</p>
+                        </div>
+                    </div>
+
+                    <div className="media">
+                        <img className="d-flex mr-3" src={require("../images/last_para.png").default} alt="image"/>
+                        <div className="media-body">
+                            <div className="d-flex">
+                            <h5 className="mt-0">Jhon Smith</h5>
+                            <span className="review-time">20 Min</span>
+                            </div>
+                            <h6><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i><i className="fa fa-star" aria-hidden="true"></i></h6>
+                            <p>If you’re looking for the supreme quality zinc supplement, HK Vitals Zinc is one of the best
+                                options out there.</p>
                         </div>
                     </div>
                 </div>

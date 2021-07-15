@@ -85,7 +85,7 @@ const Product = () => {
                     <div className="row">
                         <div className="col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p>
-                            <a href="/product_detail">
+                            <a href="/product_details">
                             <div className="product-list-box">
                                 <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil1.png").default} alt="img" />
@@ -94,6 +94,7 @@ const Product = () => {
                                     <h4>WOW Life Science Omega-3 Fish Oil</h4>
                                     <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
                                     <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
+                                    
                                 </div>
                             </div>
                             </a>

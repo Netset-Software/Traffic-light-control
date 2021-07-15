@@ -1183,7 +1183,32 @@ header .signup_btn .btn {
 .lng_box .css-tj5bde-Svg{
     color: #0000ff;
 }
+.review-list-area .media h5 {
+    font-weight: 700;
+}
+.review-list-are .fa.fa-star {
+        color: #f5bf03;
+        font-size: 18px;
+        margin-right: 2px;
+    }
+    .review-list-area .media p {
+        font-weight: 500;
+        font-size: 18px;
+        color: #343039;
+        margin: 0;
+    }
 
+
+.review-page-area {
+    background-image: url('images/slider_bg.png');
+    background-size: cover;
+    padding: 40px 0;
+    
+}
+.review-list-area h3 {
+    font-size: 25px;
+    color: #6b6b6b;
+}
 @media (max-width:1199px){
     .navbar-light .navbar-nav .nav-link {
         color: white !important;
@@ -1416,4 +1441,5 @@ header .signup_btn .btn {
 
     }
 }
+
 

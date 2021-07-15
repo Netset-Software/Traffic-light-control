@@ -693,6 +693,210 @@ span.modal-yes a:hover {
     padding: 20px 0;
     border-radius: 10px;
 }
-section.review-page-area {
-    background-image: url(./images/slider_bg.png);
+
+.product-detials-page .swiper-container.swiper-container-initialized.swiper-container-horizontal.swiper-container-pointer-events {
+    border: 2px solid #bbbbbb;
+    border-radius: 10px;
+    margin-top: 42px;
+}
+span.review-time {
+    margin-left: auto;
+    font-weight: 400;
+    color: #969696;
+}
+section.review-list-area .media {
+    border-bottom: 1px solid gainsboro;
+    padding: 22px 0;
+}
+section.review-list-area .media:last-child{
+    border-bottom:none ;
+}
+section.review-list-area h3 {
+    margin: 20px 0;
+}
+section.review-list-area {
+    margin: 30px 0;
+}
+section.review-list-area i.fa.fa-star {
+    color: #f5bf03;
+    font-size: 18px;
+    margin-right: 2px;
+}
+section.review-list-area img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.slider_box_new {
+    padding: 57px;
+}
+.slider_box_new h1{
+    font-weight: 700;
+    font-size: 40px;
+    color: #343039;
+}
+.slider_box_new p .orignl{
+    color: #00c9ff;
+    font-size: 20px;
+}
+.slider_box_new p .old{
+    position: relative;
+    display: inline-block;
+}
+.slider_box_new p .old:before{
+   content: '';
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #343039;
+    z-index: 1024;
+}
+.slider_box_new p{
+    font-size: 18px;
+    font-weight: 500;
+    color: #343039;
+}
+.slider_box .btn{
+    border: 2px solid #00c9ff;
+    color: #00c9ff;
+    font-weight: 500;
+    padding: 10px 30px;
+}
+.product-detials-page .swiper-button-next {
+    color: white !important;
+    background: #00c9ff;
+    padding: 2px 22px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #a7a7a7;
+}
+.product-detials-page .swiper-button-prev {
+    color: white !important;
+    background: #00c9ff;
+    padding: 2px 22px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px #a7a7a7;
+}
+.product-detials-page .swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 20px !important;
+    font-weight: 900;
+}
+.product-detials-page .swiper-button-next, .product-detials-page .swiper-button-prev {
+    top: 55% !important;
+}
+.product-detail-rightside {
+    margin-top: 40px;
+}
+.product-detail-rightside h2{
+    font-weight: 700;
+}
+.product-detail-rightside h6 span {
+    font-size: 16px;
+    color: blue;
+    background: #e5e5ff;
+    padding: 7px 21px;
+    border-radius: 22px;
+}
+.product-detail-rightside h6 {
+ margin: 28px 0;
+}
+.product-detail-rightside h5 i {
+    color: #f5bf03;
+    margin-right: 5px;
+}
+.product-detail-rightside h5 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 21px 0;
+}
+.product-detail-rightside del {
+    font-weight: 400;
+    color: #636363;
+}
+.product-detail-rightside h5 span{
+    color: #00c9ff;
+}
+.product-detail-rightside h5 a{
+    color:#212529 !important;
+}
+button.btn.add-minus {
+    background: #00c9ff;
+    width: 39px;
+}
+button.btn.add-minus i {
+    color: #fff;
+}
+h5.select-quantity-box {
+    border-top:1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px 0;
+}
+a.checkout-bt {
+    background: #00c9ff;
+    color: #fff !important;
+    padding: 16px 60px;
+    border-radius: 2px;
+    font-size: 20px;
+    font-weight: 500;
+    box-shadow: 0px 3px 6px #bbbbbb;
+}
+a.favourite-bt {
+    border:2px solid #00c9ff;
+    color: #00c9ff !important;
+    padding: 14px 60px;
+    border-radius: 2px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left:10px; 
+    box-shadow: 0px 3px 6px #bbbbbb;
+}
+.product-detail-rightside p{
+    margin-top: 44px;
+}
+.description-area h3 {
+    font-size: 22px;
+    color: #818181;
+}
+.description-area{
+    margin-top: 40px;
+}
+.description-area p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #343039;
+}
+.description-area {
+    margin: 50px 0;
+}
+
+.review-detail-rightside h6 {
+    margin: 19px 0;
+}
+   .review-detail-rightside h5 i {
+       color: #f5bf03;
+       margin-right: 5px;
+   }
+   .review-detail-rightside h5 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 10px 0;
+}
+   .review-detail-rightside del {
+       font-weight: 400;
+       color: #636363;
+   }
+   .review-detail-rightside h5 span{
+       color: #00c9ff;
+   }
+   .review-detail-rightside h5 a{
+       color:#212529 !important;
+   }
+   .review-detail-rightside h6 span {
+    font-size: 16px;
+    color: blue;
+    background: #e5e5ff;
+    padding: 7px 21px;
+    border-radius: 22px;
 }
