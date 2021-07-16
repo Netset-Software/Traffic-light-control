@@ -6,7 +6,8 @@ import PhoneInput from 'react-phone-number-input';
 import { userService } from '../../services';
 import Loader from './Loader';
 import MaskedInput from 'react-text-mask'
-import TextInputMask from 'react-masked-text';
+import csc from 'country-state-city'
+import { Country, State, City }  from 'country-state-city';
 
 
 const Signup = () => {
@@ -16,6 +17,8 @@ const Signup = () => {
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [countryCode, setCountryCode] = useState('');
+  const [tmpCountryCode, setTmpCountryCode] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +30,7 @@ const Signup = () => {
   const [gender, setGender] = useState('Gender');
   const [height, setHeight] = useState('Height');
   const [weight, setWeight] = useState('Weight');
+  const [weightType, setWeightType] = useState('kg');
   const [lowBP, setLowBP] = useState('');
   const [highBP, setHighBP] = useState('');
   const [glucose, setGlucose] = useState('');
@@ -69,6 +73,8 @@ const Signup = () => {
       toast.error('Please Enter Phone Number');
     }else if (!/^\d+$/.test(phoneNumber.slice(1,))){
       toast.error('Invalid Phone Number');
+    }else if (!countryCode){
+      toast.error('Please Select Phone Number country code');
     }else if (email === ''){
       toast.error('Please Enter Email');
     }else if(!emailRegrex.test(email)){
@@ -93,6 +99,10 @@ const Signup = () => {
   }
 
   function validateStep2() {
+    // let a = csc
+    // let b = Country.getAllCountries()
+    // let c = Country.getCountryByCode('IN')
+    // debugger
     if (age === 'Age') {
       toast.error('Please Select Age');
     } else if (gender === 'Gender') {
@@ -151,6 +161,7 @@ const Signup = () => {
     formData.append('middleName',middleName);
     formData.append('lastName',lastName);
     formData.append('mobileNumber',phoneNumber);
+    formData.append('countryCode', Country.getCountryByCode(countryCode));
     formData.append('email',email);
     formData.append('password',password);
     formData.append('address',address);
@@ -160,6 +171,7 @@ const Signup = () => {
     formData.append('gender',gender);
     formData.append('height',height);
     formData.append('weight',weight);
+    formData.append('weightType',weightType);
     formData.append('bloodPressureMin',lowBP);
     formData.append('bloodPressureMax',highBP);
     formData.append('glucose',glucose);
@@ -205,7 +217,6 @@ const Signup = () => {
     }).catch((error) => {
       setIsLoading(false);
       toast.error("Some Error Occur");
-      // userService.handleError(error);
       console.log("error ", error);
     });
   }
@@ -232,13 +243,13 @@ const Signup = () => {
       'foot': arry[0],
       'inch': arry[1] ? arry[1] : 0,
       'weight': w,
+     'weightType': weightType
     });
     userService.calculateBMI(params).then((response) => {
       setIsLoading(false);
       setBmi(response.data.data);
     }).catch((error) => {
       setBmi('');
-      // userService.handleError(error);
       console.log("error ", error);
     });
   }
@@ -311,10 +322,11 @@ const Signup = () => {
                         />
                         <PhoneInput
                           placeholder="Phone Number"
-                          value={phoneNumber}
+                          value={tmpCountryCode}
                           maxLength="15"
                           className="custom-phone-input"
-                          onChange={(value) => setPhoneNumber(value)}
+                          onChange={(value) => {setTmpCountryCode(value);}}
+                          onCountryChange={(value) => {setCountryCode(value);}}
                         />
                       </div>
                       </aside>
@@ -465,9 +477,23 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
+                      <label>Weight Type</label>
+                        <div className="input_row">
+                          <span><img src={require("../../../src/images/weight-scale.png").default} alt="img" /></span>
+                          <Form>
+                            <Form.Group controlId="exampleForm.ControlSelect1" className="input103">
+                              <Form.Control as="select" value={weightType} onChange={(e) => setWeightType(e.target.value)}>
+                                <option >kg</option>
+                                <option>lbs</option>
+                              </Form.Control>
+                            </Form.Group>
+                          </Form>
+                        </div>
+                      </aside>
+                      <aside className="col-md-6 mb-3 text-left">
                       <label>Weight</label>
                         <div className="input_row">
-                          <span><img src={require("../../../src/images/weight.png").default} alt="img" /></span>
+                          <span><img src={require("../../../src/images/weight2.png").default} alt="img" /></span>
                           <Form>
                             <Form.Group controlId="exampleForm.ControlSelect1" className="input103">
                               <Form.Control as="select"  value={weight} onChange={(e) => handleHeightWeight(e.target.value, 'Weight')}>
@@ -488,9 +514,9 @@ const Signup = () => {
                             <div className="input_row">
                               <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
                               <div className="bp_input">
-                              <input type="" name="" placeholder="Top Number " className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
-                              <span>/</span>
-                              <input type="" name="" placeholder="Bottom Number" className="input103 w-100 bpinp" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
+                              <input type="" name="" maxLength={3} placeholder="Top Number " className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
+                              {/* <span>/</span> */}
+                              <input type="" name="" maxLength={3} placeholder="Bottom Number" className="input103 w-100 bpinp" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
                               </div>
                             </div>
                           </aside>
@@ -507,14 +533,14 @@ const Signup = () => {
                       <label>Glucose</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/glucose.png").default} alt="img" /></span>
-                          <input type="" name="" placeholder="Glucose" className="input103 w-100" value={glucose} onChange={(e) => setGlucose(e.target.value)}/>
+                          <input type="" name=""  maxLength={3} placeholder="Glucose" className="input103 w-100" value={glucose} onChange={(e) => setGlucose(e.target.value)}/>
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
                       <label>Cholesterol</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/cholesterol.png").default} alt="img" /></span>
-                          <input type="" name="" placeholder="Cholesterol" className="input103 w-100" value={cholesterol} onChange={(e) => setCholesterol(e.target.value)}/>
+                          <input type="" name=""  maxLength={3} placeholder="Cholesterol" className="input103 w-100" value={cholesterol} onChange={(e) => setCholesterol(e.target.value)}/>
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">

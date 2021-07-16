@@ -48,9 +48,7 @@ function forgotPassword(params) {
 }
 
 function getQuizes(city) {
-    // let url = `${config.apiUrl}/quiz?userId=${user_id}&location=${city}`;
-    let url = `${config.apiUrl}/quiz?userId=${user_id}`;
-
+    let url = `${config.apiUrl}/quiz?userId=${user_id ? user_id : ''}&location=${city}`;
     return axios.get(url, configFormDataHeaders);
 }
 

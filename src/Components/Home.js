@@ -21,14 +21,15 @@ const Home = () => {
     const [isUserLogin, setIsUserLogin] = useState(false);
     const [isPlayedFirstTime, setIsPlayedFirstTime] = useState(true);
 
+    const user_id = localStorage.getItem('user_id');
 
     useEffect(() => {
-        let user_id = localStorage.getItem('user_id');
-        if (user_id){
-            setIsUserLogin(true);
-            getAllQuizes();
+        // let user_id = localStorage.getItem('user_id');
+        // if (user_id){
+            setIsUserLogin(user_id ? true : false);
+            getAllQuizes("Sahibzada Ajit Singh Nagar");
             // setCurrentLocation();
-        }
+        // }
     }, []);
 
     function setCurrentLocation() {
@@ -92,7 +93,7 @@ const Home = () => {
             if (response.data.status == 200){
                 let quizesData = response.data.data;
                 setAllQuizes(quizesData);
-                for(let i = 0; i < quizesData; i++ ){
+                if (user_id) for(let i = 0; i < quizesData; i++ ){
                     if (quizesData[i] === 'COM'){
                         setIsPlayedFirstTime(true);
                         break;
@@ -109,16 +110,19 @@ const Home = () => {
     }
 
     function handleModalShowHide(id, status) {
-        if (status === 'NEW'){
-            setSelectedQuizId(id);
-            setShowHide(!showHide);
-        }else if(status === 'QUIT'){
-            toast.warning("You have Already Quited that Quiz")
-        }else if(status === 'COM'){
-            window.location.href = "/result?id=" + id;
-            // toast.warning("You have Already Completed that Quiz")
+        if (user_id){
+            if (status === 'NEW'){
+                setSelectedQuizId(id);
+                setShowHide(!showHide);
+            }else if(status === 'QUIT'){
+                toast.warning("You have Already Quited that Quiz")
+            }else if(status === 'COM'){
+                window.location.href = "/result?id=" + id;
+            }else{
+                toast.error("Something Went Wrong");
+            }
         }else{
-            toast.error("Something Went Wrong");
+            setShowHide(!showHide);
         }
     }
 
@@ -134,7 +138,9 @@ const Home = () => {
     return (
         <>
             {isLoading && <Loader/>}
-            { isUserLogin && allQuizes.length > 0 &&
+            {
+            //  isUserLogin && 
+            allQuizes.length > 0 &&
             <section className="quiz_slider py-4">
                 <div className="container">
                     <div className="row">
@@ -497,7 +503,7 @@ const Home = () => {
                             </aside>
                             <aside className="col-sm-6">
                                 <span className="start_btn">
-                                    <a className="btn" onClick={() => startQuiz()} >START QUIZ</a>
+                                    <a className="btn" onClick={() => {user_id ? startQuiz() : window.location.href = "/signin"}} >START QUIZ</a>
                                 </span>
                             </aside>
                         </div>

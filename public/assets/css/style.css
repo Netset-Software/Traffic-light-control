@@ -513,6 +513,7 @@ textarea:-ms-input-placeholder {
     padding: 10px 0px;
     height: 46px;
     font-size: 15px;
+    width: 72%;
 }
 .search-box {
     max-width: 390px;

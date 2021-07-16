@@ -54,7 +54,7 @@ const Result = () => {
         tmpQuizData.questions.map((question, i) => {
             if (question._id === questionArry[i]) {
                 question.answers.map((answer, j) => {
-                    console.log(answer._id === answerArry[i], answer._id, answerArry[i]);
+                    // console.log(answer._id === answerArry[i], answer._id, answerArry[i]);
                     if (answer._id === answerArry[i]) {
                         if (answer.isRight) setRightAnswers(rightAnswers + 1);
                         tmpQuizData.questions[i].answers[j].userAnswer = true;
@@ -80,7 +80,7 @@ const Result = () => {
                         <h2 className="mb-0 mt-3">Score {score} of {totalQuestions} </h2>
 
                         {/* <p>You have won {rightAnswers === totalQuestions ? 10 : 5}% discount on your next purchase.</p> */}
-                        <p>You have won {Number(score) === totalQuestions ? 10 : 5}% discount on your next purchase.</p>
+                        <p>{quizData.questions && quizData.questions.length > 0 && "You have won " + (Number(score) === totalQuestions ? 10 : 5) + "% discount on your next purchase."}</p>
 
                     </div>
                     {/* <div className="col-sm-6 text-right">
