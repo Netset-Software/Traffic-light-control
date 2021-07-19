@@ -1374,6 +1374,7 @@ input[type="file"]{
     font-size: 12px;
     background: #00c9ff29;
     padding: 6px;
+    width: 100%;
 }
 .profile_section input:disabled {
     background: #ffffff8a;
@@ -1401,6 +1402,19 @@ input[type="file"]{
     font-size: 14px;
     color: grey;
 }
+.profile_section .list-group p{
+    font-weight: 500;
+    color: grey;
+    font-size: 15px;
+}
+.sharebtn .btn{
+    background: #00c9ff;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    padding: 7px 17px;
+    width: 100%;
+}
 .profile_section .list-group .bp{
     color: #eed948;
 }
@@ -1423,6 +1437,91 @@ input[type="file"]{
     display: flex;
     justify-content: space-between;
 }
+.card_header{
+    display: flex;
+    justify-content: space-between;
+}
+.newcard_btn .btn{
+    background: #00c9ff;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    padding: 7px 17px;
+}
+.cardbox h5{
+    color: #696969;
+    font-size: 21px;
+    letter-spacing: 2px;
+    margin: 11px 0;
+}
+.cardbox h5 span{
+    color: black;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+.cardbox h6{
+    color: #69696999;
+    font-size: 16px;
+    font-weight: 500;
+}
+.cardbox{
+    background-image: url('../src/images/card_bg.png');
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #d3d3d399;
+    border-radius: 9px;
+    overflow: hidden;
+    padding: 14px;
+}
+.cardbox:hover{
+    border: 1px solid #00c9ff;
+}
+.cardbox_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.car_btn{
+    cursor: pointer;
+}
+.payment_modal label{
+    font-size: 13px;
+    font-weight: 500;
+    color: #1f1f1f;
+    margin-bottom: 4px;
+}
+.payment_modal input{
+    border: 0;
+    background: #d3d3d345;
+    height: 46px;
+    padding: 0 7px;
+    font-size: 15px;
+    width: 100%;
+}
+.dltebtn{
+    width: 48%;
+    border: 1px solid #00c9ff !important;
+    border: 0;
+    background-color: transparent !important;
+    padding: 10px !important;
+    font-weight: 500;
+    color: #00c9ff;
+    border-radius: 6px;
+}
+.paybtn{
+    width: 48%;
+    background: #00c9ff;
+    border: 0;
+    color: white;
+    padding: 10px !important;
+    font-weight: 500;
+    border-radius: 6px;
+}
+.pay_modal .modal-content{
+    border-radius: 23px;
+    border: 0;
+}
 @media (max-width:1199px){
     .img_row{  
     height: 160px;
@@ -1433,8 +1532,22 @@ input[type="file"]{
         padding: 0 24px 0 0 !important;
         font-size: 14px;
     }
+    .cardbox h5{
+        font-size: 21px;
+    }
 }
 @media (max-width:991px){
+    .cardbox h5{
+        color: #696969;
+        font-size: 13px;
+        letter-spacing: 2px;
+        margin: 11px 0;
+    }
+    .cardbox h5 span{
+        color: black;
+        font-size: 17px;
+        letter-spacing: 1px;
+    }
     .popular {
         background: white;
         padding: 12px;
@@ -1493,7 +1606,17 @@ input[type="file"]{
    
 }
 @media (max-width:767px){
-   
+    .cardbox h5{
+        color: #696969;
+        font-size: 24px;
+        letter-spacing: 2px;
+        margin: 11px 0;
+    }
+    .cardbox h5 span{
+        color: black;
+        font-size: 29px;
+        letter-spacing: 1px;
+    }
     .food_option {
         margin-top: 0px;
     }

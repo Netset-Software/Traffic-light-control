@@ -17,7 +17,7 @@ import My_favorites from './Components/My_favorites';
 import Reviews from './Components/Reviews';
 import Blog from './Components/Blog';
 import Profile from './Components/Profile';
-
+import Cards from './Components/Cards'
 import Offer from './Components/Offer';
 import SignIn from './Components/common/Signin';
 import Signup from './Components/common//Signup';
@@ -59,6 +59,7 @@ function App() {
             <Route  path="/blog" component={Blog} />
             <Route  path="/packages" component={Packages} />
             <Route  path="/profile" component={Profile} />
+            <Route  path="/cards" component={Cards} />
             
       </Switch>
       <Footer />

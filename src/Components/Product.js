@@ -83,7 +83,7 @@ const Product = () => {
             <section className="product-page-area">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p>
                             <a href="/product_details">
                             <div className="product-list-box">
@@ -99,7 +99,7 @@ const Product = () => {
                             </div>
                             </a>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
@@ -112,7 +112,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
@@ -125,7 +125,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                   <div className="product-list-image text-center">
@@ -138,7 +138,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
@@ -151,7 +151,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
@@ -164,7 +164,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
@@ -177,7 +177,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
@@ -190,7 +190,7 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-lg-3 col-md-4">
                             <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">

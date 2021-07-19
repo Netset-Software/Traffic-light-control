@@ -17,7 +17,7 @@ const Profile = () => {
                                 <input type="file" className="text-center center-block file-upload" />
                             </div>
                         </div>
-
+                        <hr />
                         <ul className="list-group mt-4">
                             <h6>Share with your doctor:</h6>
                             <li className="list-group-item text-left">
@@ -36,6 +36,9 @@ const Profile = () => {
                                     <span className="bmi"><strong>BMI</strong></span>
                                     <p className="mb-0">9.31243124</p>
                             </li>
+                            <li className="list-group-item text-left sharebtn">
+                                    <button className="btn">Share</button>
+                            </li>
                         </ul>
 
                         <ul className="list-group mt-4">
@@ -43,6 +46,16 @@ const Profile = () => {
                                 <a className="" href="/#">
                                     <span className="pull-left"><strong>Settings</strong></span> <i className="fa fa-cog"></i>
                                 </a> 
+                            </li>
+                            <li className="list-group-item text-right">
+                                <a className="" href="/cards">
+                                    <span className="pull-left"><strong>My cards</strong></span> <i className="fa fa-credit-card"></i> 
+                                </a>
+                            </li>
+                            <li className="list-group-item text-right">
+                                <a className="" href="/#">
+                                    <span className="pull-left"><strong>My Packages</strong></span> <i className="fa fa-list"></i> 
+                                </a>
                             </li>
                             <li className="list-group-item text-right">
                                 <a className="" href="/#">
