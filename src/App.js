@@ -15,12 +15,15 @@ import Product from './Components/Product';
 import Product_search from './Components/Product_search';
 import My_favorites from './Components/My_favorites';
 import Reviews from './Components/Reviews';
+import Blog from './Components/Blog';
+import Profile from './Components/Profile';
 
 import Offer from './Components/Offer';
 import SignIn from './Components/common/Signin';
 import Signup from './Components/common//Signup';
 import Signup2 from './Components/common//Signup2';
 import Forgotpassword from './Components/common/Forgotpassword';
+import Packages from './Components/Packages';
 
 import {BrowserRouter as Router, Switch, Route} from'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -53,6 +56,10 @@ function App() {
             <Route  path="/my_favorites" component={My_favorites} />
             <Route  path="/Reviews" component={Reviews} />
             <Route  path="/Product_details" component={Product_details} />
+            <Route  path="/blog" component={Blog} />
+            <Route  path="/packages" component={Packages} />
+            <Route  path="/profile" component={Profile} />
+            
       </Switch>
       <Footer />
     </Router>

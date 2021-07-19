@@ -71,9 +71,11 @@ const Signup = () => {
       toast.error('Please Enter Last Name');
     }else if (phoneNumber === '' || phoneNumber === undefined){
       toast.error('Please Enter Phone Number');
-    }else if (!/^\d+$/.test(phoneNumber.slice(1,))){
-      toast.error('Invalid Phone Number');
-    }else if (!countryCode){
+    }
+    // else if (!/^\d+$/.test(phoneNumber)){
+    //   toast.error('Invalid Phone Number');
+    // }
+    else if (!countryCode){
       toast.error('Please Select Phone Number country code');
     }else if (email === ''){
       toast.error('Please Enter Email');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, Dropdown } from 'react-bootstrap'
 import { toast } from 'react-toastify';
 import Loader from './Loader';
 
@@ -60,7 +60,20 @@ const Header = () => {
                                     </a>
                                 </li>
                                 {isUserPresent && <li className="signin_btn pl-2 pr-0">
-                                    <a className="btn" onClick={() => onLogOut()}>LOG OUT</a>
+                                    {/* <a className="btn" onClick={() => onLogOut()}>LOG OUT</a> */}
+                                    <Dropdown  className="user_dropdown">
+                                        <Dropdown.Toggle id="dropdown-basic">
+                                            <span>
+                                            <img src={require('../../images/placeholder.png').default} alt="" width="100" />
+                                            </span>
+                                            <i className="fa fa-angle-down"></i>
+                                        </Dropdown.Toggle>
+                                       
+                                        <Dropdown.Menu className="py-0 mt-1 dropdown-menu-right">
+                                            <Dropdown.Item href="/profile" className="py-2">Profile</Dropdown.Item>
+                                            <Dropdown.Item onClick={() => onLogOut()} className="py-2">Logout</Dropdown.Item>
+                                        </Dropdown.Menu>
+                                        </Dropdown>
                                 </li>
                                 }
                                 {!isUserPresent && <li className="signin_btn pl-2 pr-0">
@@ -89,7 +102,7 @@ const Header = () => {
                                             <Nav.Link href="/#">FOUNDATIONS</Nav.Link>
                                             <Nav.Link href="/foodoption">FOOD OPTIONS</Nav.Link>
                                             <Nav.Link href="/faq">FAQ</Nav.Link>
-                                            <Nav.Link href="/#">BLOGS</Nav.Link>
+                                            <Nav.Link href="/blog">BLOGS</Nav.Link>
                                             <Nav.Link href="/contact">CONTACT</Nav.Link>
                                         </Nav>
                                     </Navbar.Collapse>
