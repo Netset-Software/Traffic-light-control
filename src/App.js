@@ -15,6 +15,8 @@ import Product from './Components/Product';
 import Product_search from './Components/Product_search';
 import My_favorites from './Components/My_favorites';
 import Reviews from './Components/Reviews';
+
+import Checkout from './Components/Checkout';
 import Blog from './Components/Blog';
 import Profile from './Components/Profile';
 import Cards from './Components/Cards'
@@ -24,7 +26,7 @@ import Signup from './Components/common//Signup';
 import Signup2 from './Components/common//Signup2';
 import Forgotpassword from './Components/common/Forgotpassword';
 import Packages from './Components/Packages';
-
+import Cart from './Components/Cart'
 import {BrowserRouter as Router, Switch, Route} from'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -60,6 +62,8 @@ function App() {
             <Route  path="/packages" component={Packages} />
             <Route  path="/profile" component={Profile} />
             <Route  path="/cards" component={Cards} />
+            <Route  path="/cart" component={Cart} />
+            <Route  path="/checkout" component={Checkout} />
             
       </Switch>
       <Footer />

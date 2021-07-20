@@ -133,9 +133,14 @@ const Product_details = () => {
                                  <h2>WOW Life Science Omega-3 <br></br>Fish Oil</h2>
                                  <h6><span>NUTRITION & FITNESS SUPPLEMENTS</span></h6>
                                  <h5><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><span><a href="/reviews">(1.2k reviews)</a></span></h5>
-                                 <h5>PRICE: <del>$15.50</del> <span>$13.95 (10% Off)</span></h5>
-                                 <h5 className="select-quantity-box">SELECT QUANTITY <button type="button" class="btn add-minus mr-2"><i class="fa fa-minus" aria-hidden="true"></i></button> 1 <button type="button" class="btn add-minus ml-2"><i class="fa fa-plus" aria-hidden="true"></i></button></h5>
-                                 <p><a className="checkout-bt" href="">Checkout</a><a className="favourite-bt" href="">Favourite</a></p>
+                                 <h5 className="mt-4">PRICE: <del>$15.50</del> <span>$13.95 (10% Off)</span></h5>
+                                 <h5 className="select-quantity-box">SELECT QUANTITY </h5>
+                                 <button type="button" class="btn add-minus mr-2"><i class="fa fa-minus" aria-hidden="true"></i></button> 1 <button type="button" class="btn add-minus ml-2"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                 <p className="border-top">
+                                    <a className="checkout-bt" href="/checkout">Checkout</a>
+                                    <a className="favourite-bt" href="/cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
+                                    <a className="heart_icon1" href="/my_favorites"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                 </p>
                             </div>
                         </div>
                     </div>

@@ -533,7 +533,7 @@ textarea:-ms-input-placeholder {
     color: #00c9ff;
 }
 section.heading-search {
-    margin: 20px 0;
+    margin: 10px 0;
 }
 section.heading-search .container {
     display: flex;
@@ -552,6 +552,7 @@ section.heading-search h2 {
     font-weight: 700;
     font-size: 23px;
     margin-top: 18px;
+    /* text-transform: lowercase; */
 }
 .search-box input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: rgb(0, 0, 0);
@@ -582,7 +583,7 @@ section.heading-search h2 {
     box-shadow: 0px 2px 5px #00000012;
     border: 1px solid #bdbdbd85;
     width: 100%;
-    border-radius: 10px 10px 0 0;
+    border-radius: 3px 3px 0 0;
 }
 .product-image img {
     height: 130px;
@@ -602,16 +603,16 @@ section.product-area-box {
 .product-list-box {
     background: white;
     border: 1px solid #bdbdbd;
-    border-radius: 10px;
+    border-radius: 3px;
     box-shadow: 0px 2px 5px #00000012;
     margin: 15px 0;
 }
 .product-list-box h4 {
-    font-size: 16px;
+    font-size: 15px;
     color: #000;
 }
 .product-list-box h6  {
-    margin: 9px 0;
+    margin: 9px 0 4px 0;
 }
 .product-list-box h6 i {
     color: #f5bf03;
@@ -628,17 +629,19 @@ span.total-review.ml-1 {
 }
 span.discount-amount {
     color: #00c9ff;
-    font-size: 21px;
+    font-size: 17px;
 }
 .product-list-details {
     background: #00c9ff12;
     margin-top: 18px;
     padding: 13px;
+    padding-bottom: 10px;
 }
 .like-favorite-box {
     position: absolute;
     right: 24px;
     top: 24px;
+    z-index: 1024;
     cursor: pointer;
 }
 .recent-search{
@@ -819,7 +822,7 @@ section.review-list-area img {
     font-size: 16px;
 }
 .product-detail-rightside h5 {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
     margin: 16px 0;
 }
@@ -836,8 +839,8 @@ section.review-list-area img {
 }
 button.btn.add-minus {
     background: #00c9ff;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -846,17 +849,19 @@ button.btn.add-minus {
 button.btn.add-minus i {
     color: #fff;
     margin-right: 0;
+    font-size: 14px;
 }
 h5.select-quantity-box {
     border-top:1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 20px 0;
+    /* border-bottom: 1px solid #e0e0e0; */
+    padding: 10px 0 0 0;
+    margin-bottom: 8px;
 }
 a.checkout-bt {
     background: #00c9ff;
     color: #fff !important;
     padding: 12px 36px;
-    border-radius: 2px;
+    border-radius: 4px;
     font-size: 17px;
     font-weight: 500;
     /* box-shadow: 0px 3px 6px #bbbbbb; */
@@ -864,14 +869,19 @@ a.checkout-bt {
 a.favourite-bt {
     border: 1px solid #00c9ff;
     color: #00c9ff !important;
-    padding: 12px 42px;
-    border-radius: 2px;
+    padding: 12px 25px;
+    border-radius: 4px;
     font-size: 17px;
     font-weight: 500;
     margin-left: 10px;
 }
+a.favourite-bt i{
+    font-size: 23px;
+    margin-right: 7px;
+}
 .product-detail-rightside p{
-    margin-top: 44px;
+    padding: 17px 0;
+    margin: 18px 0px;
 }
 .description-area h3 {
     font-size: 18px;
@@ -882,7 +892,8 @@ a.favourite-bt {
 }
 .description-area p {
     font-size: 15px;
-    color: grey;
+    color: #1b1b1b;
+    font-weight: 500;
 }
 .description-area {
     margin: 50px 0;

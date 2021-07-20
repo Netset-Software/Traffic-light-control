@@ -59,6 +59,7 @@ const Header = () => {
                                         <i className="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </li>
+                               
                                 {isUserPresent && <li className="signin_btn pl-2 pr-0">
                                     {/* <a className="btn" onClick={() => onLogOut()}>LOG OUT</a> */}
                                     <Dropdown  className="user_dropdown">
@@ -108,10 +109,16 @@ const Header = () => {
                                     </Navbar.Collapse>
 
                                 </Navbar>
-                                {/* <div className="lng_box">
-                                    <span className="lng-icon"><img src={require("../../images/lang.png").default} alt="img" width="14px" /></span>
+                                {/* <div className="lng_box text-right">
+                                       <span className="lng-icon"><img src={require("../../images/lang.png").default} alt="img" width="14px" /></span>
                                     <Select options={Language} placeholder='Select Language' />
                                 </div> */}
+                                <div className="text-right carticon_row">
+                                    <a href="/cart">
+                                        <span className="cart_count">3</span>
+                                        <i className="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

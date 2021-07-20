@@ -1150,14 +1150,15 @@ header .signup_btn .btn {
 }
 .nav1{
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
-.lng_box{
+/* .lng_box{
     min-width: 173px;
     z-index: 1025;
     position: relative;
     margin: auto 0;
-}
+} */
 
 
 .lng-icon{
@@ -1522,6 +1523,209 @@ input[type="file"]{
     border-radius: 23px;
     border: 0;
 }
+.heart_icon1{
+    color: #fff !important;
+    padding: 9px 15px;
+    border-radius: 7px;
+    font-size: 21px;
+    background-color: #00c9ff;
+    display: inline-block;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.removebtn  .btn-light {
+    color: #ffffff;
+    background-color: #00c9ff;
+    border-color: #f8f9fa;
+    font-weight: 600;
+}
+.removebtn  .btn-light:hover{
+    color: #ffffff;
+    background-color: #00c9ff;
+    border-color: #f8f9fa;
+    font-weight: 600;
+}
+.price-wrap{
+    font-weight: 600;
+}
+.summry .card{
+    background-color: #00c9ff1f;    
+    border: 0;
+}
+.dlist-align{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 11px;
+}
+.dlist-align dd{
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #00c9ff;
+}
+.dlist-align dt{
+    font-weight: 500;
+    font-size: 14px;
+    color: grey;
+}
+.summry .btn-main{
+    font-weight: 600;
+    padding: 8px 0;
+}
+.checkout .cardbox h5 {
+    color: #696969;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 11px 0;
+}
+.checkout .cardbox h5 span {
+    color: black;
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+.checkout .cardbox h6 {
+    color: #69696999;
+    font-size: 14px;
+    font-weight: 500;
+}
+.cart_count{
+    width: 21px;
+    height: 21px;
+    border-radius: 100px;
+    background-color: blue;
+    color: #ffffff;
+    font-weight: 500;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    position: absolute;
+    right: 10px;
+    border: 2px solid #00c9ff;
+    top: -5px;
+}
+/****************************************** add to cart ****************************************/
+.product-list-box .buttons {
+    padding: 4px 10px 12px 10px;
+    background-color: #edfbff;
+    border-radius: 4px;
+    position: relative;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.itemside .aside img{
+    width: 100px;
+}
+.itemside {
+    display: flex;
+    align-items: center;
+}
+.itemside .info{
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.itemside .info .text-muted {
+    color: #6c757d!important;
+    font-weight: 500;
+    font-size: 14px;
+}
+.itemside .info .title{
+    font-size: 15px;
+    font-weight: 500;
+}
+.product-list-box .cart {
+    position: relative;
+    height: 44px !important;
+    width: 44px;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 11px;
+    border-radius: 5px;
+    color: #00c9ff;
+    font-size: 21px;
+    transition: 1s ease-in-out;
+    overflow: hidden;
+}
+
+.product-list-box .clicked span.dot {
+    animation: item 0.3s ease-in forwards
+}
+
+@keyframes item {
+    0% {
+        opacity: 1;
+        top: 30%;
+        left: 30%
+    }
+
+    25% {
+        opacity: 1;
+        left: 26%;
+        top: 0%
+    }
+
+    50% {
+        opacity: 1;
+        left: 23%;
+        top: -22%
+    }
+
+    75% {
+        opacity: 1;
+        left: 19%;
+        top: -18%
+    }
+
+    100% {
+        opacity: 1;
+        left: 14%;
+        top: 28%
+    }
+}
+
+.product-list-box:hover .buttons {
+    opacity: 1
+}
+
+.weight {
+    margin-top: -65px;
+    transition: all 0.5s;
+}
+.product-list-box:hover .weight {
+    margin-top: 0px;
+}
+.product-list-box:hover {
+    z-index: 2;
+    overflow: hidden
+}
+.product-details .btn-success {
+    color: #fff;
+    background-color: #00c9ff;
+    border-color: #00c9ff;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 9px;
+    height: 44px;
+    line-height: 0;
+}
+.product-details .btn-success:hover{
+    color: #fff;
+    background-color: #00c9ff;
+    border-color: #00c9ff;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 9px;
+    height: 44px;
+    line-height: 0;
+}
+/***************************************************************************gf**********************************/
+
 @media (max-width:1199px){
     .img_row{  
     height: 160px;
@@ -1534,6 +1738,15 @@ input[type="file"]{
     }
     .cardbox h5{
         font-size: 21px;
+    }
+    .product-list-box h4{
+        font-size: 14px;
+    }
+    span.total-review.ml-1, .product-list-box h6 i, .product-details .btn-success{
+        font-size: 13px;
+    }
+    span.discount-amount{
+        font-size: 17px;
     }
 }
 @media (max-width:991px){
@@ -1602,6 +1815,24 @@ input[type="file"]{
     .Signup_box h5 {
         font-weight: 700;
         font-size: 17px;
+    }
+    .weight {
+        margin-top: 0;
+        transition: all 0.5s;
+    }
+    .product-list-box .buttons{
+        opacity: 1;
+    }
+    .nav1{
+        align-items: start;
+    }
+    .cart_count{
+        right: 10px;
+        border: 2px solid #00c9ff;
+        top: 2px;
+    }
+    .carticon_row{
+        margin-top: 9px;
     }
    
 }
@@ -1796,6 +2027,21 @@ input[type="file"]{
     .sign_btn .btn{
         font-size: 15px;
 
+    }
+    .itemside{
+        flex-direction: column;
+    }
+    .itemside .info {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .removebtn.text-center{
+        text-align: left !important;
+    }
+    .itemside .aside img {
+        width: unset;
     }
 }
 
