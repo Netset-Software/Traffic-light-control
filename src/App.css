@@ -524,14 +524,14 @@ color: #00c9ff;
     color: #000000;
 }
 .about_sec p{
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 500;
     color: #424242;
     line-height: 1.8;
 }
 
 .about_sec1 p{
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 500;
     color: #424242;
     line-height: 1.8;
@@ -1833,6 +1833,12 @@ input[type="file"]{
     }
     .carticon_row{
         margin-top: 9px;
+    }
+    .blog-single h2 {
+        font-size: 17px;
+    }
+    .blog-single p {
+        font-size: 14px;
     }
    
 }

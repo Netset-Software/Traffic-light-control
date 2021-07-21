@@ -31,6 +31,7 @@ import {BrowserRouter as Router, Switch, Route} from'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Product_details from './Components/Product_details';
+import Blog_details from './Components/Blog_details';
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
             <Route  path="/cards" component={Cards} />
             <Route  path="/cart" component={Cart} />
             <Route  path="/checkout" component={Checkout} />
+            <Route  path="/blog_details" component={Blog_details} />
             
       </Switch>
       <Footer />

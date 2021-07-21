@@ -70,6 +70,29 @@ input:focus, textarea:focus{
 .lng_row .dropdown-item{
         padding: 6px 8px;
 }
+.blog-single{
+    background: #00c9ff0a;
+}
+.blog-single .article{
+    background: white;
+    box-shadow: 0 0 30px rgb(31 45 61 / 13%);
+    padding: 16px;
+}
+.blog-single h2{
+    color: #1d1d20;
+    font-weight: 700;
+    font-size: 28px;
+    margin: 10px 0;
+}
+.blog-single p{
+    color: #565656;
+    font-weight: 400;
+}
+.blog-single .popular{
+    background: white;
+    box-shadow: 0 0 30px rgb(31 45 61 / 13%);
+    padding: 16px;
+}
 .header .nav-item .nav-link {
     color: white;
     font-weight: 500;
