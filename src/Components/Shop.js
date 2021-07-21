@@ -11,62 +11,41 @@ import Loader from './common/Loader'
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
-const Home = () => {
+const Shop = () => {
 
-    const [showHide, setShowHide] = useState(false);
-    const [allQuizes, setAllQuizes] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [selectedQuizId, setSelectedQuizId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isUserLogin, setIsUserLogin] = useState(false);
-    const [isPlayedFirstTime, setIsPlayedFirstTime] = useState(true);
+    const [searchText, setSearchText] = useState('');
 
 
     useEffect(() => {
-        let user_id = localStorage.getItem('user_id');
-        if (user_id){
-            setIsUserLogin(true);
-            getAllQuizes();
-            // setCurrentLocation();
-        }
+        // setIsLoading(true);
+        // let user_id = localStorage.getItem('user_id');
+        getCategories('searchText');
     }, []);
 
- 
-
-    
-      function error_location(err) {
-        setIsLoading(false);
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-        if (err.message == "User denied Geolocation") {
-          alert("Please enable location settings");
-        }
-        if (err.code == 2 || err.code == "2") {
-          alert("We can't locate your position, please try again!");
-        }
-      }
-
-    function getAllQuizes(city) {
-        setIsLoading(true);
-        userService.getQuizes(city).then((response) => {
+    function getCategories(searchTxt) {
+        userService.getQuizes(searchTxt).then((response) => {
             setIsLoading(false);
             if (response.data.status == 200){
-                let quizesData = response.data.data;
-                setAllQuizes(quizesData);
-                for(let i = 0; i < quizesData; i++ ){
-                    if (quizesData[i] === 'COM'){
-                        setIsPlayedFirstTime(true);
-                        break;
-                    }
-                }
+                // setCategories(quizesData);
               }else{
+                setCategories([]);
                 toast.error("Some Error Occur");
               } 
         }).catch((error) => {
             setIsLoading(false);
-            setAllQuizes([]);
+            setCategories([]);
             console.log("error ", error);
         });
     }
 
+    function handleSearch(txt){
+        setSearchText(txt);
+        getCategories(txt);
+    }
 
     return (
         <>
@@ -75,7 +54,7 @@ const Home = () => {
                 <div className="container">
                     <h2>SHOP</h2>
                     <div className="input-group search-box">
-                        <input type="text" class="form-control" placeholder="Search any category or product here" aria-label="" aria-describedby="basic-addon1"/>
+                        <input type="text" class="form-control" placeholder="Search any category or product here" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
                         <div className="input-group-append">
                             <button className="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
@@ -106,6 +85,18 @@ const Home = () => {
             <section className="product-area-box">
                 <div className="container">
                     <div className="row">
+                        {categories.length > 0  && categories.map((cat) => {
+                            return(<div className="col-md-3">
+                                <a href={"/product?id=" + cat._id}>
+                                <div className="first-product text-center">
+                                    <div className="product-image">
+                                        <img src={require("../images/one.png").default} alt="img" />
+                                    </div>
+                                    <p>{cat.name}</p>
+                                </div>
+                                </a>
+                            </div>)
+                        })}
                         <div className="col-md-3">
                             <a href="/product">
                             <div className="first-product text-center">
@@ -189,4 +180,4 @@ const Home = () => {
 }
 
 
-export default Home;
+export default Shop;

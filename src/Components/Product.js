@@ -11,58 +11,60 @@ SwiperCore.use([Pagination, Navigation, Autoplay]);
 
 const Product = () => {
 
-    const [showHide, setShowHide] = useState(false);
-    const [allQuizes, setAllQuizes] = useState([]);
-    const [selectedQuizId, setSelectedQuizId] = useState('');
+    const [products, setProducts] = useState([]);
+    const [categoryId, setCategoryId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isUserLogin, setIsUserLogin] = useState(false);
-    const [isPlayedFirstTime, setIsPlayedFirstTime] = useState(true);
+    const [searchText, setSearchText] = useState('');
 
 
     useEffect(() => {
-        let user_id = localStorage.getItem('user_id');
-        if (user_id){
-            setIsUserLogin(true);
-            getAllQuizes();
-            // setCurrentLocation();
+        // setIsLoading(true);
+        // let user_id = localStorage.getItem('user_id');
+        const urlParams = new URLSearchParams(window.location.search);
+        const catId = urlParams.get('id');
+        if (catId){
+            setIsLoading(true);
+            setCategoryId(catId);
+            getProducts(catId, searchText);
         }
     }, []);
 
- 
-
-    
-      function error_location(err) {
-        setIsLoading(false);
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-        if (err.message == "User denied Geolocation") {
-          alert("Please enable location settings");
-        }
-        if (err.code == 2 || err.code == "2") {
-          alert("We can't locate your position, please try again!");
-        }
-      }
-
-    function getAllQuizes(city) {
-        setIsLoading(true);
-        userService.getQuizes(city).then((response) => {
+    function getProducts(catId, searchTxt) {
+        userService.getQuizes(searchTxt).then((response) => {
             setIsLoading(false);
             if (response.data.status == 200){
-                let quizesData = response.data.data;
-                setAllQuizes(quizesData);
-                for(let i = 0; i < quizesData; i++ ){
-                    if (quizesData[i] === 'COM'){
-                        setIsPlayedFirstTime(true);
-                        break;
-                    }
-                }
+                // setProducts(quizesData);
               }else{
+                setProducts([]);
                 toast.error("Some Error Occur");
               } 
         }).catch((error) => {
             setIsLoading(false);
-            setAllQuizes([]);
+            setProducts([]);
             console.log("error ", error);
         });
+    }
+
+    function handleFavourite(val) {
+        setIsLoading(true);
+        userService.getQuizes(val).then((response) => {
+            setIsLoading(false);
+            if (response.data.status == 200){
+                // setProducts(quizesData);
+              }else{
+                setProducts([]);
+                toast.error("Some Error Occur");
+              } 
+        }).catch((error) => {
+            setIsLoading(false);
+            setProducts([]);
+            console.log("error ", error);
+        });
+    }
+
+    function handleSearch(txt){
+        setSearchText(txt);
+        getProducts(categoryId, txt);
     }
 
 
@@ -73,7 +75,7 @@ const Product = () => {
                 <div className="container">
                     <h2>Nutrition & Fitness Supplement</h2>
                     <div className="input-group search-box">
-                        <input type="text" class="form-control" placeholder="Search any category or product here" aria-label="" aria-describedby="basic-addon1"/>
+                        <input type="text" class="form-control" placeholder="Search any category or product here" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
                         <div className="input-group-append">
                             <button className="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
@@ -83,7 +85,27 @@ const Product = () => {
             <section className="product-page-area">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 col-md-4">
+                         <div className="col-lg-3 col-md-4">
+                            {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
+                    {/* {products.length > 0  && products.map((product) => {
+                        return(<div className="col-md-4">
+                                <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p>
+                                <a href={"/product_details?id=" + product._id}>
+                                <div className="product-list-box">
+                                    <div className="product-list-image text-center">
+                                        <img src={require("../images/fish_oil1.png").default} alt="img" />
+                                    </div>
+                                    <div className="product-list-details">
+                                        <h4>WOW Life Science Omega-3 Fish Oil</h4>
+                                        <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
+                                        <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
+                                        
+                                    </div>
+                                </div>
+                                </a>
+                            </div>)
+                        })} */}
+                        {/* <div className="col-md-4"> */}
                             {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
                             <a href="/product_details">
                             <div className="product-list-box">
