@@ -619,8 +619,10 @@ section.product-area-box {
     box-shadow: none !important ;
 }
 .product-list-image.text-center {
-    /* height: 210px; */
+    height: 210px;
     padding: 9px 22px;
+    display: flex;
+    align-items: center;
 }
 
 .product-list-box {
@@ -660,6 +662,12 @@ span.discount-amount {
     padding: 13px;
     padding-bottom: 10px;
 }
+.product-list-details h4{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .like-favorite-box {
     position: absolute;
     right: 24px;
@@ -950,4 +958,12 @@ a.favourite-bt i{
     background: #e5e5ff;
     padding: 7px 21px;
     border-radius: 22px;
+}
+.no-blog{
+    text-align: center !important;
+    display: block !important;
+    padding-bottom: 9px;
+    width: 100%;
+    border-bottom: 1px solid #d3d3d39e !important;
+
 }

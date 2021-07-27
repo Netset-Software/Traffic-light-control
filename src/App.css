@@ -2051,4 +2051,33 @@ input[type="file"]{
     }
 }
 
+.pagination {
+    display: inline-block;
+    }
+    .pagination li.active {
+    background-color: #00c9ff;
+    border-radius: 5px;
+    }
+    .pagination a {
+    color: rgb(0, 79, 248);
+    float: left;
+    font-size: 16px;
+    padding: 4px 12px;
+    text-decoration: none;
+    }
+    .pagination li.active a {
+    font-size: 16px;
+    color: white;
+    }
+    .pagination li:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
+    }
+    .pagination-container{
+    width: 350px;
+    float: right;
+    margin: 40px 0px;
+    margin-bottom: 150px;
+    }
+    
 

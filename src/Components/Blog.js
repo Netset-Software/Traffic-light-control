@@ -1,8 +1,60 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import Paginate from './common/Pagination';
+import { userService } from '../services';
+import Loader from './common/Loader'
+import { toast } from 'react-toastify';
+import { config } from '../config/config'
 
 const Blog = () => {
-    return(
+
+    const [pageNo, setPageNo] = useState(0);
+    const [perPage, setPerPage] = useState(10);
+    const [totalCount, setTotalCount] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
+    const [latestBlogs, setLatestBlogs] = useState([]);
+    const [popularBlogs, setPopularBlogs] = useState([]);
+
+
+    useEffect(() => {
+        getBlogs(0);
+    }, []);
+
+    function getBlogs(page) {
+        setIsLoading(true);
+        userService.getBlogs(page).then((response) => {
+            setIsLoading(false);
+            if (response.data.status == 200) {
+                let data = response.data
+                setLatestBlogs(data.latestBlogs);
+                setPopularBlogs(data.popularBlogs);
+                setTotalCount(data.totalPages);
+                // setBlogs(quizesData);
+            } else {
+                setLatestBlogs([]);
+                setPopularBlogs([]);
+                setTotalCount(0);
+                setIsLoading(false);
+                toast.error("Some Error Occur");
+            }
+        }).catch((error) => {
+            setIsLoading(false);
+            setLatestBlogs([]);
+            setPopularBlogs([]);
+            setTotalCount(0);
+            console.log("error ", error);
+        });
+    }
+
+
+
+    function handlePageChange(page) {
+        setPageNo(page);
+        getBlogs(page);
+    }
+
+    return (
         <>
+            {isLoading && <Loader />}
             <section className="blog_section py-5">
                 <div className="container">
                     <div className="row">
@@ -13,126 +65,38 @@ const Blog = () => {
                     <div className="row">
                         <div className="col-md-8">
                             <div className="row">
-                                <div className="col-md-6 mb-3">
-                                    <div>
-                                        <a href="/blog_details">
-                                            
-                                            <div className="img_row shadow-sm">
-                                                <img src={require('../images/blog1.jpg').default} alt="" />
-                                            </div>
-                                            
-                                            <h3 className="blog_title">How to create a profile page using Appy</h3>
-                                            <p className="blog_paragraph mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </a>
-                                       
-                                    </div>
-                                    <hr />
-                                </div>
-                                
-                                <div className="col-md-6 mb-3">
-                                    <div>
-                                        <a href="/blog_details">
-                                            
-                                            <div className="img_row shadow-sm">
-                                                <img src={require('../images/blog2.jpg').default} alt="" />
-                                            </div>
-                                            
-                                            <h3 className="blog_title">How to create a profile page using Appy</h3>
-                                            <p className="blog_paragraph mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </a>
-                                       
-                                    </div>
-                                    <hr />
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <div>
-                                        <a href="/blog_details">
-                                            
-                                            <div className="img_row shadow-sm">
-                                                <img src={require('../images/blog3.jpg').default} alt="" />
-                                            </div>
-                                            
-                                            <h3 className="blog_title">How to create a profile page using Appy</h3>
-                                            <p className="blog_paragraph mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </a>
-                                       
-                                    </div>
-                                    
-                                </div>
-                                <div className="col-md-6 mb-3">
-                                    <div>
-                                        <a href="/blog_details">
-                                            
-                                            <div className="img_row shadow-sm">
-                                                <img src={require('../images/blog4.jpg').default} alt="" />
-                                            </div>
-                                            
-                                            <h3 className="blog_title">How to create a profile page using Appy</h3>
-                                            <p className="blog_paragraph mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                        </a>
-                                       
-                                    </div>
-                                </div>
+                                {latestBlogs.length > 0 ? latestBlogs.map((blog) => {
+                                    return (<div className="col-md-6 mb-3">
+                                        <div>
+                                            <a href={"/blog_details?id=" + blog._id}>
+
+                                                <div className="img_row shadow-sm">
+                                                    <img src={config.imageUrl + blog.image} alt="" />
+                                                </div>
+                                                <h3 className="blog_title">{blog.title}</h3>
+                                                <p className="blog_paragraph mt-2">{blog.short_description}</p>
+                                            </a>
+                                        </div>
+                                        <hr />
+                                    </div>)
+                                }) : <p className="no-blog" >{!isLoading ? "No Latest-Blogs Found" : ''}</p>}
+                            </div>
+                            <div style={{ width: '100%' }}>
+                                <Paginate count={totalCount} activePage={pageNo} handlePageChange={(page) => handlePageChange(page)} perPageEntries={perPage} />
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div className="popular">
                                 <h4>Popular Blogs</h4>
                                 <ul className="p-0 mt-4">
-                                    <li>
-                                        <span>
-                                            01
-                                        </span>
-                                        <div>
-                                            <h6>How to get creative using geometric patterns</h6>
-                                            
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            02
-                                        </span>
-                                        <div>
-                                            <h6>Create your branding strategy in 4 simple steps</h6>
-                                            
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            03
-                                        </span>
-                                        <div>
-                                            <h6>Don’t miss Appy’s exclusive workshop with our CEO</h6>
-                                            
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            04
-                                        </span>
-                                        <div>
-                                            <h6>How to get creative using geometric patterns</h6>
-                                            
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            05
-                                        </span>
-                                        <div>
-                                            <h6>Create your branding strategy in 4 simple steps</h6>
-                                            
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            06
-                                        </span>
-                                        <div>
-                                            <h6>Don’t miss Appy’s exclusive workshop with our CEO</h6>
-                                            
-                                        </div>
-                                    </li>
+                                    {popularBlogs.length > 0 ? popularBlogs.map((blog, i) => {
+                                        return (<li>
+                                            <span>{ (i < 10 ? '0' : '')+(i + 1)}</span>
+                                            <div><h6>{blog.title}</h6></div>
+                                        </li>)
+                                    }) :
+                                        <li className="no-blog">No Popular-Blogs Found</li>
+                                    }
                                 </ul>
                             </div>
                         </div>

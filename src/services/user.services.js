@@ -23,6 +23,10 @@ export const userService = {
     getQuizResult,
     getCurrentLocation,
     socialLogin,
+    getBlogs,
+    getBlog,
+    getCategories,
+    getProducts,
 
 };
 
@@ -75,6 +79,26 @@ function getQuizResult(quizeId) {
 function getCurrentLocation(lat, lng) {
     let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&result_type=administrative_area_level_2&sensor=true&key=AIzaSyAyiC-K1_Bxfbh6jCaG3zs_Y_5PxrsXUGE`;
     return axios.get(url, jsonHeaders);   
+}
+
+function getBlogs(page) {
+    let url = `${config.apiUrl}/blog?page=${page}`;
+    return axios.get(url, configJsonHeaders);
+}
+
+function getBlog(id) {
+    let url = `${config.apiUrl}/blog/${id}`;
+    return axios.get(url, configJsonHeaders);
+}
+
+function getCategories(searchTxt) {
+    let url = `${config.apiUrl}/product/category?search=${searchTxt}`;
+    return axios.get(url, configJsonHeaders);
+}
+
+function getProducts(categoryId, searchTxt, pageNo) {
+    let url = `${config.apiUrl}/product/all/list?category=${categoryId}&search=${searchTxt}&page=${pageNo}`;
+    return axios.get(url, configJsonHeaders);
 }
 
 function handleError(error) {

@@ -150,8 +150,8 @@ const Signup = () => {
   }
 
   function getParams() {
-    var date = new Date().getDate(); //Current Date
-        var year = new Date().getFullYear(); //Current Year
+    var date = new Date().getDate();
+        var year = new Date().getFullYear();
         var month = new Date().getMonth() + 1
         var day = new Date().getDay() + 1
         // this.setState({ offset: (new Date().getTimezoneOffset() / 60) * -1 }, () => {
@@ -163,7 +163,7 @@ const Signup = () => {
     formData.append('middleName',middleName);
     formData.append('lastName',lastName);
     formData.append('mobileNumber',phoneNumber);
-    formData.append('countryCode', Country.getCountryByCode(countryCode));
+    formData.append('countryCode', Country.getCountryByCode(countryCode).phonecode);
     formData.append('email',email);
     formData.append('password',password);
     formData.append('address',address);
@@ -516,9 +516,9 @@ const Signup = () => {
                             <div className="input_row">
                               <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
                               <div className="bp_input">
-                              <input type="" name="" maxLength={3} placeholder="Top Number " className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
+                              <input type="" name="" maxLength={3} placeholder="Bottom Number " className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
                               {/* <span>/</span> */}
-                              <input type="" name="" maxLength={3} placeholder="Bottom Number" className="input103 w-100 bpinp" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
+                              <input type="" name="" maxLength={3} placeholder="Top Number" className="input103 w-100 bpinp" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
                               </div>
                             </div>
                           </aside>

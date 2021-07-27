@@ -4,8 +4,8 @@ import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
 import {userService} from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
-
-
+import Paginate from './common/Pagination';
+import { config } from '../config/config'
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -15,25 +15,29 @@ const Product = () => {
     const [categoryId, setCategoryId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [searchText, setSearchText] = useState('');
-
+    const [pageNo, setPageNo] = useState(0);
+    const [perPage, setPerPage] = useState(10);
+    const [totalCount, setTotalCount] = useState(0);
+    const [isUserLogin, setIsUserLogin] = useState(false);
 
     useEffect(() => {
-        // setIsLoading(true);
-        // let user_id = localStorage.getItem('user_id');
+         let user_id = localStorage.getItem('user_id');
+        if (user_id) setIsUserLogin(user_id ? true : false);
         const urlParams = new URLSearchParams(window.location.search);
         const catId = urlParams.get('id');
         if (catId){
             setIsLoading(true);
             setCategoryId(catId);
-            getProducts(catId, searchText);
+            getProducts(catId, searchText, 0);
         }
     }, []);
 
-    function getProducts(catId, searchTxt) {
-        userService.getQuizes(searchTxt).then((response) => {
+    function getProducts(catId, searchTxt, page) {
+        userService.getProducts(catId, searchTxt, page).then((response) => {
             setIsLoading(false);
             if (response.data.status == 200){
-                // setProducts(quizesData);
+                setProducts(response.data.data);
+                setTotalCount(response.data.totalRecords);
               }else{
                 setProducts([]);
                 toast.error("Some Error Occur");
@@ -45,26 +49,37 @@ const Product = () => {
         });
     }
 
-    function handleFavourite(val) {
+    function handleFavourite(status) {
+       if (isUserLogin){
         setIsLoading(true);
-        userService.getQuizes(val).then((response) => {
-            setIsLoading(false);
-            if (response.data.status == 200){
-                // setProducts(quizesData);
-              }else{
+            userService.updateFavourite(!status).then((response) => {
+                setIsLoading(false);
+                if (response.data.status == 200){
+                    setProducts(response.data.delquizesData);
+                    setTotalCount(response.data.totalRecords);
+                }else{
+                    setProducts([]);
+                    toast.error("Some Error Occur");
+                } 
+            }).catch((error) => {
+                setIsLoading(false);
                 setProducts([]);
-                toast.error("Some Error Occur");
-              } 
-        }).catch((error) => {
-            setIsLoading(false);
-            setProducts([]);
-            console.log("error ", error);
-        });
+                console.log("error ", error);
+            });
+        }else{
+            toast.primary("ewsd");
+        }
     }
 
-    function handleSearch(txt){
-        setSearchText(txt);
-        getProducts(categoryId, txt);
+    function handleSearch(searchTxt){
+        setSearchText(searchTxt);
+        setPageNo(0);
+        getProducts(categoryId, searchTxt, 0);
+    }
+
+    function handlePageChange(page) {
+        setPageNo(page);
+        getProducts(categoryId, searchText, page);
     }
 
 
@@ -75,7 +90,7 @@ const Product = () => {
                 <div className="container">
                     <h2>Nutrition & Fitness Supplement</h2>
                     <div className="input-group search-box">
-                        <input type="text" class="form-control" placeholder="Search any category or product here" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
+                        <input type="text" class="form-control" placeholder="Search by product name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
                         <div className="input-group-append">
                             <button className="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
@@ -85,7 +100,6 @@ const Product = () => {
             <section className="product-page-area">
                 <div className="container">
                     <div className="row">
-                         <div className="col-lg-3 col-md-4">
                             {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
                     {/* {products.length > 0  && products.map((product) => {
                         return(<div className="col-md-4">
@@ -107,6 +121,34 @@ const Product = () => {
                         })} */}
                         {/* <div className="col-md-4"> */}
                             {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
+                            
+
+                            {products.length > 0  && products.map((product) => {
+                                return (<div className="col-lg-3 col-md-4">
+                                    <a href={"/product_details?id=" + product._id}>
+                                        <div className="product-list-box">
+                                            <div className="product-list-image text-center">
+                                                <img src={product?.images.length > 0 ? config.imageUrl + product.images[0].image : ''} alt="img" />
+                                            </div>
+                                            <div className="product-list-details">
+                                                <h4>{product.name}</h4>
+                                                <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
+                                                <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">${product.price.toFixed(2)}</span></h5>
+
+                                            </div>
+                                            <div className="product-details">
+                                                <div className="buttons d-flex flex-row">
+                                                    <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a>
+                                                    <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{ fontSize: "19px" }}></i> ADD TO CART </a>
+                                                </div>
+                                                <div class="weight"> </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>)
+                        })}
+
+                            <div className="col-lg-3 col-md-4">
                             <a href="/product_details">
                             <div className="product-list-box">
                                 <div className="product-list-image text-center">
@@ -288,6 +330,9 @@ const Product = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div style={{ width: '100%' }}>
+                        <Paginate count={totalCount} activePage={pageNo} handlePageChange={(page) => handlePageChange(page)} perPageEntries={perPage} />
                     </div>
                 </div>
             </section>

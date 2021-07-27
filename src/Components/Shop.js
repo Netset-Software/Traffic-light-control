@@ -6,6 +6,7 @@ import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
 import {userService} from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
+import { config } from '../config/config'
 
 
 
@@ -16,21 +17,19 @@ const Shop = () => {
     const [categories, setCategories] = useState([]);
     const [selectedQuizId, setSelectedQuizId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isUserLogin, setIsUserLogin] = useState(false);
     const [searchText, setSearchText] = useState('');
 
 
     useEffect(() => {
-        // setIsLoading(true);
-        // let user_id = localStorage.getItem('user_id');
-        getCategories('searchText');
+        setIsLoading(true);
+        getCategories([]);
     }, []);
 
     function getCategories(searchTxt) {
-        userService.getQuizes(searchTxt).then((response) => {
+        userService.getCategories(searchTxt).then((response) => {
             setIsLoading(false);
             if (response.data.status == 200){
-                // setCategories(quizesData);
+                setCategories(response.data.data);
               }else{
                 setCategories([]);
                 toast.error("Some Error Occur");
@@ -53,12 +52,12 @@ const Shop = () => {
             <section className="heading-search">
                 <div className="container">
                     <h2>SHOP</h2>
-                    <div className="input-group search-box">
-                        <input type="text" class="form-control" placeholder="Search any category or product here" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
+                    {/* <div className="input-group search-box">
+                        <input type="text" class="form-control" placeholder="Search by category name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
                         <div className="input-group-append">
                             <button className="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
             <section className="banner pt-0 pb-4">
@@ -90,14 +89,14 @@ const Shop = () => {
                                 <a href={"/product?id=" + cat._id}>
                                 <div className="first-product text-center">
                                     <div className="product-image">
-                                        <img src={require("../images/one.png").default} alt="img" />
+                                        <img src={cat.image ? config.imageUrl + cat.image : ''} alt="img" />
                                     </div>
                                     <p>{cat.name}</p>
                                 </div>
                                 </a>
                             </div>)
                         })}
-                        <div className="col-md-3">
+                        {/* <div className="col-md-3">
                             <a href="/product">
                             <div className="first-product text-center">
                                 <div className="product-image">
@@ -146,7 +145,7 @@ const Shop = () => {
                                     <p>Diabetic Care</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
