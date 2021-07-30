@@ -1,14 +1,8 @@
 import React from "react";
 
-import { ShareButtons } from "react-share";
+import  {FacebookShareButton, TwitterShareButton, WhatsappShareButton} from "react-share";
 
-const {
-  FacebookShareButton,
-  TwitterShareButton,
-  WhatsappShareButton
-} = ShareButtons;
-
-const SocialMediaButtons = props => (
+const ShareOnSocialMedia = props => (
   <div className="row animated animatedFadeInUp fadeInUp social-btns">
     <div className="col-md-4 col-sm-4 col-xs-4 social-btn">
       <FacebookShareButton url={props.url} quote={props.text}>
@@ -34,4 +28,4 @@ const SocialMediaButtons = props => (
   </div>
 );
 
-export default SocialMediaButtons;
+export default ShareOnSocialMedia;

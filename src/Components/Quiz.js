@@ -11,7 +11,7 @@ import { config } from '../config/config'
 const Quiz = (props) => {
 
     const [currentStep, setCurrentStep] = useState(1);
-    const [showHide, setShowHide] = useState(false);
+    const [showHide, setShowHide] = useState(true);
     const [quizId, setQuizId] = useState({});
     const [quizData, setQuizData] = useState({});
     const [quizTime, setQuizTime] = useState('');
@@ -27,11 +27,11 @@ const Quiz = (props) => {
 
 
     useEffect(() => {
-        if (localStorage.getItem('done') === "true") window.location.href = '/';
-        localStorage.setItem('done', true);
-        let query = new URLSearchParams(window.location.search);
-        setQuizId(query.get('id'));
-        getQuizData(query.get('id'));
+        // if (localStorage.getItem('done') === "true") window.location.href = '/';
+        // localStorage.setItem('done', true);
+        // let query = new URLSearchParams(window.location.search);
+        // setQuizId(query.get('id'));
+        // getQuizData(query.get('id'));
     }, []);
 
     function getQuizData(id) {

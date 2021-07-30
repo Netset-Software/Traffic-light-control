@@ -27,6 +27,8 @@ export const userService = {
     getBlog,
     getCategories,
     getProducts,
+    updateFavourite,
+    getFavourites,
 
 };
 
@@ -100,6 +102,17 @@ function getProducts(categoryId, searchTxt, pageNo) {
     let url = `${config.apiUrl}/product/all/list?category=${categoryId}&search=${searchTxt}&page=${pageNo}`;
     return axios.get(url, configJsonHeaders);
 }
+
+function updateFavourite(params) {
+    let url = `${config.apiUrl}/product/favourites`;
+    return axios.post(url, params, configJsonHeaders);
+}
+
+function getFavourites() {
+    let url = `${config.apiUrl}/favourites/products?user=${user_id}`;
+    return axios.get(url, configJsonHeaders);
+}
+
 
 function handleError(error) {
     console.log("errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", error);

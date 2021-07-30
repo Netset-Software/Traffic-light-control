@@ -55,7 +55,7 @@ const Header = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href={isUserPresent ? '/' : '/signin'}>
+                                    <a href={isUserPresent ? '/my_favorites' : '/signin'}>
                                         <i className="fa fa-heart-o" aria-hidden="true"></i>
                                     </a>
                                 </li>

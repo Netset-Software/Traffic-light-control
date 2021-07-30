@@ -18,11 +18,11 @@ const Product = () => {
     const [pageNo, setPageNo] = useState(0);
     const [perPage, setPerPage] = useState(10);
     const [totalCount, setTotalCount] = useState(0);
-    const [isUserLogin, setIsUserLogin] = useState(false);
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
-         let user_id = localStorage.getItem('user_id');
-        if (user_id) setIsUserLogin(user_id ? true : false);
+        let user_id = localStorage.getItem('user_id');
+        if (user_id) setUserId(user_id);
         const urlParams = new URLSearchParams(window.location.search);
         const catId = urlParams.get('id');
         if (catId){
@@ -49,25 +49,26 @@ const Product = () => {
         });
     }
 
-    function handleFavourite(status) {
-       if (isUserLogin){
-        setIsLoading(true);
-            userService.updateFavourite(!status).then((response) => {
+    function handleFavourite(id, status) {
+       if (userId){
+            setIsLoading(true);
+            let params = {user: userId, product: id, is_favourite: !status}
+            userService.updateFavourite(params).then((response) => {
                 setIsLoading(false);
                 if (response.data.status == 200){
-                    setProducts(response.data.delquizesData);
-                    setTotalCount(response.data.totalRecords);
+                    // setProducts(response.data.delquizesData);
+                    // setTotalCount(response.data.totalRecords);
                 }else{
-                    setProducts([]);
+                    // setProducts([]);
                     toast.error("Some Error Occur");
                 } 
             }).catch((error) => {
                 setIsLoading(false);
-                setProducts([]);
+                // setProducts([]);
                 console.log("error ", error);
             });
         }else{
-            toast.primary("ewsd");
+            window.location.pathname = '/signin'
         }
     }
 
@@ -123,9 +124,9 @@ const Product = () => {
                             {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
                             
 
-                            {products.length > 0  && products.map((product) => {
+                            {products.length > 0  && products.map((product, i) => {
                                 return (<div className="col-lg-3 col-md-4">
-                                    <a href={"/product_details?id=" + product._id}>
+                                    {/* <a href={"/product_details?id=" + product._id}> */}
                                         <div className="product-list-box">
                                             <div className="product-list-image text-center">
                                                 <img src={product?.images.length > 0 ? config.imageUrl + product.images[0].image : ''} alt="img" />
@@ -138,17 +139,18 @@ const Product = () => {
                                             </div>
                                             <div className="product-details">
                                                 <div className="buttons d-flex flex-row">
-                                                    <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a>
+                                                    {/* <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> */}
+                                                    <a className="cart shadow pb-3" onClick={() => handleFavourite(product._id, product.is_favorite)}><i className={product.is_favorite ? "fa fa-heart" : "fa fa-heart-o" }></i></a>
                                                     <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{ fontSize: "19px" }}></i> ADD TO CART </a>
                                                 </div>
                                                 <div class="weight"> </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    {/* </a> */}
                                 </div>)
                         })}
 
-                            <div className="col-lg-3 col-md-4">
+                            {/* <div className="col-lg-3 col-md-4">
                             <a href="/product_details">
                             <div className="product-list-box">
                                 <div className="product-list-image text-center">
@@ -169,9 +171,9 @@ const Product = () => {
                                 </div>
                             </div>
                             </a>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-4">
+                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil2.png").default} alt="img" />
@@ -189,9 +191,9 @@ const Product = () => {
                                     <div class="weight"> </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-4">
+                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil3.png").default} alt="img" />
@@ -209,9 +211,9 @@ const Product = () => {
                                     <div class="weight"> </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-4">
+                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                   <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil4.png").default} alt="img" />
@@ -229,9 +231,9 @@ const Product = () => {
                                     <div class="weight"> </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-4">
+                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil5.png").default} alt="img" />
@@ -249,9 +251,9 @@ const Product = () => {
                                     <div class="weight"> </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-4">
+                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil6.png").default} alt="img" />
@@ -269,9 +271,9 @@ const Product = () => {
                                     <div class="weight"> </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-4">
+                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil7.png").default} alt="img" />
@@ -289,9 +291,9 @@ const Product = () => {
                                     <div class="weight"> </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-4">
+                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
                             <div className="product-list-box">
                                  <div className="product-list-image text-center">
                                     <img src={require("../images/fish_oil8.png").default} alt="img" />
@@ -309,27 +311,8 @@ const Product = () => {
                                     <div class="weight"> </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4">
-                            {/* <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p> */}
-                            <div className="product-list-box">
-                                 <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil9.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div>
+                        </div> */}
+                    
                     </div>
                     <div style={{ width: '100%' }}>
                         <Paginate count={totalCount} activePage={pageNo} handlePageChange={(page) => handlePageChange(page)} perPageEntries={perPage} />

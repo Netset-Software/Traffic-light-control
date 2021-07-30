@@ -3,11 +3,14 @@ import Paginate from './common/Pagination';
 import { userService } from '../services';
 import Loader from './common/Loader'
 import { toast } from 'react-toastify';
-import { config } from '../config/config'
+import { config } from '../config/config';
+import ShareOnSocialMedia from './common/ShareOnSocialMedia'
+
 
 const Blog_details = () => {
 
     const [blog, setBlog] = useState('');
+    const [popularBlogs, setPopularBlogs] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -21,6 +24,7 @@ const Blog_details = () => {
             setIsLoading(false);
             if (response.data.status == 200) {
                 setBlog(response.data.data);
+                setPopularBlogs(response.data.popularBlogs)
                 document.getElementById('article-description').innerHTML = response.data.data.description;
             } else {
                 setBlog('');
@@ -39,6 +43,7 @@ const Blog_details = () => {
         {isLoading && <Loader />}
         <div className="blog-single py-4">
             <div className="container">
+            <ShareOnSocialMedia url="https://www.google.com" text="test"/>
                 <div className="row align-items-start">
                     <div className="col-lg-8">
                         <article className="article">
@@ -80,60 +85,14 @@ const Blog_details = () => {
                     <div className="popular">
                                 <h4>Popular Blogs</h4>
                                 <ul className="p-0 mt-4">
-                                    <li>
-                                        <span>
-                                            01
-                                        </span>
-                                        <div>
-                                            <h6>How to get creative using geometric patterns</h6>
-                                           
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            02
-                                        </span>
-                                        <div>
-                                            <h6>Create your branding strategy in 4 simple steps</h6>
-                                           
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            03
-                                        </span>
-                                        <div>
-                                            <h6>Don’t miss Appy’s exclusive workshop with our CEO</h6>
-                                           
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            04
-                                        </span>
-                                        <div>
-                                            <h6>How to get creative using geometric patterns</h6>
-                                           
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            05
-                                        </span>
-                                        <div>
-                                            <h6>Create your branding strategy in 4 simple steps</h6>
-                                           
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <span>
-                                            06
-                                        </span>
-                                        <div>
-                                            <h6>Don’t miss Appy’s exclusive workshop with our CEO</h6>
-                                           
-                                        </div>
-                                    </li>
+                                {popularBlogs.length > 0 ? popularBlogs.map((blog, i) => {
+                                        return (<li>
+                                            <span>{ (i < 10 ? '0' : '')+(i + 1)}</span>
+                                            <div><h6>{blog.title}</h6></div>
+                                        </li>)
+                                    }) :
+                                        <li className="no-blog">No Popular-Blogs Found</li>
+                                    }
                                 </ul>
                             </div>
                     </div>
