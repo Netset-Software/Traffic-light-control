@@ -87,8 +87,10 @@ const Blog_details = () => {
                                 <ul className="p-0 mt-4">
                                 {popularBlogs.length > 0 ? popularBlogs.map((blog, i) => {
                                         return (<li>
+                                            <a href={"/blog_details?id=" + blog._id}>
                                             <span>{ (i < 10 ? '0' : '')+(i + 1)}</span>
                                             <div><h6>{blog.title}</h6></div>
+                                            </a>
                                         </li>)
                                     }) :
                                         <li className="no-blog">No Popular-Blogs Found</li>

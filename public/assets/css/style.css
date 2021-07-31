@@ -967,3 +967,6 @@ a.favourite-bt i{
     border-bottom: 1px solid #d3d3d39e !important;
 
 }
+.popular a h6{
+    color: #565656;
+}
