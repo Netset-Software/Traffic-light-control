@@ -2081,3 +2081,10 @@ input[type="file"]{
     }
     
 
+    @media (max-width:676px){
+        .heart_icon1{
+            padding: 6px 13px;
+        border-radius: 7px;
+        font-size: 19px;
+        }
+    }

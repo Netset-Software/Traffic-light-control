@@ -99,6 +99,7 @@ const Product_details = () => {
                     <div className="row">
                         <div class="col-md-6">
                         <Swiper
+                                spaceBetween={25}
                                 pagination={{ clickable: true }}
                                 slidesPerView={1}
                                 autoplay={{ delay: 3000 }}
@@ -112,11 +113,7 @@ const Product_details = () => {
                                 {productDetail?.images?.map((image) => {
                                     return (<SwiperSlide>
                                         <div className="slider_box_new text-center">
-                                            <div className="row align-items-center">
-                                                <div className="col-md-12">
-                                                    <img src={image.image ? config.imageUrl + image.image : ''} alt="img" />
-                                                </div>
-                                            </div>
+                                                <img src={image.image ? config.imageUrl + image.image : ''} alt="img" />
                                         </div>
                                     </SwiperSlide>)
                                 })}
