@@ -6,70 +6,91 @@ import SwiperCore, { Pagination,Autoplay,} from 'swiper';
 import {userService} from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
-
-
-
-
-
+import { config } from '../config/config'
 
 
 const Product_details = () => {
-
-    const [showHide, setShowHide] = useState(false);
-    const [allQuizes, setAllQuizes] = useState([]);
-    const [selectedQuizId, setSelectedQuizId] = useState('');
+    
+    const [productDetail, setProductDetail] = useState('');
+    const [productId, setProductId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isUserLogin, setIsUserLogin] = useState(false);
-    const [isPlayedFirstTime, setIsPlayedFirstTime] = useState(true);
+    const [quantity, setQuantity] = useState(1);
+    const [isFavourite, setIsFavourite] = useState(false);
+    const [userId, setUserId] = useState('');
 
 
     useEffect(() => {
         let user_id = localStorage.getItem('user_id');
-        if (user_id){
-            setIsUserLogin(true);
-            getAllQuizes();
-            // setCurrentLocation();
+        if (user_id) setUserId(user_id);
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        if (id){
+            setIsLoading(true);
+            setProductId(id);
+            getProductDetail(id);
         }
     }, []);
 
- 
-
-    
-      function error_location(err) {
-        setIsLoading(false);
-        console.warn(`ERROR(${err.code}): ${err.message}`);
-        if (err.message == "User denied Geolocation") {
-          alert("Please enable location settings");
-        }
-        if (err.code == 2 || err.code == "2") {
-          alert("We can't locate your position, please try again!");
-        }
-      }
-
-    function getAllQuizes(city) {
-        setIsLoading(true);
-        userService.getQuizes(city).then((response) => {
+    function getProductDetail(id) {
+        userService.getProductDetail(id).then((response) => {
             setIsLoading(false);
             if (response.data.status == 200){
-                let quizesData = response.data.data;
-                setAllQuizes(quizesData);
-                for(let i = 0; i < quizesData; i++ ){
-                    if (quizesData[i] === 'COM'){
-                        setIsPlayedFirstTime(true);
-                        break;
-                    }
-                }
+                setProductDetail(response.data.data);
+                setIsFavourite(response.data.data.is_favourite);
               }else{
+                setProductDetail('');
                 toast.error("Some Error Occur");
               } 
         }).catch((error) => {
             setIsLoading(false);
-            setAllQuizes([]);
+            setProductDetail('');
             console.log("error ", error);
         });
     }
 
+    function handleFavourite(status) {
+        if (userId){
+             setIsLoading(true);
+             let params = {user: userId, product: productId, is_favourite: !status}
+             userService.updateFavourite(params).then((response) => {
+                 setIsLoading(false);
+                 if (response.data.status == 200){
+                    setIsFavourite(!status);
+                    toast.success("Product added to favourite list successfully.");
+                 }else{
+                     toast.error("Some Error Occur");
+                 } 
+             }).catch((error) => {
+                 setIsLoading(false);
+                 console.log("error ", error);
+             });
+         }else{
+             window.location.pathname = '/signin'
+         }
+     }
 
+    function addToCart() {
+        if (userId){
+             setIsLoading(true);
+             let params = {user: userId, product: productId, qty: quantity}
+             userService.addToCart(params).then((response) => {
+                 setIsLoading(false);
+                 if (response.data.status == 200){
+                    toast.success("Product added to cart successfully.")
+                 }else{
+                     toast.error("Some Error Occur");
+                 } 
+             }).catch((error) => {
+                 setIsLoading(false);
+                 // setProducts([]);
+                 console.log("error ", error);
+             });
+         }else{
+             window.location.pathname = '/signin'
+         }
+     }
+
+     
     return (
         <>
             {isLoading && <Loader/>}
@@ -88,58 +109,39 @@ const Product_details = () => {
                                 onSlideChange={() => console.log('slide change')}
                                   
                             >
-                                <SwiperSlide>
-                                    <div className="slider_box_new text-center">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-12">
-                                                <img src={require("../images/slider_1.png").default} alt="img" />
+                                {productDetail?.images?.map((image) => {
+                                    return (<SwiperSlide>
+                                        <div className="slider_box_new text-center">
+                                            <div className="row align-items-center">
+                                                <div className="col-md-12">
+                                                    <img src={image.image ? config.imageUrl + image.image : ''} alt="img" />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box_new text-center">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-12">
-                                                <img src={require("../images/slider_1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box_new text-center">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-12">
-                                                <img src={require("../images/slider_1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                                <SwiperSlide>
-                                    <div className="slider_box_new text-center">
-                                        <div className="row align-items-center">
-                                            <div className="col-md-12">
-                                                <img src={require("../images/slider_1.png").default} alt="img" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
+                                    </SwiperSlide>)
+                                })}
                             </Swiper>
 
 
                         </div>
                         <div className="col-md-6">
                             <div className="product-detail-rightside">
-                                 <h2>WOW Life Science Omega-3 <br></br>Fish Oil</h2>
-                                 <h6><span>NUTRITION & FITNESS SUPPLEMENTS</span></h6>
-                                 <h5><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><span><a href="/reviews">(1.2k reviews)</a></span></h5>
-                                 <h5 className="mt-4">PRICE: <del>$15.50</del> <span>$13.95 (10% Off)</span></h5>
+                                <h2>{productDetail?.name}</h2>
+                                 {/* <h2>WOW Life Science Omega-3 <br></br>Fish Oil</h2> */}
+                                 <h6><span>{productDetail?.category?.name}</span></h6>
+                                 {/* <h6><span>NUTRITION & FITNESS SUPPLEMENTS</span></h6> */}
+                                 {/* <h5><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><span><a href="/reviews">(1.2k reviews)</a></span></h5> */}
+                                 <h5 className="mt-4">PRICE: 
+                                 {/* <del>$15.50</del> */}
+                                  <span> ${productDetail?.price?.toFixed(2)} 
+                                 {/* (10% Off) */}
+                                 </span></h5>
                                  <h5 className="select-quantity-box">SELECT QUANTITY </h5>
-                                 <button type="button" class="btn add-minus mr-2"><i class="fa fa-minus" aria-hidden="true"></i></button> 1 <button type="button" class="btn add-minus ml-2"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                 <button type="button" class="btn add-minus mr-2" onClick={() => {if (quantity > 1 )  setQuantity(quantity -1)}}><i class="fa fa-minus" aria-hidden="true"></i></button> {quantity} <button type="button" class="btn add-minus ml-2" onClick={() => setQuantity(quantity + 1)}><i class="fa fa-plus" aria-hidden="true"></i></button>
                                  <p className="border-top">
                                     <a className="checkout-bt" href="/checkout">Checkout</a>
-                                    <a className="favourite-bt" href="/cart"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
-                                    <a className="heart_icon1" href="/my_favorites"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                    <a className="favourite-bt" onClick={() => addToCart()}><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
+                                    <a className="heart_icon1" onClick={() => handleFavourite(isFavourite)} ><i class={isFavourite ? "fa fa-heart" : "fa fa-heart-o"} aria-hidden="true"></i></a>
                                  </p>
                             </div>
                         </div>
@@ -150,7 +152,8 @@ const Product_details = () => {
             <section className="description-area">
                 <div className="container">
                     <h3>DESCRIPTION</h3>
-                    <p>WOW Life Science Omega 3 for healthy heart and body. Omega 3 in fish oil has Eicosapentaenoic acid (EPA) and
+                    {productDetail?.description}
+                    {/* <p>WOW Life Science Omega 3 for healthy heart and body. Omega 3 in fish oil has Eicosapentaenoic acid (EPA) and
                         Docosahexaenoic acid (DHA). WOW Life Science OMEGA 3 has the optimal 3:2 EPA:DHA ratio. It gives you 1000mg 
                         of pure blend of Omega 3 – 550mg EPA, 350 mg DHA an 100 mg other Omega 3. It supports healthy heart and
                         joints.
@@ -159,7 +162,7 @@ const Product_details = () => {
                         Docosahexaenoic acid (DHA). WOW Life Science OMEGA 3 has the optimal 3:2 EPA:DHA ratio. It gives you 1000mg 
                         of pure blend of Omega 3 – 550mg EPA, 350 mg DHA an 100 mg other Omega 3. It supports healthy heart and
                         joints.
-                    </p>
+                    </p> */}
                 </div>
             </section>
 

@@ -29,6 +29,10 @@ export const userService = {
     getProducts,
     updateFavourite,
     getFavourites,
+    getProductDetail,
+    addToCart,
+    getCartProducts,
+    updateQuantity,
 
 };
 
@@ -99,7 +103,7 @@ function getCategories(searchTxt) {
 }
 
 function getProducts(categoryId, searchTxt, pageNo) {
-    let url = `${config.apiUrl}/product/all/list?category=${categoryId}&search=${searchTxt}&page=${pageNo}`;
+    let url = `${config.apiUrl}/product/all/list?category=${categoryId}&search=${searchTxt}&page=${pageNo}&userId=${user_id}`;
     return axios.get(url, configJsonHeaders);
 }
 
@@ -113,6 +117,25 @@ function getFavourites() {
     return axios.get(url, configJsonHeaders);
 }
 
+function getProductDetail(productId) {
+    let url = `${config.apiUrl}/product/${productId}/details/product?userId=${user_id}`;
+    return axios.get(url, configJsonHeaders);
+}
+
+function addToCart(params) {
+    let url = `${config.apiUrl}/cart`;
+    return axios.post(url, params, configJsonHeaders);
+}
+
+function getCartProducts(){
+    let url = `${config.apiUrl}/cart?user=${user_id}`;
+    return axios.get(url, configJsonHeaders);
+}
+
+function updateQuantity(params) {
+    let url = `${config.apiUrl}/cart`;
+    return axios.put(url, params, configJsonHeaders);
+}
 
 function handleError(error) {
     console.log("errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", error);

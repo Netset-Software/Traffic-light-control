@@ -1,25 +1,16 @@
 export function formDataHeader() {
-    let accessToken = localStorage.getItem('access_token') | ''
-    return {
-        'deviceType': 'w',
-        'appVersion': '1.0',
-        "Content-Type": "application/x-www-form-urlencoded",
-        // "Content-Type": "multipart/form-data",
-                // "Content-Type": "application/json",
-
-        'Access-Control-Allow-Origin': 'true',
-        // 'token': accessToken,
-        'timezone': 'Asia/Kolkata'
-    };
+    return Object.assign({}, {"Content-Type": "application/x-www-form-urlencoded"}, commonHeaders);
 }
 
 export function jsonHeaders() {
-    let accessToken = localStorage.getItem('access_token') | ''
+    return Object.assign({}, {"Content-Type": "application/json"}, commonHeaders);
+}
+
+function commonHeaders(){
     return {
         'deviceType': 'w',
         'appVersion': '1.0',
-        "Content-Type": "application/json",
         'Access-Control-Allow-Origin': 'true',
         'timezone': 'Asia/Kolkata'
-    };
+    }
 }

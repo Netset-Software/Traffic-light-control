@@ -114,8 +114,10 @@ const Favorites = () => {
                                             </div>
                                             <div className="product-list-details">
                                                 <h4>{product.name}</h4>
-                                                <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                                <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">${product.price.toFixed(2)}</span></h5>
+                                                {/* <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6> */}
+                                                <h5>Price: 
+                                                    {/* <del className="orginal-amount">$15.50</del>  */}
+                                                    <span className="discount-amount"> ${product.price.toFixed(2)}</span></h5>
 
                                             </div>
                                             <div className="product-details">

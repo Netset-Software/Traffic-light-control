@@ -3,25 +3,25 @@ import React from "react";
 import  {FacebookShareButton, TwitterShareButton, WhatsappShareButton} from "react-share";
 
 const ShareOnSocialMedia = props => (
-  <div className="row animated animatedFadeInUp fadeInUp social-btns">
-    <div className="col-md-4 col-sm-4 col-xs-4 social-btn">
+  <div className="row animated animatedFadeInUp fadeInUp social-btns text-right">
+    <div className="social-btn">
       <FacebookShareButton url={props.url} quote={props.text}>
         <button className="btn btn-sm btn-facebook">
-          <i className="fa fa-facebook" /> <span>Share</span>
+          <i className="fa fa-facebook" /> 
         </button>
       </FacebookShareButton>
     </div>
-    <div className="col-md-4 col-sm-4 col-xs-4 social-btn">
+    <div className="social-btn">
       <TwitterShareButton url={props.url} title={props.text}>
         <button className="btn btn-sm twt-btn">
-          <i class="fa fa-twitter-square" /> <span>Tweet</span>
+          <i class="fa fa-twitter" /> 
         </button>
       </TwitterShareButton>
     </div>
-    <div className="col-md-4 col-sm-4 col-xs-4 social-btn">
+    <div className="social-btn">
       <WhatsappShareButton url={props.url} title={props.text}>
         <button className="btn btn-sm whtsp-btn">
-          <i class="fab fa-whatsapp" /> <span>Share</span>
+          <i class="fa fa-whatsapp" /> 
         </button>
       </WhatsappShareButton>
     </div>

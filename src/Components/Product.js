@@ -56,6 +56,7 @@ const Product = () => {
             userService.updateFavourite(params).then((response) => {
                 setIsLoading(false);
                 if (response.data.status == 200){
+                    getProducts(categoryId, searchText, pageNo);
                     // setProducts(response.data.delquizesData);
                     // setTotalCount(response.data.totalRecords);
                 }else{
@@ -71,6 +72,28 @@ const Product = () => {
             window.location.pathname = '/signin'
         }
     }
+
+    function addToCart(id) {
+        if (userId){
+             setIsLoading(true);
+             let params = {user: userId, product: id, qty: 1}
+             userService.addToCart(params).then((response) => {
+                 setIsLoading(false);
+                 if (response.data.status == 200){
+                    toast.success("Product added to cart successfully.")
+                 }else{
+                     toast.error("Some Error Occur");
+                 } 
+             }).catch((error) => {
+                 setIsLoading(false);
+                 // setProducts([]);
+                 console.log("error ", error);
+             });
+         }else{
+             window.location.pathname = '/signin'
+         }
+     }
+
 
     function handleSearch(searchTxt){
         setSearchText(searchTxt);
@@ -126,27 +149,31 @@ const Product = () => {
 
                             {products.length > 0  && products.map((product, i) => {
                                 return (<div className="col-lg-3 col-md-4">
-                                    {/* <a href={"/product_details?id=" + product._id}> */}
+                                   
                                         <div className="product-list-box">
-                                            <div className="product-list-image text-center">
-                                                <img src={product?.images.length > 0 ? config.imageUrl + product.images[0].image : ''} alt="img" />
-                                            </div>
-                                            <div className="product-list-details">
-                                                <h4>{product.name}</h4>
-                                                <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                                <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">${product.price.toFixed(2)}</span></h5>
+                                             <a href={"/product_details?id=" + product._id}>
+                                                <div className="product-list-image text-center">
+                                                    <img src={product?.images.length > 0 ? config.imageUrl + product.images[0].image : ''} alt="img" />
+                                                </div>
+                                                <div className="product-list-details">
+                                                    <h4>{product.name}</h4>
+                                                    {/* <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6> */}
+                                                    <h5>Price: 
+                                                        {/* <del className="orginal-amount">$15.50</del>  */}
+                                                        <span className="discount-amount"> ${product.price.toFixed(2)}</span></h5>
 
-                                            </div>
+                                                </div>
+                                             </a>
                                             <div className="product-details">
                                                 <div className="buttons d-flex flex-row">
                                                     {/* <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> */}
-                                                    <a className="cart shadow pb-3" onClick={() => handleFavourite(product._id, product.is_favorite)}><i className={product.is_favorite ? "fa fa-heart" : "fa fa-heart-o" }></i></a>
-                                                    <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{ fontSize: "19px" }}></i> ADD TO CART </a>
+                                                    <a className="cart shadow pb-3" onClick={() => handleFavourite(product._id, product.is_favourite)}><i className={product.is_favourite ? "fa fa-heart" : "fa fa-heart-o" }></i></a>
+                                                    <a className="btn btn-success cart-button btn-block shadow" onClick={() => addToCart(product._id)}><i className="fa fa-shopping-cart mr-2" style={{ fontSize: "19px" }}></i> ADD TO CART </a>
                                                 </div>
                                                 <div class="weight"> </div>
                                             </div>
                                         </div>
-                                    {/* </a> */}
+                                   
                                 </div>)
                         })}
 
