@@ -1613,7 +1613,7 @@ input[type="file"]{
     opacity: 0;
     transition: all 0.8s
 }
-.aisde1 {
+.itemsiderow .aside1 {
     width: 85px;
     height: 85px;
     overflow: hidden;

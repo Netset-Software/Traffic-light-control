@@ -131,6 +131,7 @@ input:focus, textarea:focus{
     font-weight: 500;
     color: #343039;
 }
+
 .slider_box .btn{
     border: 2px solid #00c9ff;
     color: #00c9ff;
@@ -1080,15 +1081,4 @@ p.no-categgory {
 .share-Quiz{
     width: 100%;
     justify-content: center;
-}
-.aisde1 {
-    width: 85px;
-    height: 85px;
-    overflow: hidden;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    margin-right: 10px;
 }

@@ -100,7 +100,7 @@ const Cart = () => {
                         return(<div>
                             <div className="row align-items-center">
                             <div className="col-lg-5 col-md-5 col-sm-6 mb-2">
-                                    <figure className="itemside align-items-center mb-0">
+                                    <figure className="itemside align-items-center mb-0 itemsiderow">
                                         <div className="aside1">
                                             <img src={cartProduct.product?.images.length > 0 ? config.imageUrl + cartProduct.product.images[0].image : ''} alt="img" />
                                         </div>
