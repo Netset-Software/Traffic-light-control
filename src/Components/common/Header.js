@@ -115,8 +115,8 @@ const Header = () => {
                                         <Nav className="mr-auto">
                                             <Nav.Link href="/#">HOME</Nav.Link>
                                             <Nav.Link href="/about">ABOUT</Nav.Link>
-                                            <Nav.Link href="/#">BENIFITS</Nav.Link>
-                                            <Nav.Link href="/#">FOUNDATIONS</Nav.Link>
+                                            <Nav.Link href="#benifits_section">BENIFITS</Nav.Link>
+                                            <Nav.Link href="#foundation">FOUNDATIONS</Nav.Link>
                                             <Nav.Link href="/foodoption">FOOD OPTIONS</Nav.Link>
                                             <Nav.Link href="/faq">FAQ</Nav.Link>
                                             <Nav.Link href="/blog">BLOGS</Nav.Link>

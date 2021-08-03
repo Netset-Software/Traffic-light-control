@@ -1,6 +1,10 @@
-import React, {useState} from 'react'
-import { Button, Modal} from 'react-bootstrap';
+import React, { useState, useEffect } from 'react'
+import { Button, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { userService } from '../services';
+import Loader from './common/Loader'
 
 const Cards = () => {
 
@@ -13,148 +17,193 @@ const Cards = () => {
     const [isLoading, setIsLoading] = useState(false);
     const userId = localStorage.getItem('user_id')
 
-  const handleClose = () =>{
-      setShow(false);
-      setShowAddaCardModal(false);
-  }
+    useEffect(() => {
+        let user_id = localStorage.getItem('user_id');
+        if (user_id) {
+            getCards();
+        }
+    }, []);
 
-  const handleShow = () => setShow(true);
 
-  function openAddCardModal(){
-    setCardNo('');
-    setCardHolderName('');
-    setExpiryDate('');
-    setExpiryDate('');
-    setShowAddaCardModal(true);
-  }
-
-  function validateForm(){
-    if(!/^[0-9]{12,16}$/.test(cardNo)){
-        toast.error("Invalid Card No");
-    }else if(!/^[a-zA-Z][a-zA-Z ]*$/.test(cardHolderName)){
-        toast.error("Invalid Card Holder Name");
-    }else if(!/^[0-9]{3,4}$/.test(cvv)){
-        toast.error("Invalid CVV Number");
-    }else{
-            setIsLoading(true);
-            let params = {user: userId, card_number: cardNo, exp_month: expiryDate, exp_year: expiryDate, cvv: cvv}
-            // userService.updateQuantity(params).then((response) => {
-            //     setIsLoading(false);
-            //     if (response.data.status == 200){
-            //         if (type === 'DEL') getCartProducts();
-            //     }else{
-            //         toast.error("Some Error Occur");
-            //     } 
-            // }).catch((error) => {
-            //     setIsLoading(false);
-            //     console.log("error ", error);
-            // });
+    const handleClose = () => {
+        setShow(false);
+        setShowAddaCardModal(false);
     }
-  }
 
-    return(
-            <>
-                <section className="card_section py-4">
-                    <div className="container">
-                        <div className="row align-items-center">
-                            <div className="col-md-12">
-                                <div className="card_header mb-4">
-                                    <h5 className="mb-0">My Cards</h5>
-                                    <div className="newcard_btn">
-                                        <button className="btn text-white shadow-sm" onClick={() => openAddCardModal()}>Add New Card</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-4 mb-3">
-                                <div className="cardbox">
-                                    <div className="cardbox_header mb-3">
-                                        <img src={require('../../src/images/mastercard.png').default} />
-                                        <a className="car_btn" onClick={handleShow}>
-                                            <img src={require('../images/next1.svg').default} alt="" />
-                                        </a>
-                                    </div>
-                                    <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
-                                    <h6>Alex Smith</h6>
-                                </div>
-                            </div>
+    const handleShow = () => setShow(true);
 
-                            <div className="col-md-4 mb-3">
-                                <div className="cardbox">
-                                    <div className="cardbox_header mb-3">
-                                        <img src={require('../../src/images/visa.png').default} />
-                                        <a className="car_btn" onClick={handleShow}>
-                                            <img src={require('../images/next1.svg').default} alt="" />
-                                        </a>
-                                    </div>
-                                    <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
-                                    <h6>Alex Smith</h6>
-                                </div>
-                            </div>
+    function openAddCardModal() {
+        setCardNo('');
+        setCardHolderName('');
+        setExpiryDate('');
+        setExpiryDate('');
+        setShowAddaCardModal(true);
+    }
 
-                            <div className="col-md-4 mb-3">
-                                <div className="cardbox">
-                                    <div className="cardbox_header mb-3">
-                                        <img src={require('../../src/images/mastercard.png').default} />
-                                        <a className="car_btn" onClick={handleShow}>
-                                            <img src={require('../images/next1.svg').default} alt="" />
-                                        </a>
-                                    </div>
-                                    <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
-                                    <h6>Alex Smith</h6>
-                                </div>
-                            </div>
+    function getCards() {
+        setIsLoading(true);
+        userService.getCards().then((response) => {
+            setIsLoading(false);
+            if (response.data.status == 200) {
+            } else {
+                toast.error("Some Error Occur");
+            }
+        }).catch((error) => {
+            setIsLoading(false);
+            console.log("error ", error);
+        });
+    }
 
-                            <div className="col-md-4 mb-3">
-                                <div className="cardbox">
-                                    <div className="cardbox_header mb-3">
-                                        <img src={require('../../src/images/visa.png').default} />
-                                        <a className="car_btn" onClick={handleShow}>
-                                            <img src={require('../images/next1.svg').default} alt="" />
-                                        </a>
-                                    </div>
-                                    <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
-                                    <h6>Alex Smith</h6>
-                                </div>
-                            </div>
+    function deleteCard(id) {
+        setIsLoading(true);
+        userService.deleteCard(id).then((response) => {
+            setIsLoading(false);
+            if (response.data.status == 200) {
+                getCards();
+            } else {
+                toast.error("Some Error Occur");
+            }
+        }).catch((error) => {
+            setIsLoading(false);
+            console.log("error ", error);
+        });
+    }
 
-                            <div className="col-md-4 mb-3">
-                                <div className="cardbox">
-                                    <div className="cardbox_header mb-3">
-                                        <img src={require('../../src/images/mastercard.png').default} />
-                                        <a className="car_btn" onClick={handleShow}>
-                                            <img src={require('../images/next1.svg').default} alt="" />
-                                        </a>
-                                    </div>
-                                    <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
-                                    <h6>Alex Smith</h6>
-                                </div>
-                            </div>
+    function validateForm() {
+        if (!/^[0-9]{12,16}$/.test(cardNo)) {
+            toast.error("Invalid Card No");
+        } else if (!/^[a-zA-Z][a-zA-Z ]*$/.test(cardHolderName)) {
+            toast.error("Invalid Card Holder Name");
+        } else if (!expiryDate) {
+            toast.error("Please Select Expiry Date");
+        } else if (!/^[0-9]{3,4}$/.test(cvv)) {
+            toast.error("Invalid CVV Number");
+        } else {
+            setIsLoading(true);
+            let params = { user: userId, card_number: cardNo, exp_month: expiryDate.getFullYear(), exp_year: expiryDate.getMonth() + 1, cvv: cvv }
+            userService.addCard(params).then((response) => {
+                setIsLoading();
+                if (response.data.status == 200) {
+                    getCards();
+                    toast.success("Card Added Successfully");
+                } else {
+                    toast.error("Some Error Occur");
+                }
+            }).catch((error) => {
+                setIsLoading(false);
+                console.log("error ", error);
+            });
+        }
+    }
 
-                            <div className="col-md-4 mb-3">
-                                <div className="cardbox">
-                                    <div className="cardbox_header mb-3">
-                                        <img src={require('../../src/images/visa.png').default} />
-                                        <a className="car_btn" onClick={handleShow}>
-                                            <img src={require('../images/next1.svg').default} alt="" />
-                                        </a>
-                                    </div>
-                                    <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
-                                    <h6>Alex Smith</h6>
+    const handleExpiryDate = (date) => {
+        setExpiryDate(date);
+    }
+
+    return (
+        <>
+            {isLoading && <Loader />}
+            <section className="card_section py-4">
+                <div className="container">
+                    <div className="row align-items-center">
+                        <div className="col-md-12">
+                            <div className="card_header mb-4">
+                                <h5 className="mb-0">My Cards</h5>
+                                <div className="newcard_btn">
+                                    <button className="btn text-white shadow-sm" onClick={() => openAddCardModal()}>Add New Card</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+                    <div className="row">
+                        <div className="col-md-4 mb-3">
+                            <div className="cardbox">
+                                <div className="cardbox_header mb-3">
+                                    <img src={require('../../src/images/mastercard.png').default} />
+                                    <a className="car_btn" onClick={handleShow}>
+                                        <img src={require('../images/next1.svg').default} alt="" />
+                                    </a>
+                                </div>
+                                <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
+                                <h6>Alex Smith</h6>
+                            </div>
+                        </div>
 
-                <Modal show={show} onHide={handleClose}
-                  aria-labelledby="contained-modal-title-vcenter"
-                  centered
-                  className="pay_modal"
-                 >
+                        <div className="col-md-4 mb-3">
+                            <div className="cardbox">
+                                <div className="cardbox_header mb-3">
+                                    <img src={require('../../src/images/visa.png').default} />
+                                    <a className="car_btn" onClick={handleShow}>
+                                        <img src={require('../images/next1.svg').default} alt="" />
+                                    </a>
+                                </div>
+                                <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
+                                <h6>Alex Smith</h6>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-3">
+                            <div className="cardbox">
+                                <div className="cardbox_header mb-3">
+                                    <img src={require('../../src/images/mastercard.png').default} />
+                                    <a className="car_btn" onClick={handleShow}>
+                                        <img src={require('../images/next1.svg').default} alt="" />
+                                    </a>
+                                </div>
+                                <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
+                                <h6>Alex Smith</h6>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-3">
+                            <div className="cardbox">
+                                <div className="cardbox_header mb-3">
+                                    <img src={require('../../src/images/visa.png').default} />
+                                    <a className="car_btn" onClick={handleShow}>
+                                        <img src={require('../images/next1.svg').default} alt="" />
+                                    </a>
+                                </div>
+                                <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
+                                <h6>Alex Smith</h6>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-3">
+                            <div className="cardbox">
+                                <div className="cardbox_header mb-3">
+                                    <img src={require('../../src/images/mastercard.png').default} />
+                                    <a className="car_btn" onClick={handleShow}>
+                                        <img src={require('../images/next1.svg').default} alt="" />
+                                    </a>
+                                </div>
+                                <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
+                                <h6>Alex Smith</h6>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-3">
+                            <div className="cardbox">
+                                <div className="cardbox_header mb-3">
+                                    <img src={require('../../src/images/visa.png').default} />
+                                    <a className="car_btn" onClick={handleShow}>
+                                        <img src={require('../images/next1.svg').default} alt="" />
+                                    </a>
+                                </div>
+                                <h5>XXXX  XXXX  XXXX <span> 1234</span></h5>
+                                <h6>Alex Smith</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <Modal show={show} onHide={handleClose}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                className="pay_modal"
+            >
                 <Modal.Header closeButton className="border-0">
-                <Modal.Title>Payment</Modal.Title>
+                    <Modal.Title>Payment</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="payment_modal">
@@ -191,23 +240,23 @@ const Cards = () => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="border-0 pb-4">
-                <button className="dltebtn" onClick={handleClose}>
-                    Delete Card
-                </button>
-                <button
+                    <button className="dltebtn" style={{ width: "100%" }} onClick={handleClose}>
+                        Delete Card
+                    </button>
+                    {/* <button
                  className="paybtn" onClick={handleClose}>
                     PAY
-                </button>
+                </button> */}
                 </Modal.Footer>
             </Modal>
 
             <Modal show={showAddaCardModal} onHide={handleClose}
-                  aria-labelledby="contained-modal-title-vcenter"
-                  centered
-                  className="pay_modal"
-                 >
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                className="pay_modal"
+            >
                 <Modal.Header closeButton className="border-0">
-                <Modal.Title>Add Card</Modal.Title>
+                    <Modal.Title>Add Card</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="payment_modal">
@@ -221,35 +270,43 @@ const Cards = () => {
                             <div className="col-md-6 mb-3">
                                 <div>
                                     <label>Card Holder Name</label>
-                                    <input type="" value={cardHolderName} onChange={(e) => setCardHolderName(e.target.value)}/>
+                                    <input type="" value={cardHolderName} onChange={(e) => setCardHolderName(e.target.value)} />
                                 </div>
                             </div>
                             <div className="col-md-6 mb-3">
                                 <div>
                                     <label>Expiry</label>
-                                    <input type="" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)}/>
+                                    <DatePicker
+                                        selected={expiryDate}
+                                        minDate={new Date()}
+                                        showMonthYearPicker
+                                        dateFormat={"MM/yyyy"}
+                                        placeholderText="MM/YYYY"
+                                        onChange={handleExpiryDate}
+                                    />
+                                    {/* <input type="" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)}/> */}
                                 </div>
                             </div>
                             <div className="col-md-6 mb-3">
                                 <div>
                                     <label>CVV</label>
-                                    <input type="" value={cvv} maxLength={4} onChange={(e) => setCvv(e.target.value)}/>
+                                    <input type="" value={cvv} maxLength={4} onChange={(e) => setCvv(e.target.value)} />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="border-0 pb-4">
-                {/* <button className="dltebtn" onClick={() => handleClose()}>
+                    {/* <button className="dltebtn" onClick={() => handleClose()}>
                     Delete
                 </button> */}
-                <button
-                 className="paybtn" style={{width: "100%"}} onClick={() => validateForm()}>
-                    Add
-                </button>
+                    <button
+                        className="paybtn" style={{ width: "100%" }} onClick={() => validateForm()}>
+                        Add
+                    </button>
                 </Modal.Footer>
             </Modal>
-            </>
+        </>
     )
 }
-export  default Cards;
+export default Cards;

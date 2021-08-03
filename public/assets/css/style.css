@@ -1081,7 +1081,7 @@ p.no-categgory {
     width: 100%;
     justify-content: center;
 }
-.aisde1 {
+.aside1 {
     width: 85px;
     height: 85px;
     overflow: hidden;
@@ -1091,4 +1091,7 @@ p.no-categgory {
     border: 1px solid lightgray;
     border-radius: 10px;
     margin-right: 10px;
+}
+.mandatory{
+    color: red
 }

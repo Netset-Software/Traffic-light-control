@@ -360,7 +360,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="benifits_section my-4 py-5">
+            <section className="benifits_section my-4 py-5" id="benifits_section">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-12 text-center mb-5">
@@ -410,7 +410,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className="built_sec my-4 py-5">
+            <section className="built_sec my-4 py-5" id="foundation">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-12 mb-5 text-center">
