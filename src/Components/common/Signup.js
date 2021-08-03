@@ -113,15 +113,15 @@ const Signup = () => {
       toast.error('Please Select Height');
     } else if (weight === 'Weight') {
       toast.error('Please Select Weight');
-    } else if (lowBP === '') {
-      toast.error('Please Enter Low BP');
     } else if (highBP === '') {
       toast.error('Please Enter High BP');
-    } else if (!/^\d+(\.\d+)?$/.test(lowBP) || /^[0.]+$/.test(lowBP)) {
-      toast.error('Invalid Low BP');
+    } else if (lowBP === '') {
+      toast.error('Please Enter Low BP');
     } else if (!/^\d+(\.\d+)?$/.test(highBP) || /^[0.]+$/.test(highBP)) {
       toast.error('Invalid High BP');
-    }else if (Number(highBP) <= Number(lowBP) ) {
+    } else if (!/^\d+(\.\d+)?$/.test(lowBP) || /^[0.]+$/.test(lowBP)) {
+      toast.error('Invalid Low BP');
+    } else if (Number(highBP) <= Number(lowBP) ) {
       toast.error('Invalid High and Low BP ');
     } else if (glucose === '') {
       toast.error('Please Enter Glucose');
@@ -283,7 +283,7 @@ const Signup = () => {
                   <form className="py-4">
                     <div className="row frist_step  ">
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>First Name</label>
+                      <label>First Name<span className="mandatory">*</span></label>
                         <div className="input_row">
                          
                           <span><img src={require("../../../src/images/user.png").default} alt="img" /></span>
@@ -291,14 +291,14 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Middle Name</label>
+                      <label>Middle Name<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/user.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Middle Name" className="input103 w-100" value={middleName} onChange={(e) => setMiddleName(e.target.value)} />
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Last Name</label>
+                      <label>Last Name<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/user.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Last Name" className="input103 w-100" value={lastName} onChange={(e) => setLastName(e.target.value)} />
@@ -311,7 +311,7 @@ const Signup = () => {
                           </div>
                       </aside> */} 
                       <aside className="col-md-6 mb-3 text-left" >
-                      <label>Phone Number</label>
+                      <label>Phone Number<span className="mandatory">*</span></label>
                       <div className="input_row">
                         <MaskedInput
                           mask={[/[1-9]/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
@@ -334,7 +334,7 @@ const Signup = () => {
                       </aside>
                       {!isEmailAlreadyExist && 
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Email Address</label>
+                      <label>Email Address<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
                           <input type="" name="" placeholder="Email Address" className="input103 w-100" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -342,7 +342,7 @@ const Signup = () => {
                       </aside>}
                       {!isEmailAlreadyExist && 
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Password</label>
+                      <label>Password<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/padlock.png").default} alt="img" /></span>
                           <input type="password" name="" placeholder="Password" className="input103 w-100" value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -357,7 +357,7 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>ZIP Code</label>
+                      <label>ZIP Code<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/zip.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Enter ZIP Code" className="input103 w-100" value={zip} onChange={(e) => setZip(e.target.value)} />
@@ -430,7 +430,7 @@ const Signup = () => {
                   <form className="pt-4 pb-2">
                     <div className="row frist_step">
                       <aside className="col-md-6 mb-3 text-left">
-                        <label>Age</label>
+                        <label>Age<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/age.png").default} alt="img" /></span>
                           <Form>
@@ -447,7 +447,7 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Gender</label>
+                      <label>Gender<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/gender.png").default} alt="img" /></span>
                           <Form>
@@ -463,7 +463,7 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Height</label>
+                      <label>Height<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/height.png").default} alt="img" /></span>
                           <Form>
@@ -479,7 +479,7 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Weight Type</label>
+                      <label>Weight Type<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/weight-scale.png").default} alt="img" /></span>
                           <Form>
@@ -493,7 +493,7 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Weight</label>
+                      <label>Weight<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/weight2.png").default} alt="img" /></span>
                           <Form>
@@ -512,13 +512,13 @@ const Signup = () => {
                         <div className="row">
                         
                           <aside className="col-md-12">
-                          <label>BLOOD PRESSURE</label>
+                          <label>BLOOD PRESSURE<span className="mandatory">*</span></label>
                             <div className="input_row">
                               <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
                               <div className="bp_input">
-                              <input type="" name="" maxLength={3} placeholder="Bottom Number " className="input103 w-100" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
+                              <input type="" name="" maxLength={3} placeholder="Top Number" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
                               {/* <span>/</span> */}
-                              <input type="" name="" maxLength={3} placeholder="Top Number" className="input103 w-100 bpinp" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
+                              <input type="" name="" maxLength={3} placeholder="Bottom Number " className="input103 w-100 bpinp" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
                               </div>
                             </div>
                           </aside>
@@ -532,21 +532,21 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Glucose</label>
+                      <label>Glucose<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/glucose.png").default} alt="img" /></span>
                           <input type="" name=""  maxLength={3} placeholder="Glucose" className="input103 w-100" value={glucose} onChange={(e) => setGlucose(e.target.value)}/>
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Cholesterol</label>
+                      <label>Cholesterol<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/cholesterol.png").default} alt="img" /></span>
                           <input type="" name=""  maxLength={3} placeholder="Cholesterol" className="input103 w-100" value={cholesterol} onChange={(e) => setCholesterol(e.target.value)}/>
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>BMI</label>
+                      <label>BMI<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/bmi.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="BMI" className="input103 w-100" value={bmi ? Number(bmi).toFixed(2) : ''} />

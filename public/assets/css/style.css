@@ -1082,3 +1082,17 @@ p.no-categgory {
     width: 100%;
     justify-content: center;
 }
+.aside1 {
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.mandatory{
+    color: red
+}
