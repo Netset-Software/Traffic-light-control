@@ -3,7 +3,8 @@ import React from "react";
 import  {FacebookShareButton, TwitterShareButton, WhatsappShareButton} from "react-share";
 
 const ShareOnSocialMedia = props => (
-  <div className="row animated animatedFadeInUp fadeInUp social-btns text-right">
+
+  <div className={"row animated animatedFadeInUp fadeInUp social-btns text-right " + (props.quizClass ? props.quizClass : '')}>
     <div className="social-btn">
       <FacebookShareButton url={props.url} quote={props.text}>
         <button className="btn btn-sm btn-facebook">

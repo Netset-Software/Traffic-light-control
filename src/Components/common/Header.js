@@ -3,11 +3,12 @@ import Select from 'react-select';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap'
 import { toast } from 'react-toastify';
 import Loader from './Loader';
+import {userService} from '../../services';
 
 const Header = () => {
 
     const [isLoading, setIsLoading] = useState(false);
-
+    const [countData, setCountData] = useState('');
     const Language = [
         { label: "English", value: 355 },
         { label: "German", value: 54 },
@@ -18,7 +19,19 @@ const Header = () => {
     useEffect(() => {
         let isUser = localStorage.getItem('user_id');
         if (isUser) setIsUserPresent(true);
+        getProductCount();
     }, []);
+
+    function getProductCount() {
+        userService.getProductCount().then((response) => {
+            if (response.data.status == 200){
+                setCountData(response.data);
+              }else{
+              } 
+        }).catch((error) => {
+            console.log("error ", error);
+        });
+    }
 
     function onLogOut() {
         setIsLoading(true);
@@ -57,6 +70,9 @@ const Header = () => {
                                 <li>
                                     <a href={isUserPresent ? '/my_favorites' : '/signin'}>
                                         <i className="fa fa-heart-o" aria-hidden="true"></i>
+                                        <span className="notification_circle">
+                                        {countData?.favCount}
+                                </span>
                                     </a>
                                 </li>
                                
@@ -114,8 +130,8 @@ const Header = () => {
                                     <Select options={Language} placeholder='Select Language' />
                                 </div> */}
                                 <div className="text-right carticon_row">
-                                    <a href="/cart">
-                                        <span className="cart_count">3</span>
+                                    <a href={isUserPresent ? "/cart" : "/signin"}>
+                                        <span className="cart_count">{countData?.cartCount}</span>
                                         <i className="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i>
                                     </a>
                                 </div>

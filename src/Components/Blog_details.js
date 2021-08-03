@@ -43,7 +43,7 @@ const Blog_details = () => {
         {isLoading && <Loader />}
         <div className="blog-single py-4">
             <div className="container">
-            <ShareOnSocialMedia url="https://www.google.com" text="test"/>
+            <ShareOnSocialMedia url={window.location.href} text="Big4Health - Blog"/>
                 <div className="row align-items-start">
                     <div className="col-lg-8">
                         <article className="article">

@@ -911,6 +911,7 @@ a.favourite-bt {
     font-size: 17px;
     font-weight: 500;
     margin-left: 10px;
+    cursor: pointer;
 }
 a.favourite-bt i{
     font-size: 23px;
@@ -1046,4 +1047,48 @@ button.btn.btn-sm.whtsp-btn i{
         padding: 9px 8px;
         font-size: 14px;
     }
+}
+
+.pointer{
+    cursor: pointer;
+}
+p.no-categgory {
+    font-size: 30px;
+    padding-top: 80px;
+}
+.figure.itemside.align-items-center.mb-0 img {
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+    object-fit: fill;
+    margin: 6px 12px 1px 0;
+}
+.itemside .aisde {
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+.main-div{
+    min-height: 480px;
+}
+.share-Quiz{
+    width: 100%;
+    justify-content: center;
+}
+.aisde1 {
+    width: 85px;
+    height: 85px;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin-right: 10px;
 }

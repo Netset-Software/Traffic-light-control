@@ -7,6 +7,7 @@ import { userService } from '../services'
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
 import { config } from '../config/config'
+import ShareOnSocialMedia from './common/ShareOnSocialMedia'
 
 const Quiz = (props) => {
 
@@ -272,14 +273,15 @@ const Quiz = (props) => {
 
                                     </div>
                                     <div className="col-md-6 mb-3 share_btn">
-                                        <button className="btn">SHARE</button>
+                                    <a className="btn" href="/">GO TO HOME</a>
                                     </div>
                                     <div className="col-md-12 mb-2 share_btn">
                                         <a className="btn"  href={"/result?id="+ quizId}>Check your Answers</a>
                                     </div>
-                                    <div className="col-md-12 mb-2 home_btn">
+                                    {/* <div className="col-md-12 mb-2 home_btn">
                                         <a className="btn" href="/">GO TO HOME</a>
-                                    </div>
+                                    </div> */}
+                                    <ShareOnSocialMedia url={window.location.href} text="Big4Health - Quiz" quizClass="share-Quiz"/>
                                 </div>
                             </div>
 

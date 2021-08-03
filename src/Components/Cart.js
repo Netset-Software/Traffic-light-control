@@ -89,6 +89,7 @@ const Cart = () => {
     return(
         <>
          {isLoading && <Loader/>}
+         <div className="main-div">
         <section className="py-4">
             <div className="container">
                 <div className="row">
@@ -100,7 +101,7 @@ const Cart = () => {
                             <div className="row align-items-center">
                             <div className="col-lg-5 col-md-5 col-sm-6 mb-2">
                                     <figure className="itemside align-items-center mb-0">
-                                        <div className="aside">
+                                        <div className="aside1">
                                             <img src={cartProduct.product?.images.length > 0 ? config.imageUrl + cartProduct.product.images[0].image : ''} alt="img" />
                                         </div>
                                         <figcaption className="info"> <a href="#" className="title text-dark">{cartProduct.product?.name}</a>
@@ -120,8 +121,8 @@ const Cart = () => {
                         </div>
                         <hr />
                         </div>)
-                    }) : 
-                    <p> No Products Added Yet.</p>
+                    }):
+                    !isLoading ? <p className="no-categgory text-center">No Products Added Yet. </p> : ''
                     }
                         {/* <div className="row align-items-center">
                             <div className="col-lg-5 col-md-5 col-sm-6 mb-2">
@@ -216,6 +217,7 @@ const Cart = () => {
                 </div>
             </div>
             </section>
+            </div>
         </>
     )   
 }

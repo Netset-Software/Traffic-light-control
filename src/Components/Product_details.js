@@ -136,9 +136,11 @@ const Product_details = () => {
                                  <h5 className="select-quantity-box">SELECT QUANTITY </h5>
                                  <button type="button" class="btn add-minus mr-2" onClick={() => {if (quantity > 1 )  setQuantity(quantity -1)}}><i class="fa fa-minus" aria-hidden="true"></i></button> {quantity} <button type="button" class="btn add-minus ml-2" onClick={() => setQuantity(quantity + 1)}><i class="fa fa-plus" aria-hidden="true"></i></button>
                                  <p className="border-top">
-                                    <a className="checkout-bt" href="/checkout">Checkout</a>
+                                    <a className="checkout-bt pointer" 
+                                    // href="/checkout"
+                                    >Checkout</a>
                                     <a className="favourite-bt" onClick={() => addToCart()}><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
-                                    <a className="heart_icon1" onClick={() => handleFavourite(isFavourite)} ><i class={isFavourite ? "fa fa-heart" : "fa fa-heart-o"} aria-hidden="true"></i></a>
+                                    <a className="heart_icon1 pointer" onClick={() => handleFavourite(isFavourite)} ><i class={isFavourite ? "fa fa-heart" : "fa fa-heart-o"} aria-hidden="true"></i></a>
                                  </p>
                             </div>
                         </div>

@@ -33,6 +33,10 @@ export const userService = {
     addToCart,
     getCartProducts,
     updateQuantity,
+    addCard,
+    getCards,
+    deleteCard,
+    getProductCount
 
 };
 
@@ -136,6 +140,27 @@ function updateQuantity(params) {
     let url = `${config.apiUrl}/cart`;
     return axios.put(url, params, configJsonHeaders);
 }
+
+function addCard(params) {
+    let url = `${config.apiUrl}/cart`;
+    return axios.post(url, params, configJsonHeaders);
+}
+
+function getCards() {
+    let url = `${config.apiUrl}/card?userId=${user_id}`;
+    return axios.get(url, configJsonHeaders);
+}
+
+function deleteCard(id) {
+    let url = `${config.apiUrl}/card/${id}`;
+    return axios.delete(url, configJsonHeaders);
+}
+
+function getProductCount(){
+    let url = `${config.apiUrl}/count?userId=${user_id}`;
+    return axios.get(url, configJsonHeaders);
+}
+
 
 function handleError(error) {
     console.log("errorrrrrrrrrrrrrrrrrrrrrrrrrrrrr", error);

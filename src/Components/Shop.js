@@ -46,6 +46,13 @@ const Shop = () => {
         getCategories(txt);
     }
 
+    function redirectToProducts(cat){
+        localStorage.setItem('cat_name', cat.name);
+        setTimeout(() => {
+            window.location.href = `/product?id=${cat._id}`;
+        }, 100);
+    }
+
     return (
         <>
             {isLoading && <Loader/>}
@@ -84,12 +91,12 @@ const Shop = () => {
             <section className="product-area-box">
                 <div className="container">
                     <div className="row">
-                        {categories.length > 0  && categories.map((cat) => {
+                        {categories.length > 0 && categories.map((cat) => {
                             return(<div className="col-md-3">
-                                <a href={"/product?id=" + cat._id}>
+                                <a className="pointer" onClick={() => redirectToProducts(cat)}>
                                 <div className="first-product text-center">
                                     <div className="product-image">
-                                        <img src={cat.image ? config.imageUrl + cat.image : ''} alt="img" />
+                                        <img src={cat.image ? config.imageUrl + cat.image : require("../images/no-image.png").default} alt="img" />
                                     </div>
                                     <p>{cat.name}</p>
                                 </div>
@@ -147,6 +154,7 @@ const Shop = () => {
                             </div>
                         </div> */}
                     </div>
+                    {categories.length === 0 && !isLoading && <p className="no-categgory text-center">No Categories Available. </p>}
                 </div>
             </section>
 

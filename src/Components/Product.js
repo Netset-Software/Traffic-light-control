@@ -19,12 +19,14 @@ const Product = () => {
     const [perPage, setPerPage] = useState(10);
     const [totalCount, setTotalCount] = useState(0);
     const [userId, setUserId] = useState('');
+    const [categoryName, setCategoryName] = useState('');
 
     useEffect(() => {
         let user_id = localStorage.getItem('user_id');
         if (user_id) setUserId(user_id);
         const urlParams = new URLSearchParams(window.location.search);
         const catId = urlParams.get('id');
+        setCategoryName(localStorage.getItem('cat_name'));
         if (catId){
             setIsLoading(true);
             setCategoryId(catId);
@@ -86,7 +88,6 @@ const Product = () => {
                  } 
              }).catch((error) => {
                  setIsLoading(false);
-                 // setProducts([]);
                  console.log("error ", error);
              });
          }else{
@@ -112,7 +113,7 @@ const Product = () => {
             {isLoading && <Loader/>}
             <section className="heading-search">
                 <div className="container">
-                    <h2>Nutrition & Fitness Supplement</h2>
+                    <h2>{categoryName ? categoryName : ''}</h2>
                     <div className="input-group search-box">
                         <input type="text" class="form-control" placeholder="Search by product name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
                         <div className="input-group-append">
@@ -176,174 +177,14 @@ const Product = () => {
                                    
                                 </div>)
                         })}
-
-                            {/* <div className="col-lg-3 col-md-4">
-                            <a href="/product_details">
-                            <div className="product-list-box">
-                                <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil1.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                    
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                            </a>
-                        </div> */}
-                        {/* <div className="col-lg-3 col-md-4">
-                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
-                            <div className="product-list-box">
-                                 <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil2.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="col-lg-3 col-md-4">
-                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
-                            <div className="product-list-box">
-                                 <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil3.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="col-lg-3 col-md-4">
-                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
-                            <div className="product-list-box">
-                                  <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil4.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="col-lg-3 col-md-4">
-                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
-                            <div className="product-list-box">
-                                 <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil5.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="col-lg-3 col-md-4">
-                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
-                            <div className="product-list-box">
-                                 <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil6.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="col-lg-3 col-md-4">
-                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
-                            <div className="product-list-box">
-                                 <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil7.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div> */}
-                        {/* <div className="col-lg-3 col-md-4">
-                            <p className="like-favorite-box"><img src={require("../images/unlike.png").default} alt="img" /></p>
-                            <div className="product-list-box">
-                                 <div className="product-list-image text-center">
-                                    <img src={require("../images/fish_oil8.png").default} alt="img" />
-                                </div>
-                                <div className="product-list-details">
-                                    <h4>WOW Life Science Omega-3 Fish Oil</h4>
-                                    <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6>
-                                    <h5>Price: <del className="orginal-amount">$15.50</del> <span className="discount-amount">$13.95</span></h5>
-                                </div>
-                                <div className="product-details">
-                                    <div className="buttons d-flex flex-row">
-                                        <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> 
-                                        <a className="btn btn-success cart-button btn-block shadow" href="/cart"><i className="fa fa-shopping-cart mr-2" style={{fontSize:"19px"}}></i> ADD TO CART </a>
-                                    </div>
-                                    <div class="weight"> </div>
-                                </div>
-                            </div>
-                        </div> */}
                     
                     </div>
+                    {products.length === 0 && !isLoading && <section className="product-area-box"><p className="no-categgory text-center">No Products Available. </p></section>}
+                    
                     <div style={{ width: '100%' }}>
                         <Paginate count={totalCount} activePage={pageNo} handlePageChange={(page) => handlePageChange(page)} perPageEntries={perPage} />
                     </div>
+                    
                 </div>
             </section>
 

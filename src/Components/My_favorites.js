@@ -307,6 +307,10 @@ const Favorites = () => {
                             </div>
                         </div> */}
                     </div>
+                    
+
+                    {products.length === 0 && !isLoading && <section className="product-area-box"><p className="no-categgory text-center">No Products Added Yet. </p></section>}
+
                 </div>
             </section>
 
