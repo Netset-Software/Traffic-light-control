@@ -55,6 +55,7 @@ const Product_details = () => {
              userService.updateFavourite(params).then((response) => {
                  setIsLoading(false);
                  if (response.data.status == 200){
+                    window.location.reload();
                     setIsFavourite(!status);
                     toast.success("Product added to favourite list successfully.");
                  }else{
@@ -76,6 +77,7 @@ const Product_details = () => {
              userService.addToCart(params).then((response) => {
                  setIsLoading(false);
                  if (response.data.status == 200){
+                    window.location.reload();
                     toast.success("Product added to cart successfully.")
                  }else{
                      toast.error("Some Error Occur");

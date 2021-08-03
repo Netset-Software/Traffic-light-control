@@ -70,7 +70,7 @@ const Header = () => {
                                 <li>
                                     <a href={isUserPresent ? '/my_favorites' : '/signin'}>
                                         <i className="fa fa-heart-o" aria-hidden="true"></i>
-                                        <span className="notification_circle">
+                                        <span className="notification_circle" id="fav-count">
                                         {countData?.favCount}
                                 </span>
                                     </a>
@@ -115,8 +115,8 @@ const Header = () => {
                                         <Nav className="mr-auto">
                                             <Nav.Link href="/#">HOME</Nav.Link>
                                             <Nav.Link href="/about">ABOUT</Nav.Link>
-                                            <Nav.Link href="#benifits_section">BENIFITS</Nav.Link>
-                                            <Nav.Link href="#foundation">FOUNDATIONS</Nav.Link>
+                                            <Nav.Link href="/#benifits_section">BENIFITS</Nav.Link>
+                                            <Nav.Link href="/#foundation">FOUNDATIONS</Nav.Link>
                                             <Nav.Link href="/foodoption">FOOD OPTIONS</Nav.Link>
                                             <Nav.Link href="/faq">FAQ</Nav.Link>
                                             <Nav.Link href="/blog">BLOGS</Nav.Link>
@@ -131,7 +131,7 @@ const Header = () => {
                                 </div> */}
                                 <div className="text-right carticon_row">
                                     <a href={isUserPresent ? "/cart" : "/signin"}>
-                                        <span className="cart_count">{countData?.cartCount}</span>
+                                        <span className="cart_count" id="cart-count">{countData?.cartCount}</span>
                                         <i className="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i>
                                     </a>
                                 </div>

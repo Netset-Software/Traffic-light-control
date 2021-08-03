@@ -59,12 +59,12 @@ const Shop = () => {
             <section className="heading-search">
                 <div className="container">
                     <h2>SHOP</h2>
-                    {/* <div className="input-group search-box">
+                    <div className="input-group search-box">
                         <input type="text" class="form-control" placeholder="Search by category name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
                         <div className="input-group-append">
                             <button className="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </section>
             <section className="banner pt-0 pb-4">

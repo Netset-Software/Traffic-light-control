@@ -2,6 +2,10 @@
 import './App.css';
 import Header from './Components/common/Header';
 import Footer from './Components/common/Footer';
+import PrivacyPolicy from './Components/common/PrivacyPolicy';
+import Copyright from './Components/common/Copyright';
+import Term from './Components/common/Term';
+
 import Home from './Components/Home';
 import About from './Components/About';
 import Foodoption from './Components/Foodoption';
@@ -66,7 +70,10 @@ function App() {
             <Route  path="/cart" component={Cart} />
             <Route  path="/checkout" component={Checkout} />
             <Route  path="/blog_details" component={Blog_details} />
-            
+            <Route  path="/privacy-policy" component={PrivacyPolicy} />
+            <Route  path="/copyright" component={Copyright} />
+            <Route  path="/terms" component={Term} />
+
       </Switch>
       <Footer />
     </Router>

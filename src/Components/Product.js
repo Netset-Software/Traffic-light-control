@@ -58,6 +58,7 @@ const Product = () => {
             userService.updateFavourite(params).then((response) => {
                 setIsLoading(false);
                 if (response.data.status == 200){
+                    window.location.reload();
                     getProducts(categoryId, searchText, pageNo);
                     // setProducts(response.data.delquizesData);
                     // setTotalCount(response.data.totalRecords);
@@ -82,6 +83,7 @@ const Product = () => {
              userService.addToCart(params).then((response) => {
                  setIsLoading(false);
                  if (response.data.status == 200){
+                    window.location.reload();
                     toast.success("Product added to cart successfully.")
                  }else{
                      toast.error("Some Error Occur");

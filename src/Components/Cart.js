@@ -30,10 +30,11 @@ const Cart = () => {
     function getCartProducts() {
         userService.getCartProducts().then((response) => {
             setIsLoading(false);
+            
             if (response.data.status == 200){
                 let tmpArry = [];
                 response.data.cart.lineitems.map((product) => {
-                    tmpArry.push({price: product.qty * product.product.price, qty: product.qty});
+                    tmpArry.push({price: product?.qty * product?.product?.price, qty: product?.qty});
                 });
                 setPrices(tmpArry);
                 setCartProducts(response.data.cart.lineitems);
@@ -94,7 +95,7 @@ const Cart = () => {
             <div className="container">
                 <div className="row">
                 
-                    <aside className="col-lg-9">
+                    <aside className={cartProducts.length > 0 ? "col-lg-9" : "col-lg-12"}>
                     <h5 className="mb-4">Your Shoping Cart</h5>
                     {cartProducts.length > 0 ? cartProducts.map((cartProduct, i) => {
                         return(<div>
@@ -191,6 +192,7 @@ const Cart = () => {
                         </div>
                         <hr /> */}
                     </aside>
+                    {cartProducts.length > 0 &&
                     <aside className="col-lg-3 summry">
                         <div className="card">
                             <div className="card-body">
@@ -213,7 +215,10 @@ const Cart = () => {
                                 <hr /> <a href="/checkout" className="btn btn-out btn-success btn-square btn-main w-100 shadow">Checkout </a>
                             </div>
                         </div>
+                          
                     </aside>
+}
+                  
                 </div>
             </div>
             </section>
