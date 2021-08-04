@@ -402,10 +402,18 @@ footer .fa{
     opacity: 0;
     cursor: pointer;
 }
+.popular a h6, .blog_title {
+    color: hsl(0, 0%, 34%);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+   -webkit-box-orient: vertical; 
+}
 
 .camera_box img{
-    height: 200px;
-    width: 200px;
+    max-width: 146px;
+    max-height: 146px;
 }
 .react-tel-input .flag-dropdown {
     background-color: white !important;
@@ -425,6 +433,7 @@ footer .fa{
     border-right: none;
     padding: 10px 0px;
     height: 46px;
+    
 }
 
 .PhoneInputInput{

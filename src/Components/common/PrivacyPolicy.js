@@ -1,6 +1,10 @@
+import Header from './Header'
+import Footer from './Footer'
+
 const PrivacyPolicy = () => {
 	return (
 		<>
+			<Header />
 			<div className="container">
 				<h1>Privacy Policy</h1>
 				<h3>Last Updated: March 21, 2020</h3>
@@ -227,6 +231,7 @@ const PrivacyPolicy = () => {
 				<p>We welcome your comments or questions about this Policy. You may contact us in writing or through our App or at info@big4healthapp.com
 				</p>
 			</div>
+			<Footer />
 		</>
 
 	)

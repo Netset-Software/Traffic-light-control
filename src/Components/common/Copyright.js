@@ -1,6 +1,11 @@
+import Header from './Header'
+import Footer from './Footer'
+
 const CopyRight = () => {
     return (
         <>
+            <Header />
+
             <div className="container">
                 <h1>Copyright Notice</h1>
                 <p>All files and information contained in this App or Blog located at https://www.big4healthapp.com are copyright by CollConnect L.L.C, and may not be duplicated, copied, modified or adapted, in any way without our written permission. Our App or Blog may contain our service marks or trademarks as well as those of our affiliates or other companies, in the form of words, graphics, and logos.
@@ -19,8 +24,8 @@ const CopyRight = () => {
                 <p>Copyright © CollConnect L.L.C 2019 All Rights Reserved
                 </p>
             </div>
+            <Footer />
         </>
-
     )
 }
 

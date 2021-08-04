@@ -7,8 +7,9 @@ import { userService } from '../../services';
 import Loader from './Loader';
 import MaskedInput from 'react-text-mask'
 import csc from 'country-state-city'
-import { Country, State, City }  from 'country-state-city';
-
+import { Country, State, City, getAllCountries }  from 'country-state-city';
+import Header from './Header'
+import Footer from './Footer'
 
 const Signup = () => {
 
@@ -43,6 +44,7 @@ const Signup = () => {
   const [signUpType, setSignUpType] = useState("Standard");
   const [fbId, setFbId] = useState("");
   const [isEmailAlreadyExist, setIsEmailAlreadyExist] = useState(false);
+  const [country, setCountry] = useState('-1');
 
   const heightList = ["4", "4'1", "4'2", "4'3", "4'4", "4'5", "4'6", "4'7", "4'8", "4'9", "4'10", "4'11", "5", "5'1", "5'2", "5'3", "5'4", "5'5", "5'6", "5'7", "5'8", "5'9", "5'10", "5'11", "6", "6'1", "6'2", "6'3", "6'4", "6'5", "6'6", "6'7", "6'8", "6'9", "6'10", "6'11", "7"];
 
@@ -66,30 +68,30 @@ const Signup = () => {
   function validateStep1() {
     var emailRegrex = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
     if (firstName === ''){
-      toast.error('Please Enter First Name');
+      toast.error('Please enter first name');
     }else if (lastName === ''){
-      toast.error('Please Enter Last Name');
+      toast.error('Please enter last name');
     }else if (phoneNumber === '' || phoneNumber === undefined){
-      toast.error('Please Enter Phone Number');
+      toast.error('Please enter phone number');
     }
     // else if (!/^\d+$/.test(phoneNumber)){
     //   toast.error('Invalid Phone Number');
     // }
     else if (!countryCode){
-      toast.error('Please Select Phone Number country code');
+      toast.error('Please select phone number country code');
     }else if (email === ''){
-      toast.error('Please Enter Email');
+      toast.error('Please enter email');
     }else if(!emailRegrex.test(email)){
-      toast.error("Invalid Email");
+      toast.error("Invalid email");
     }else if (password === ''){
-      toast.error('Please Enter Password');
-    }
-    // else if (address === ''){
-    //   toast.error('Please Enter Address');
-    // }
-    else if (zip === ''){
-      toast.error('Please Enter Zip');
-    }
+      toast.error('Please enter password');
+    }else if (password.length <  8){
+      toast.error("Password must contain atleast 8 character's");
+    } else if (zip === ''){
+      toast.error('Please enter zip');
+    } else if (country === '-1'){
+      toast.error('Please select country');
+    } 
     // else if (profilePic === ''){
     //   toast.error('Please Select Profile Picture');
     // }
@@ -106,36 +108,36 @@ const Signup = () => {
     // let c = Country.getCountryByCode('IN')
     // debugger
     if (age === 'Age') {
-      toast.error('Please Select Age');
+      toast.error('Please select age');
     } else if (gender === 'Gender') {
-      toast.error('Please Select Gender');
+      toast.error('Please select gender');
     } else if (height === 'Height') {
-      toast.error('Please Select Height');
-    } else if (weight === 'Weight') {
-      toast.error('Please Select Weight');
+      toast.error('Please select height');
     } else if (highBP === '') {
-      toast.error('Please Enter High BP');
+      toast.error('Please enter high BP');
     } else if (lowBP === '') {
-      toast.error('Please Enter Low BP');
+      toast.error('Please enter low BP');
     } else if (!/^\d+(\.\d+)?$/.test(highBP) || /^[0.]+$/.test(highBP)) {
-      toast.error('Invalid High BP');
+      toast.error('Invalid high BP');
     } else if (!/^\d+(\.\d+)?$/.test(lowBP) || /^[0.]+$/.test(lowBP)) {
-      toast.error('Invalid Low BP');
+      toast.error('Invalid low BP');
     } else if (Number(highBP) <= Number(lowBP) ) {
-      toast.error('Invalid High and Low BP ');
-    } else if (glucose === '') {
-      toast.error('Please Enter Glucose');
+      toast.error('Invalid high and low BP ');
+    } else if (weight === 'Weight') {
+      toast.error('Please select weight');
+    }  else if (glucose === '') {
+      toast.error('Please enter glucose');
     }else if (!/^\d+(\.\d+)?$/.test(glucose) || /^[0.]+$/.test(glucose)) {
-      toast.error('Invalid Glucose');
+      toast.error('Invalid glucose');
     }else if (cholesterol === '') {
-      toast.error('Please Enter Cholesterol');
+      toast.error('Please enter cholesterol');
     }else if (!/^\d+(\.\d+)?$/.test(cholesterol) || /^[0.]+$/.test(cholesterol)) {
       toast.error('Invalid Cholesterol');
     }else if (!acceptPrivacyTerms){
-      toast.error('Please Accept Terms and Condtions');
+      toast.error('Please accept terms and conditions');
     }else {
       if (bmi === '' || bmi === 'null'){
-        toast.error('we are calculating a BMI. Please wait...');
+        toast.error('We are calculating a BMI. please wait...');
       }else{
         createProfile();
       }
@@ -204,6 +206,7 @@ const Signup = () => {
       let status = response.data.status;
       if (status == 200){
         localStorage.setItem('user_id', response.data.data[0]._id);
+        localStorage.setItem('image', response.data.data[0].profilePicture);
         toast.success("Profile Created Successfully");
         setTimeout(() => {
           window.location.href = '/';
@@ -258,6 +261,7 @@ const Signup = () => {
 
   return (
     <>
+    <Header />
       {isLoading && <Loader/>}
       {currentStep === 1 ?
         <section className="bg_section py-5 signup_section">
@@ -291,7 +295,7 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
-                      <label>Middle Name<span className="mandatory">*</span></label>
+                      <label>Middle Name</label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/user.png").default} alt="img" /></span>
                           <input type="" name="" placeholder="Middle Name" className="input103 w-100" value={middleName} onChange={(e) => setMiddleName(e.target.value)} />
@@ -321,6 +325,7 @@ const Signup = () => {
                           onChange={(e) => setPhoneNumber(e.target.value)}
                           style={{position: 'absolute'}}
                           maxLength={12}
+                          value={phoneNumber}
                         />
                         <PhoneInput
                           placeholder="Phone Number"
@@ -345,7 +350,7 @@ const Signup = () => {
                       <label>Password<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/padlock.png").default} alt="img" /></span>
-                          <input type="password" name="" placeholder="Password" className="input103 w-100" value={password} onChange={(e) => setPassword(e.target.value)} />
+                          <input type="password" name="" maxLength={32} placeholder="Password" className="input103 w-100" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                       </aside>
                       }
@@ -364,22 +369,22 @@ const Signup = () => {
                         </div>
                       </aside>
 
-                      {/* <aside className="col-md-6 mb-3">
+                      <aside className="col-md-6 mb-3 text-left">
+                      <label>Country<span className="mandatory">*</span></label>
                           <div className="input_row">
                           <span><img src={require("../../../src/images/city.png").default} alt="img" /></span>
                           <Form>
                             <Form.Group controlId="exampleForm.ControlSelect1" className="input103">
-                                <Form.Control as="select">
-                                <option default>City</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <Form.Control as="select" onChange={(e) => setCountry(e.target.value)}>
+                                <option value="-1">Select Country</option>
+                                {Country.getAllCountries().map((c) => {
+                                  return (<option>{c.name}</option>)
+                                })}
                                 </Form.Control>
                             </Form.Group>
                             </Form>
                           </div>
-                      </aside> */}
+                      </aside>
 
 
 
@@ -479,6 +484,29 @@ const Signup = () => {
                         </div>
                       </aside>
                       <aside className="col-md-6 mb-3 text-left">
+                        <div className="row">
+                        
+                          <aside className="col-md-12">
+                          <label>BLOOD PRESSURE<span className="mandatory">*</span></label>
+                            <div className="input_row">
+                              <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
+                              <div className="bp_input">
+                              <input type="" name="" maxLength={3} placeholder="Top Number" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
+                              {/* <span>/</span> */}
+                              <input type="" name="" maxLength={3} placeholder="Bottom Number " className="input103 w-100 bpinp" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
+                              </div>
+                            </div>
+                          </aside>
+                          {/* <aside className="col-md-6 text-left">
+                          <label></label>
+                            <div className="input_row">
+                              <span></span>
+                              <input type="" name="" placeholder="BN" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
+                            </div>
+                          </aside> */}
+                        </div>
+                      </aside>
+                      <aside className="col-md-6 mb-3 text-left">
                       <label>Weight Type<span className="mandatory">*</span></label>
                         <div className="input_row">
                           <span><img src={require("../../../src/images/weight-scale.png").default} alt="img" /></span>
@@ -508,29 +536,7 @@ const Signup = () => {
                           </Form>
                         </div>
                       </aside>
-                      <aside className="col-md-6 mb-3 text-left">
-                        <div className="row">
-                        
-                          <aside className="col-md-12">
-                          <label>BLOOD PRESSURE<span className="mandatory">*</span></label>
-                            <div className="input_row">
-                              <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
-                              <div className="bp_input">
-                              <input type="" name="" maxLength={3} placeholder="Top Number" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
-                              {/* <span>/</span> */}
-                              <input type="" name="" maxLength={3} placeholder="Bottom Number " className="input103 w-100 bpinp" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
-                              </div>
-                            </div>
-                          </aside>
-                          {/* <aside className="col-md-6 text-left">
-                          <label></label>
-                            <div className="input_row">
-                              <span></span>
-                              <input type="" name="" placeholder="BN" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
-                            </div>
-                          </aside> */}
-                        </div>
-                      </aside>
+                      
                       <aside className="col-md-6 mb-3 text-left">
                       <label>Glucose<span className="mandatory">*</span></label>
                         <div className="input_row">
@@ -557,7 +563,7 @@ const Signup = () => {
                           <input type="checkbox" name="remember" className="remem mr-2" defaultChecked={recieveNotificationAndPromotions} onClick={() => setRecieveNotificationAndPromotions(!recieveNotificationAndPromotions)} />Receive Health Related News Promotions
                         </label>
                         <label className="d-flex align-items-center">
-                          <input type="checkbox" name="remember" className="remem mr-2" defaultChecked={acceptPrivacyTerms} onClick={() => setAcceptPrivacyTerms(!acceptPrivacyTerms)}/> Accept Our <a className="mx-1"> Privacy Policy</a>  and  <a className="ml-1"> Terms And Conditions</a>
+                          <input type="checkbox" name="remember" className="remem mr-2" defaultChecked={acceptPrivacyTerms} onClick={() => setAcceptPrivacyTerms(!acceptPrivacyTerms)}/> Accept Our <a className="mx-1" href="/privacy-policy" target="_blank"> Privacy Policy</a>  and  <a className="ml-1" href="/terms" target="_blank"> Terms And Conditions</a>
                         </label>
                       </aside>
                     </div>
@@ -577,6 +583,7 @@ const Signup = () => {
           </div>
         </section>
       }
+      <Footer/>
     </>
   );
 }

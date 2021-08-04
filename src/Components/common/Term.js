@@ -1,6 +1,10 @@
+import Header from './Header'
+import Footer from './Footer'
+
 const Term = () => {
   return (
     <>
+      <Header />
       <div className="container">
 
         <div><div><div><h3><b>COLLCONNECT LLC MOBILE APP TERMS OF USE</b></h3>
@@ -122,7 +126,7 @@ const Term = () => {
           <p>12.1 The Mobile Application can be accessed from all countries around the world where the local technology permits. As each of these places have differing laws, by accessing the Mobile Application both you and we agree that the laws of the  United States , without regard to the conflicts of laws principles thereof, will apply to all matters relating to the use of the Mobile Application.</p>
           <p>12.2 You accept and agree that both you and we shall submit to the exclusive jurisdiction of the courts of American in respect of any dispute arising out of and/or in connection with these Terms and Conditions of Use.</p>
         </div></div></div><div class="eut-bg-wrapper"></div></div>
-
+      <Footer />
     </>
 
   )

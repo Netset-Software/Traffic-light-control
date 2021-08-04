@@ -42,7 +42,7 @@ function App() {
    <>
    <ToastContainer/>
     <Router>
-    <Header />
+    {/* <Header /> */}
       <Switch>
             <Route exact path="/" component={Home} />
             <Route  path="/signin" component={SignIn} />
@@ -75,7 +75,7 @@ function App() {
             <Route  path="/terms" component={Term} />
 
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
 
    </>

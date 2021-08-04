@@ -4,7 +4,8 @@ import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
 import {userService} from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
-
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
@@ -68,6 +69,7 @@ const Product = () => {
 
     return (
         <>
+        <Header/>
             {isLoading && <Loader/>}
             <section className="review-page-area">
                 <div className="container">
@@ -210,6 +212,7 @@ const Product = () => {
                     </div>
                 </div>
             </section>
+            <Footer/>
         </>
     )
 }

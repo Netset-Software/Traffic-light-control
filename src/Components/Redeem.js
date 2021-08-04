@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 const Redeem = () => {
     return (
         <>
+        <Header/>
             <section className="py-4">
             <div className="container">
                 <div className="row">
@@ -265,6 +268,7 @@ const Redeem = () => {
                 </div>
             </div>
         </section> 
+        <Footer/>
         </>
     )
 }

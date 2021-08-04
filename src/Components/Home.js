@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react'
 
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Modal } from 'react-bootstrap';
-import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
-import {userService} from '../services';
+import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper';
+import { userService } from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
+import Header from './common/Header'
+import Footer from './common/Footer'
 import Geocode from "react-geocode";
 
 
@@ -26,9 +28,11 @@ const Home = () => {
     useEffect(() => {
         // let user_id = localStorage.getItem('user_id');
         // if (user_id){
-            setIsUserLogin(user_id ? true : false);
-            getAllQuizes("Sahibzada Ajit Singh Nagar");
-            // setCurrentLocation();
+        setIsUserLogin(user_id ? true : false);
+        // getAllQuizes("Sahibzada Ajit Singh Nagar");
+        getAllQuizes("");
+
+        // setCurrentLocation();
         // }
     }, []);
 
@@ -38,13 +42,13 @@ const Home = () => {
             console.log("gelocation----");
             navigator.geolocation.getCurrentPosition(showPosition, error_location);
         } else {
-        //   openModalverifilocation();
+            //   openModalverifilocation();
         }
-      }
-    
+    }
 
 
-      function showPosition(position) {
+
+    function showPosition(position) {
         var lat = position.coords.latitude;
         var lng = position.coords.longitude;
         // console.log(lat, lng);
@@ -73,35 +77,35 @@ const Home = () => {
             console.log("error ", error);
         });
 
-      }
-    
-      function error_location(err) {
+    }
+
+    function error_location(err) {
         setIsLoading(false);
         console.warn(`ERROR(${err.code}): ${err.message}`);
         if (err.message == "User denied Geolocation") {
-          alert("Please enable location settings");
+            alert("Please enable location settings");
         }
         if (err.code == 2 || err.code == "2") {
-          alert("We can't locate your position, please try again!");
+            alert("We can't locate your position, please try again!");
         }
-      }
+    }
 
     function getAllQuizes(city) {
         setIsLoading(true);
         userService.getQuizes(city).then((response) => {
             setIsLoading(false);
-            if (response.data.status == 200){
+            if (response.data.status == 200) {
                 let quizesData = response.data.data;
                 setAllQuizes(quizesData);
-                if (user_id) for(let i = 0; i < quizesData; i++ ){
-                    if (quizesData[i] === 'COM'){
+                if (user_id) for (let i = 0; i < quizesData; i++) {
+                    if (quizesData[i] === 'COM') {
                         setIsPlayedFirstTime(true);
                         break;
                     }
                 }
-              }else{
+            } else {
                 toast.error("Some Error Occur");
-              } 
+            }
         }).catch((error) => {
             setIsLoading(false);
             setAllQuizes([]);
@@ -110,91 +114,92 @@ const Home = () => {
     }
 
     function handleModalShowHide(id, status) {
-        if (user_id){
-            if (status === 'NEW'){
+        if (user_id) {
+            if (status === 'NEW') {
                 setSelectedQuizId(id);
                 setShowHide(!showHide);
-            }else if(status === 'QUIT'){
+            } else if (status === 'QUIT') {
                 toast.warning("You have Already Quited that Quiz")
-            }else if(status === 'COM'){
+            } else if (status === 'COM') {
                 window.location.href = "/result?id=" + id;
-            }else{
+            } else {
                 toast.error("Something Went Wrong");
             }
-        }else{
+        } else {
             setShowHide(!showHide);
         }
     }
 
-    function startQuiz(){
-        if (localStorage.getItem('user_id')){
+    function startQuiz() {
+        if (localStorage.getItem('user_id')) {
             localStorage.setItem('done', false);
             window.location.href = "/quiz?id=" + selectedQuizId;
-        }else{
+        } else {
             toast.error("Please sign-up before to get participate into quiz")
         }
     }
 
     return (
         <>
-            {isLoading && <Loader/>}
+            <Header />
+            {isLoading && <Loader />}
             {
-            //  isUserLogin && 
-            allQuizes.length > 0 &&
-            <section className="quiz_slider py-4">
-                <div className="container">
-                    <div className="row">
-                        <aside className="col-md-12 col-sm-12 mb-2">
-                            <div className="quiz_section_title">
-                                <h2 className="">BIG4 QUIZ</h2>
-                                { isPlayedFirstTime ? 
-                                    <p>Play the BIG4 Quiz in Your Location! By answering the questions in a given time and get a chance to win the rewards.</p>
-                                :
-                                    <p>Do you want to play more ?We will get back to you soon with new challenges</p>
-                                }
-                            </div>
+                //  isUserLogin && 
+                allQuizes.length > 0 &&
+                <section className="quiz_slider py-4">
+                    <div className="container">
+                        <div className="row">
+                            <aside className="col-md-12 col-sm-12 mb-2">
+                                <div className="quiz_section_title">
+                                    <h2 className="">BIG4 QUIZ</h2>
+                                    {isPlayedFirstTime ?
+                                        <p>Play the BIG4 Quiz in Your Location! By answering the questions in a given time and get a chance to win the rewards.</p>
+                                        :
+                                        <p>Do you want to play more ?We will get back to you soon with new challenges</p>
+                                    }
+                                </div>
 
-                        </aside>
-                        <aside className="col-md-12">
-                            <Swiper className="mySwiper"
-                                navigation
-                                autoplay={{ delay: 2500 }}
-                                spaceBetween={20}
-                                slidesPerView={6}
-                                breakpoints={{
-                                    320: {
-                                        slidesPerView: 1,
-                                        spaceBetween: 20,
-                                    },
-                                    576: {
-                                        slidesPerView: 1,
-                                        spaceBetween: 20,
-                                    },
-                                    768: {
-                                        slidesPerView: 2,
-                                        spaceBetween: 20,
-                                    },
-                                    1366: {
-                                        slidesPerView: 2,
-                                        spaceBetween: 20,
-                                    },
-                                }}
-                            >
-                                {allQuizes.length > 0 && allQuizes.map((quiz, i) => {
-                                    return (
-                                        <SwiperSlide>
-                                            <div className="quiz_section_box">
-                                                <h6>{quiz.name}</h6>
-                                                <div className="quiz_footer mt-3">
-                                                    <button className="ans bg-transparent border-0" onClick={() => handleModalShowHide(quiz._id, quiz.quiz_done_status)}><u>{quiz.quiz_done_status === 'COM' ? "Check your answers" : "Answer this quiz"}</u></button>
-                                                    <span className="qstn"> {quiz.questions.length} Questions</span>
+                            </aside>
+                            <aside className="col-md-12">
+                                <Swiper className="mySwiper"
+                                    navigation
+                                    autoplay={{ delay: 2500 }}
+                                    spaceBetween={20}
+                                    slidesPerView={6}
+                                    breakpoints={{
+                                        320: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 20,
+                                        },
+                                        576: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 20,
+                                        },
+                                        768: {
+                                            slidesPerView: 2,
+                                            spaceBetween: 20,
+                                        },
+                                        1366: {
+                                            slidesPerView: 2,
+                                            spaceBetween: 20,
+                                        },
+                                    }}
+                                >
+                                    {allQuizes.length > 0 && allQuizes.map((quiz, i) => {
+                                        return (
+                                            <SwiperSlide>
+                                                <div className="quiz_section_box">
+                                                    <h6>{quiz.name}</h6>
+                                                    <div className="quiz_footer mt-3">
+                                                        <button className="ans bg-transparent border-0" onClick={() => handleModalShowHide(quiz._id, quiz.quiz_done_status)}><u>{quiz.quiz_done_status === 'COM' ? "Check your answers" : "Answer this quiz"}</u></button>
+                                                        <span className="qstn"> {quiz.questions.length} Questions</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </SwiperSlide>
-                                    );
+                                            </SwiperSlide>
+                                        );
 
-                                })}
-                                {/* <SwiperSlide>
+                                    })}
+                                    {/* <SwiperSlide>
                                     <div className="quiz_section_box">
                                         <h6>What are some things you can do to help support your brain health?</h6>
                                         <div className="quiz_footer mt-3">
@@ -203,7 +208,7 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </SwiperSlide> */}
-                                {/* <SwiperSlide>
+                                    {/* <SwiperSlide>
                                     <div class="quiz_section_box">
                                         <h6>What are some things you can do to help support your brain health?</h6>
                                         <div className="quiz_footer mt-3">
@@ -239,12 +244,12 @@ const Home = () => {
                                         </div>
                                     </div>
                                 </SwiperSlide> */}
-                            </Swiper>
+                                </Swiper>
 
-                        </aside>
+                            </aside>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
             }
             <section className="banner pt-0 pb-4">
                 <div className="container">
@@ -261,7 +266,7 @@ const Home = () => {
                                             <div className="col-md-6">
                                                 <h1>WOW Life Science Omega-3 Fish Oil</h1>
                                                 <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
+                                                <a className="btn  mt-3" href={user_id ? '/shop' : '/signin'}>SHOP NOW</a>
                                             </div>
                                             <div className="col-md-6">
                                                 <img src={require("../images/med1.png").default} alt="img" />
@@ -275,7 +280,7 @@ const Home = () => {
                                             <div className="col-md-6">
                                                 <h1>WOW Life Science Omega-3 Fish Oil</h1>
                                                 <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
+                                                <a className="btn  mt-3" href={user_id ? '/shop' : '/signin'}>SHOP NOW</a>
                                             </div>
                                             <div className="col-md-6">
                                                 <img src={require("../images/med1.png").default} alt="img" />
@@ -289,7 +294,7 @@ const Home = () => {
                                             <div className="col-md-6">
                                                 <h1>WOW Life Science Omega-3 Fish Oil</h1>
                                                 <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
+                                                <a className="btn  mt-3" href={user_id ? '/shop' : '/signin'}>SHOP NOW</a>
                                             </div>
                                             <div className="col-md-6">
                                                 <img src={require("../images/med1.png").default} alt="img" />
@@ -303,7 +308,7 @@ const Home = () => {
                                             <div className="col-md-6">
                                                 <h1>WOW Life Science Omega-3 Fish Oil</h1>
                                                 <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                                <button className="btn  mt-3">SHOP NOW</button>
+                                                <a className="btn  mt-3" href={user_id ? '/shop' : '/signin'}>SHOP NOW</a>
                                             </div>
                                             <div className="col-md-6">
                                                 <img src={require("../images/med1.png").default} alt="img" />
@@ -347,8 +352,8 @@ const Home = () => {
                         <div className="col-md-5">
                             <h5>Know your BIG4</h5>
                             <p className="mt-4">The BIG4 Health App empowers you and your loved
-                            ones to take control of your health while enjoying the
-                                    pleasure of life.</p>
+                                ones to take control of your health while enjoying the
+                                pleasure of life.</p>
                             <p className="mb-2 mt-4">It’s your true addition to your health care providers’ recommendations to prevent and control the BIG4:</p>
                             <h6>Diabetes – High Cholesterol – High Blood Pressure – BMI.</h6>
                         </div>
@@ -461,9 +466,9 @@ const Home = () => {
                         <div className="col-md-9 mb-2 text-left">
                             <h5>DOWNLOAD THE BIG4 HEALTH APP NOW</h5>
                             <p>Enjoy best practices to reshape your health to maintain a healthy lifestyle. Lifestyle modification can be
-                            painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
-                            No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
-                                    sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
+                                painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
+                                No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
+                                sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
                         </div>
                         <div className="col-md-3">
                             <a className="" href="/#">
@@ -481,8 +486,8 @@ const Home = () => {
 
 
             <Modal show={showHide} className="quizmodal"
-             aria-labelledby="contained-modal-title-vcenter"
-             centered
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
             >
                 <Modal.Header className="border-0 mb-1 pb-1">
                     <Modal.Title>Are you ready to start the BIG4 Quiz?</Modal.Title>
@@ -503,7 +508,7 @@ const Home = () => {
                             </aside>
                             <aside className="col-sm-6">
                                 <span className="start_btn">
-                                    <a className="btn" onClick={() => {user_id ? startQuiz() : window.location.href = "/signin"}} >START QUIZ</a>
+                                    <a className="btn" onClick={() => { user_id ? startQuiz() : window.location.href = "/signin" }} >START QUIZ</a>
                                 </span>
                             </aside>
                         </div>
@@ -512,7 +517,7 @@ const Home = () => {
                 </Modal.Body>
 
             </Modal>
-
+            <Footer />
         </>
     )
 }

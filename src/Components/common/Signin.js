@@ -5,7 +5,8 @@ import Loader from './Loader'
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
 import {config} from '../../config/config'
-
+import Header from './Header'
+import Footer from './Footer'
 
 const SignIn = () => {
 
@@ -30,6 +31,7 @@ const SignIn = () => {
       userService.logIn(params).then((response) => {
         if (response.data.status == 200){
           localStorage.setItem('user_id', response.data.data[0]._id);
+          localStorage.setItem('image', response.data.data[0].profilePicture);
           localStorage.setItem('remember_me', rememberMe);
           toast.success("Successfully Signed-In");
           setTimeout(() => {
@@ -117,6 +119,7 @@ const SignIn = () => {
 
   return (
     <>
+    <Header />
     {isLoading && <Loader/>}
       <section className="bg_section py-5">
         <div className="container">
@@ -200,6 +203,7 @@ const SignIn = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </>
   );
 }

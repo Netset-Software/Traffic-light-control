@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 const Contact = () => {
   return (
     <>
+    <Header/>
       <section className="contact_section py-5">
         <div className="container">
           <div className="row align-items-center">
@@ -44,6 +47,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </>
   );
 }

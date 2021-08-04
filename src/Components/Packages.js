@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 const Packages = () => {
     return (
         <>
+        <Header/>
         <section className="package_bg py-5">
             <div className="container">
                 <div className="row">
@@ -20,6 +23,7 @@ const Packages = () => {
                 </div>
             </div>
         </section>
+        <Footer/>
         </>
     )
 }
