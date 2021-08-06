@@ -292,6 +292,7 @@ const Quiz = (props) => {
                     </Modal>
 
                 </React.Fragment>
+                <Footer/>
         </div>
 
     );
@@ -361,7 +362,6 @@ const Quiz = (props) => {
                 </div>
             </div>
            }
-           <Footer/>
        </div>
         );     
     }
