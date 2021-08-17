@@ -30,9 +30,8 @@ const Home = () => {
         // if (user_id){
         setIsUserLogin(user_id ? true : false);
         // getAllQuizes("Sahibzada Ajit Singh Nagar");
-        getAllQuizes("");
-
-        // setCurrentLocation();
+        // getAllQuizes("");
+        setCurrentLocation();
         // }
     }, []);
 
@@ -68,8 +67,8 @@ const Home = () => {
 
         userService.getCurrentLocation(lat, lng).then((response) => {
             let city = response.data.results[0].address_components[0].long_name;
-            // getAllQuizes(city);
-            getAllQuizes("Sahibzada Ajit Singh Nagar");
+            getAllQuizes(city);
+            // getAllQuizes("Sahibzada Ajit Singh Nagar");
         }).catch((error) => {
             setIsLoading(false);
             // setAllQuizes([]);

@@ -62,7 +62,7 @@ const Product_details = () => {
                     if (response.data.status == 200) {
                         setFavCount(response.data.favCount);
                         setIsFavourite(!status);
-                        toast.success("Product added to favourite list successfully.");
+                        toast.success("Product " + (!status ?  "added to" : "removed from") + " your favourite list successfully.");
                     } else {
                         toast.error("Some Error Occur");
                     }
