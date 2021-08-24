@@ -517,7 +517,7 @@ const Signup = () => {
                               <span><img src={require("../../../src/images/bp.png").default} alt="img" /></span>
                               <div className="bp_input">
                               <input type="" name="" maxLength={3} placeholder="Top Number" className="input103 w-100" value={highBP} onChange={(e) => setHighBP(e.target.value)}/>
-                              {/* <span>/</span> */}
+                              <div>/</div>
                               <input type="" name="" maxLength={3} placeholder="Bottom Number " className="input103 w-100 bpinp" value={lowBP} onChange={(e) => setLowBP(e.target.value)}/>
                               </div>
                             </div>
