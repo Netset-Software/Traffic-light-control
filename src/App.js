@@ -2,6 +2,10 @@
 import './App.css';
 import Header from './Components/common/Header';
 import Footer from './Components/common/Footer';
+import PrivacyPolicy from './Components/common/PrivacyPolicy';
+import Copyright from './Components/common/Copyright';
+import Term from './Components/common/Term';
+
 import Home from './Components/Home';
 import About from './Components/About';
 import Foodoption from './Components/Foodoption';
@@ -15,18 +19,22 @@ import Product from './Components/Product';
 import Product_search from './Components/Product_search';
 import My_favorites from './Components/My_favorites';
 import Reviews from './Components/Reviews';
-
+import My_orders from './Components/My_orders';
 import Checkout from './Components/Checkout';
 import Blog from './Components/Blog';
 import Profile from './Components/Profile';
 import Cards from './Components/Cards'
 import Offer from './Components/Offer';
+import Details from './Components/Details';
 import SignIn from './Components/common/Signin';
 import Signup from './Components/common//Signup';
 import Signup2 from './Components/common//Signup2';
 import Forgotpassword from './Components/common/Forgotpassword';
 import Packages from './Components/Packages';
-import Cart from './Components/Cart'
+import Cart from './Components/Cart';
+import Past_order from './Components/Past_order';
+import Cancelled from './Components/Cancelled';
+import Payment from './Components/Payment';
 import {BrowserRouter as Router, Switch, Route} from'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -38,7 +46,7 @@ function App() {
    <>
    <ToastContainer/>
     <Router>
-    <Header />
+    {/* <Header /> */}
       <Switch>
             <Route exact path="/" component={Home} />
             <Route  path="/signin" component={SignIn} />
@@ -66,9 +74,16 @@ function App() {
             <Route  path="/cart" component={Cart} />
             <Route  path="/checkout" component={Checkout} />
             <Route  path="/blog_details" component={Blog_details} />
-            
+            <Route  path="/privacy-policy" component={PrivacyPolicy} />
+            <Route  path="/copyright" component={Copyright} />
+            <Route  path="/terms" component={Term} />
+            <Route  path="/payment" component={Payment} />
+            <Route path="/my_orders" component={My_orders} />
+            <Route path="/details" component={Details} />
+            <Route path="/past_order" component={Past_order} />
+            <Route path="/cancelled" component={Cancelled} />
       </Switch>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
 
    </>

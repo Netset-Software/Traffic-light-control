@@ -1,8 +1,12 @@
 import React from 'react'
 import  { Accordion, Card } from 'react-bootstrap'
+import Header from './common/Header'
+import Footer from './common/Footer'
+
 const FAQ = () => {
         return (
             <>
+            <Header/>
                 <section className="faq_section py-5">
                     <div className="container">
                     <div className="row">
@@ -626,6 +630,7 @@ Other health care professionals diagnose patients with high blood pressure if th
                     </div>
                     </div>
                 </section>
+                <Footer/>
             </>
         )
     

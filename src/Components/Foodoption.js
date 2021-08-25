@@ -1,8 +1,11 @@
 import React  from 'react'
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 const Foodoption = () => {
     return (
         <>
+        <Header/>
             <section className="food_section">
                 <div className="container">
                     <div className="row">
@@ -297,6 +300,7 @@ const Foodoption = () => {
                     </div>
                 </div>
             </section>
+            <Footer/>
         </>
     )
 }

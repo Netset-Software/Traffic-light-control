@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { userService } from '../../services';
 import { toast } from 'react-toastify';
 import Loader from './Loader';
+import Header from './Header'
+import Footer from './Footer'
 
 const Forgotpassword = () => {
 
@@ -43,6 +45,7 @@ const Forgotpassword = () => {
 
     return (
         <>
+            <Header />
             {isLoading && <Loader />}
             <section className="bg_section py-5">
                 <div className="container">
@@ -76,6 +79,7 @@ const Forgotpassword = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     );
 }

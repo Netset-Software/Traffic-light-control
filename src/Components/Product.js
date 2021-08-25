@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Modal } from 'react-bootstrap';
-import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
-import {userService} from '../services';
+import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper';
+import { userService } from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
 import Paginate from './common/Pagination';
 import { config } from '../config/config'
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
 
@@ -20,6 +22,8 @@ const Product = () => {
     const [totalCount, setTotalCount] = useState(0);
     const [userId, setUserId] = useState('');
     const [categoryName, setCategoryName] = useState('');
+    const [cartCount, setCartCount] = useState('');
+    const [favCount, setFavCount] = useState('');
 
     useEffect(() => {
         let user_id = localStorage.getItem('user_id');
@@ -27,7 +31,7 @@ const Product = () => {
         const urlParams = new URLSearchParams(window.location.search);
         const catId = urlParams.get('id');
         setCategoryName(localStorage.getItem('cat_name'));
-        if (catId){
+        if (catId) {
             setIsLoading(true);
             setCategoryId(catId);
             getProducts(catId, searchText, 0);
@@ -37,13 +41,13 @@ const Product = () => {
     function getProducts(catId, searchTxt, page) {
         userService.getProducts(catId, searchTxt, page).then((response) => {
             setIsLoading(false);
-            if (response.data.status == 200){
+            if (response.data.status == 200) {
                 setProducts(response.data.data);
                 setTotalCount(response.data.totalRecords);
-              }else{
+            } else {
                 setProducts([]);
                 toast.error("Some Error Occur");
-              } 
+            }
         }).catch((error) => {
             setIsLoading(false);
             setProducts([]);
@@ -52,51 +56,58 @@ const Product = () => {
     }
 
     function handleFavourite(id, status) {
-       if (userId){
-            setIsLoading(true);
-            let params = {user: userId, product: id, is_favourite: !status}
-            userService.updateFavourite(params).then((response) => {
-                setIsLoading(false);
-                if (response.data.status == 200){
-                    getProducts(categoryId, searchText, pageNo);
-                    // setProducts(response.data.delquizesData);
-                    // setTotalCount(response.data.totalRecords);
-                }else{
+        if (userId) {
+            var answer = true;
+            if (status) answer = window.confirm("Are you sure want to remove it from your favouite list.");
+            if (answer) {
+                setIsLoading(true);
+                let params = { user: userId, product: id, is_favourite: !status }
+                userService.updateFavourite(params).then((response) => {
+                    setIsLoading(false);
+                    if (response.data.status == 200) {
+                        setFavCount(response.data.favCount);
+                        getProducts(categoryId, searchText, pageNo);
+                        // setProducts(response.data.delquizesData);
+                        // setTotalCount(response.data.totalRecords);
+                    } else {
+                        // setProducts([]);
+                        toast.error("Some Error Occur");
+                    }
+                }).catch((error) => {
+                    setIsLoading(false);
                     // setProducts([]);
-                    toast.error("Some Error Occur");
-                } 
-            }).catch((error) => {
-                setIsLoading(false);
-                // setProducts([]);
-                console.log("error ", error);
-            });
-        }else{
+                    console.log("error ", error);
+                });
+            }
+        } else {
             window.location.pathname = '/signin'
         }
     }
 
     function addToCart(id) {
-        if (userId){
-             setIsLoading(true);
-             let params = {user: userId, product: id, qty: 1}
-             userService.addToCart(params).then((response) => {
-                 setIsLoading(false);
-                 if (response.data.status == 200){
+        if (userId) {
+            setIsLoading(true);
+            let params = { user: userId, product: id, qty: 1 }
+            userService.addToCart(params).then((response) => {
+                setIsLoading(false);
+                if (response.data.status == 200) {
+                    setCartCount(response.data.cartCount);
                     toast.success("Product added to cart successfully.")
-                 }else{
-                     toast.error("Some Error Occur");
-                 } 
-             }).catch((error) => {
-                 setIsLoading(false);
-                 console.log("error ", error);
-             });
-         }else{
-             window.location.pathname = '/signin'
-         }
-     }
+                } else {
+                    toast.error("Some Error Occur");
+                }
+            }).catch((error) => {
+                setCartCount('');
+                setIsLoading(false);
+                console.log("error ", error);
+            });
+        } else {
+            window.location.pathname = '/signin'
+        }
+    }
 
 
-    function handleSearch(searchTxt){
+    function handleSearch(searchTxt) {
         setSearchText(searchTxt);
         setPageNo(0);
         getProducts(categoryId, searchTxt, 0);
@@ -110,12 +121,13 @@ const Product = () => {
 
     return (
         <>
-            {isLoading && <Loader/>}
+            <Header cartCount={cartCount} favCount={favCount} />
+            {isLoading && <Loader />}
             <section className="heading-search">
                 <div className="container">
                     <h2>{categoryName ? categoryName : ''}</h2>
                     <div className="input-group search-box">
-                        <input type="text" class="form-control" placeholder="Search by product name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
+                        <input type="text" class="form-control" placeholder="Search by product name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)} />
                         <div className="input-group-append">
                             <button className="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
@@ -125,8 +137,8 @@ const Product = () => {
             <section className="product-page-area">
                 <div className="container">
                     <div className="row">
-                            {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
-                    {/* {products.length > 0  && products.map((product) => {
+                        {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
+                        {/* {products.length > 0  && products.map((product) => {
                         return(<div className="col-md-4">
                                 <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p>
                                 <a href={"/product_details?id=" + product._id}>
@@ -145,59 +157,59 @@ const Product = () => {
                             </div>)
                         })} */}
                         {/* <div className="col-md-4"> */}
-                            {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
-                            
+                        {/* <p className="like-favorite-box"><img src={require("../images/like.png").default} alt="img" /></p> */}
 
-                            {products.length > 0  && products.map((product, i) => {
-                                return (<div className="col-lg-3 col-md-4">
-                                   
-                                        <div className="product-list-box">
-                                             <a href={"/product_details?id=" + product._id}>
-                                                <div className="product-list-image text-center">
-                                                    <img src={product?.images.length > 0 ? config.imageUrl + product.images[0].image : ''} alt="img" />
-                                                </div>
-                                                <div className="product-list-details">
-                                                    <h4>{product.name}</h4>
-                                                    {/* <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6> */}
-                                                    <h5>Price: 
-                                                        {/* <del className="orginal-amount">$15.50</del>  */}
-                                                        <span className="discount-amount"> ${product.price.toFixed(2)}</span></h5>
 
-                                                </div>
-                                             </a>
-                                            <div className="product-details">
-                                                <div className="buttons d-flex flex-row">
-                                                    {/* <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> */}
-                                                    <a className="cart shadow pb-3" onClick={() => handleFavourite(product._id, product.is_favourite)}><i className={product.is_favourite ? "fa fa-heart" : "fa fa-heart-o" }></i></a>
-                                                    <a className="btn btn-success cart-button btn-block shadow" onClick={() => addToCart(product._id)}><i className="fa fa-shopping-cart mr-2" style={{ fontSize: "19px" }}></i> ADD TO CART </a>
-                                                </div>
-                                                <div class="weight"> </div>
-                                            </div>
+                        {products.length > 0 && products.map((product, i) => {
+                            return (<div className="col-lg-3 col-md-4">
+
+                                <div className="product-list-box">
+                                    <a href={"/product_details?id=" + product._id}>
+                                        <div className="product-list-image text-center">
+                                            <img src={product?.images.length > 0 ? config.imageUrl + product.images[0].image : ''} alt="img" />
                                         </div>
-                                   
-                                </div>)
+                                        <div className="product-list-details">
+                                            <h4>{product.name}</h4>
+                                            {/* <h6><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i> <span className="total-review ml-1">(1.2k reviews)</span></h6> */}
+                                            <h5>Price:
+                                                {/* <del className="orginal-amount">$15.50</del>  */}
+                                                <span className="discount-amount"> ${product.price.toFixed(2)}</span></h5>
+
+                                        </div>
+                                    </a>
+                                    <div className="product-details">
+                                        <div className="buttons d-flex flex-row">
+                                            {/* <a className="cart shadow pb-3" href="/my_favorites"><i className="fa fa-heart-o"></i></a> */}
+                                            <a className="cart shadow pb-3 pointer" onClick={() => handleFavourite(product._id, product.is_favourite)}><i className={product.is_favourite ? "fa fa-heart" : "fa fa-heart-o"}></i></a>
+                                            <a className="btn btn-success cart-button btn-block shadow pointer" onClick={() => addToCart(product._id)}><i className="fa fa-shopping-cart mr-2" style={{ fontSize: "19px" }}></i> ADD TO CART </a>
+                                        </div>
+                                        <div class="weight"> </div>
+                                    </div>
+                                </div>
+
+                            </div>)
                         })}
-                    
+
                     </div>
                     {products.length === 0 && !isLoading && <section className="product-area-box"><p className="no-categgory text-center">No Products Available. </p></section>}
-                    
+
                     <div style={{ width: '100%' }}>
                         <Paginate count={totalCount} activePage={pageNo} handlePageChange={(page) => handlePageChange(page)} perPageEntries={perPage} />
                     </div>
-                    
+
                 </div>
             </section>
 
-           
+
             <section className="downld_sec mt-4 py-5">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-9 mb-2 text-left">
                             <h5>DOWNLOAD THE BIG4 HEALTH APP NOW</h5>
                             <p>Enjoy best practices to reshape your health to maintain a healthy lifestyle. Lifestyle modification can be
-                            painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
-                            No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
-                                    sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
+                                painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
+                                No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
+                                sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
                         </div>
                         <div className="col-md-3">
                             <a className="" href="/#">
@@ -212,6 +224,7 @@ const Product = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

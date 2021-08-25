@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import Loader from './common/Loader'
 import { config } from '../config/config'
 import ShareOnSocialMedia from './common/ShareOnSocialMedia'
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 const Quiz = (props) => {
 
@@ -184,6 +186,7 @@ const Quiz = (props) => {
 
     return (
         <div>
+            <Header/>
             {isLoading && <Loader/>}
                 <React.Fragment>
                     <section className="quiz_section py-4">
@@ -289,6 +292,7 @@ const Quiz = (props) => {
                     </Modal>
 
                 </React.Fragment>
+                <Footer/>
         </div>
 
     );

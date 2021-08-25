@@ -11,7 +11,7 @@ const Footer = () => {
                             <div className="my-4">
                                 <ul className="m-0 p-0">
                                     <li>
-                                        <a href="/#">
+                                        <a href="/">
                                             HOME
                                 </a>
                                     </li>
@@ -21,12 +21,12 @@ const Footer = () => {
                                 </a>
                                     </li>
                                     <li>
-                                        <a href="/#">
+                                        <a href="/#benifits_section">
                                             BENEFITS
                                 </a>
                                     </li>
                                     <li>
-                                        <a href="/#">
+                                        <a href="/#foundation">
                                             FOUNDATIONS
                                 </a>
                                     </li>
@@ -81,17 +81,17 @@ const Footer = () => {
                         <div className="col-md-6 text-right">
                             <ul className="m-0 p-0">
                                 <li>
-                                    <a href="/#">
+                                    <a href="/privacy-policy" target="_blank">
                                         <p> Privacy Policy</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/#">
+                                    <a href="/copyright" target="_blank">
                                         <p>Copyright Notice</p>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/#">
+                                    <a href="/terms"  target="_blank">
                                         <p>Term of Use</p>
                                     </a>
                                 </li>

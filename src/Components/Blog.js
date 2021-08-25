@@ -4,6 +4,8 @@ import { userService } from '../services';
 import Loader from './common/Loader'
 import { toast } from 'react-toastify';
 import { config } from '../config/config'
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 const Blog = () => {
 
@@ -54,6 +56,7 @@ const Blog = () => {
 
     return (
         <>
+        <Header/>
             {isLoading && <Loader />}
             <section className="blog_section py-5">
                 <div className="container">
@@ -104,6 +107,7 @@ const Blog = () => {
                     </div>
                 </div>
             </section>
+            <Footer/>
         </>
     )
 }

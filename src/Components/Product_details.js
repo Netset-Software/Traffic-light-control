@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react'
 
-import { Swiper, SwiperSlide,Navigation, } from 'swiper/react';
+import { Swiper, SwiperSlide, Navigation, } from 'swiper/react';
 import { Modal } from 'react-bootstrap';
-import SwiperCore, { Pagination,Autoplay,} from 'swiper';
-import {userService} from '../services';
+import SwiperCore, { Pagination, Autoplay, } from 'swiper';
+import { userService } from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
 import { config } from '../config/config'
-
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 const Product_details = () => {
-    
+
     const [productDetail, setProductDetail] = useState('');
     const [productId, setProductId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [quantity, setQuantity] = useState(1);
     const [isFavourite, setIsFavourite] = useState(false);
     const [userId, setUserId] = useState('');
-
+    const [cartCount, setCartCount] = useState('');
+    const [favCount, setFavCount] = useState('');
 
     useEffect(() => {
         let user_id = localStorage.getItem('user_id');
         if (user_id) setUserId(user_id);
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
-        if (id){
+        if (id) {
             setIsLoading(true);
             setProductId(id);
             getProductDetail(id);
@@ -34,13 +36,13 @@ const Product_details = () => {
     function getProductDetail(id) {
         userService.getProductDetail(id).then((response) => {
             setIsLoading(false);
-            if (response.data.status == 200){
+            if (response.data.status == 200) {
                 setProductDetail(response.data.data);
                 setIsFavourite(response.data.data.is_favourite);
-              }else{
+            } else {
                 setProductDetail('');
                 toast.error("Some Error Occur");
-              } 
+            }
         }).catch((error) => {
             setIsLoading(false);
             setProductDetail('');
@@ -49,56 +51,65 @@ const Product_details = () => {
     }
 
     function handleFavourite(status) {
-        if (userId){
-             setIsLoading(true);
-             let params = {user: userId, product: productId, is_favourite: !status}
-             userService.updateFavourite(params).then((response) => {
-                 setIsLoading(false);
-                 if (response.data.status == 200){
-                    setIsFavourite(!status);
-                    toast.success("Product added to favourite list successfully.");
-                 }else{
-                     toast.error("Some Error Occur");
-                 } 
-             }).catch((error) => {
-                 setIsLoading(false);
-                 console.log("error ", error);
-             });
-         }else{
-             window.location.pathname = '/signin'
-         }
-     }
+        if (userId) {
+            var answer = true;
+            if (status) answer = window.confirm("Are you sure want to remove it from your favouite list.");
+            if (answer) {
+                setIsLoading(true);
+                let params = { user: userId, product: productId, is_favourite: !status }
+                userService.updateFavourite(params).then((response) => {
+                    setIsLoading(false);
+                    if (response.data.status == 200) {
+                        setFavCount(response.data.favCount);
+                        setIsFavourite(!status);
+                        toast.success("Product " + (!status ?  "added to" : "removed from") + " your favourite list successfully.");
+                    } else {
+                        toast.error("Some Error Occur");
+                    }
+                }).catch((error) => {
+                    setFavCount('')
+                    setIsLoading(false);
+                    console.log("error ", error);
+                });
+            }
+        } else {
+            window.location.pathname = '/signin'
+        }
+    }
 
     function addToCart() {
-        if (userId){
-             setIsLoading(true);
-             let params = {user: userId, product: productId, qty: quantity}
-             userService.addToCart(params).then((response) => {
-                 setIsLoading(false);
-                 if (response.data.status == 200){
+        if (userId) {
+            setIsLoading(true);
+            let params = { user: userId, product: productId, qty: quantity }
+            userService.addToCart(params).then((response) => {
+                setIsLoading(false);
+                if (response.data.status == 200) {
+                    setCartCount(response.data.cartCount);
                     toast.success("Product added to cart successfully.")
-                 }else{
-                     toast.error("Some Error Occur");
-                 } 
-             }).catch((error) => {
-                 setIsLoading(false);
-                 // setProducts([]);
-                 console.log("error ", error);
-             });
-         }else{
-             window.location.pathname = '/signin'
-         }
-     }
+                } else {
+                    setCartCount('');
+                    toast.error("Some Error Occur");
+                }
+            }).catch((error) => {
+                setIsLoading(false);
+                // setProducts([]);
+                console.log("error ", error);
+            });
+        } else {
+            window.location.pathname = '/signin'
+        }
+    }
 
-     
+
     return (
         <>
-            {isLoading && <Loader/>}
+            <Header cartCount={cartCount} favCount={favCount} />
+            {isLoading && <Loader />}
             <section className="product-detials-page">
                 <div className="container">
                     <div className="row">
                         <div class="col-md-6">
-                        <Swiper
+                            <Swiper
                                 spaceBetween={25}
                                 pagination={{ clickable: true }}
                                 slidesPerView={1}
@@ -108,12 +119,12 @@ const Product_details = () => {
                                 scrollbar={{ draggable: true }}
                                 onSwiper={(swiper) => console.log(swiper)}
                                 onSlideChange={() => console.log('slide change')}
-                                  
+
                             >
                                 {productDetail?.images?.map((image) => {
                                     return (<SwiperSlide>
                                         <div className="slider_box_new text-center">
-                                                <img src={image.image ? config.imageUrl + image.image : ''} alt="img" />
+                                            <img src={image.image ? config.imageUrl + image.image : ''} alt="img" />
                                         </div>
                                     </SwiperSlide>)
                                 })}
@@ -124,30 +135,30 @@ const Product_details = () => {
                         <div className="col-md-6">
                             <div className="product-detail-rightside">
                                 <h2>{productDetail?.name}</h2>
-                                 {/* <h2>WOW Life Science Omega-3 <br></br>Fish Oil</h2> */}
-                                 <h6><span>{productDetail?.category?.name}</span></h6>
-                                 {/* <h6><span>NUTRITION & FITNESS SUPPLEMENTS</span></h6> */}
-                                 {/* <h5><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><span><a href="/reviews">(1.2k reviews)</a></span></h5> */}
-                                 <h5 className="mt-4">PRICE: 
-                                 {/* <del>$15.50</del> */}
-                                  <span> ${productDetail?.price?.toFixed(2)} 
-                                 {/* (10% Off) */}
-                                 </span></h5>
-                                 <h5 className="select-quantity-box">SELECT QUANTITY </h5>
-                                 <button type="button" class="btn add-minus mr-2" onClick={() => {if (quantity > 1 )  setQuantity(quantity -1)}}><i class="fa fa-minus" aria-hidden="true"></i></button> {quantity} <button type="button" class="btn add-minus ml-2" onClick={() => setQuantity(quantity + 1)}><i class="fa fa-plus" aria-hidden="true"></i></button>
-                                 <p className="border-top">
-                                    <a className="checkout-bt pointer" 
+                                {/* <h2>WOW Life Science Omega-3 <br></br>Fish Oil</h2> */}
+                                <h6><span>{productDetail?.category?.name}</span></h6>
+                                {/* <h6><span>NUTRITION & FITNESS SUPPLEMENTS</span></h6> */}
+                                {/* <h5><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><span><a href="/reviews">(1.2k reviews)</a></span></h5> */}
+                                <h5 className="mt-4">PRICE:
+                                    {/* <del>$15.50</del> */}
+                                    <span> ${productDetail?.price?.toFixed(2)}
+                                        {/* (10% Off) */}
+                                    </span></h5>
+                                <h5 className="select-quantity-box">SELECT QUANTITY </h5>
+                                <button type="button" class="btn add-minus mr-2" onClick={() => { if (quantity > 1) setQuantity(quantity - 1) }}><i class="fa fa-minus" aria-hidden="true"></i></button> {quantity} <button type="button" class="btn add-minus ml-2" onClick={() => setQuantity(quantity + 1)}><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                <p className="border-top">
+                                    <a className="checkout-bt pointer"
                                     // href="/checkout"
                                     >Checkout</a>
-                                    <a className="favourite-bt" onClick={() => addToCart()}><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
+                                    <a className="favourite-bt pointer" onClick={() => addToCart()}><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</a>
                                     <a className="heart_icon1 pointer" onClick={() => handleFavourite(isFavourite)} ><i class={isFavourite ? "fa fa-heart" : "fa fa-heart-o"} aria-hidden="true"></i></a>
-                                 </p>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            
+
             <section className="description-area">
                 <div className="container">
                     <h3>DESCRIPTION</h3>
@@ -164,17 +175,66 @@ const Product_details = () => {
                     </p> */}
                 </div>
             </section>
-
+            
+            <div className="container">
+                <hr className="my-4" />
+            </div>
            
+            <section className="subscribe_section">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12 mb-2">
+                            <h3>SUBSCRIBE & SAVE</h3>
+                        </div>
+                        <div className="col-md-4 mb-2">
+                            <div className="subs_firstbox subscribe_list">
+                                <span>
+                                    <div class="form-check pl-0">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"/>
+                                    </div>
+                                </span>
+                                <h5>EVERY 30 DAYS</h5>
+                                <h4>& SAVE 10%</h4>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-2">
+                            <div className="subs_secondbox subscribe_list">
+                                <span>
+                                    <div class="form-check pl-0">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"/>
+                                    </div>
+                                </span>
+                                <h5>EVERY 45 DAYS</h5>
+                                <h4>& SAVE 5%</h4>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-2">
+                            <div className="subs_thirdbox subscribe_list">
+                                <span>
+                                    <div class="form-check pl-0">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"/>
+                                    </div>
+                                </span>
+                                <h5>EVERY 60 DAYS</h5>
+                                <h4>& SAVE 2%</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
             <section className="downld_sec mt-4 py-5">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-9 mb-2 text-left">
                             <h5>DOWNLOAD THE BIG4 HEALTH APP NOW</h5>
                             <p>Enjoy best practices to reshape your health to maintain a healthy lifestyle. Lifestyle modification can be
-                            painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
-                            No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
-                                    sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
+                                painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
+                                No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
+                                sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
                         </div>
                         <div className="col-md-3">
                             <a className="" href="/#">
@@ -189,6 +249,7 @@ const Product_details = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

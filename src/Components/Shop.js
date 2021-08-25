@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 
 import { Swiper, SwiperSlide, } from 'swiper/react';
 import { Modal } from 'react-bootstrap';
-import SwiperCore, { Pagination, Navigation ,Autoplay} from 'swiper';
-import {userService} from '../services';
+import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper';
+import { userService } from '../services';
 import { toast } from 'react-toastify';
 import Loader from './common/Loader'
 import { config } from '../config/config'
-
+import Header from './common/Header'
+import Footer from './common/Footer'
 
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
@@ -18,9 +19,12 @@ const Shop = () => {
     const [selectedQuizId, setSelectedQuizId] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [searchText, setSearchText] = useState('');
+    const [userId, setUserId] = useState('');
 
 
     useEffect(() => {
+        let user_id = localStorage.getItem('user_id');
+        if (user_id) setUserId(user_id);
         setIsLoading(true);
         getCategories([]);
     }, []);
@@ -28,12 +32,12 @@ const Shop = () => {
     function getCategories(searchTxt) {
         userService.getCategories(searchTxt).then((response) => {
             setIsLoading(false);
-            if (response.data.status == 200){
+            if (response.data.status == 200) {
                 setCategories(response.data.data);
-              }else{
+            } else {
                 setCategories([]);
                 toast.error("Some Error Occur");
-              } 
+            }
         }).catch((error) => {
             setIsLoading(false);
             setCategories([]);
@@ -41,12 +45,12 @@ const Shop = () => {
         });
     }
 
-    function handleSearch(txt){
+    function handleSearch(txt) {
         setSearchText(txt);
         getCategories(txt);
     }
 
-    function redirectToProducts(cat){
+    function redirectToProducts(cat) {
         localStorage.setItem('cat_name', cat.name);
         setTimeout(() => {
             window.location.href = `/product?id=${cat._id}`;
@@ -55,16 +59,17 @@ const Shop = () => {
 
     return (
         <>
-            {isLoading && <Loader/>}
+            <Header />
+            {isLoading && <Loader />}
             <section className="heading-search">
                 <div className="container">
                     <h2>SHOP</h2>
-                    {/* <div className="input-group search-box">
-                        <input type="text" class="form-control" placeholder="Search by category name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)}/>
+                    <div className="input-group search-box">
+                        <input type="text" class="form-control" placeholder="Search by category name" aria-label="" aria-describedby="basic-addon1" onChange={(e) => handleSearch(e.target.value)} />
                         <div className="input-group-append">
                             <button className="btn" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </section>
             <section className="banner pt-0 pb-4">
@@ -76,13 +81,13 @@ const Shop = () => {
                                     <div className="col-md-6">
                                         <h1>WOW Life Science Omega-3 Fish Oil</h1>
                                         <p className="Price mt-2">Price: <span class="old">$15.50</span> <span className="ml-1 orignl">$12.60</span></p>
-                                        <button className="btn  mt-3">SHOP NOW</button>
+                                        <a className="btn  mt-3" href={userId ? '/shop' : '/signin'} >SHOP NOW</a>
                                     </div>
                                     <div className="col-md-6">
                                         <img src={require("../images/med1.png").default} alt="img" />
                                     </div>
                                 </div>
-                            </div>   
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,14 +97,14 @@ const Shop = () => {
                 <div className="container">
                     <div className="row">
                         {categories.length > 0 && categories.map((cat) => {
-                            return(<div className="col-md-3">
+                            return (<div className="col-md-3">
                                 <a className="pointer" onClick={() => redirectToProducts(cat)}>
-                                <div className="first-product text-center">
-                                    <div className="product-image">
-                                        <img src={cat.image ? config.imageUrl + cat.image : require("../images/no-image.png").default} alt="img" />
+                                    <div className="first-product text-center">
+                                        <div className="product-image">
+                                            <img src={cat.image ? config.imageUrl + cat.image : require("../images/no-image.png").default} alt="img" />
+                                        </div>
+                                        <p>{cat.name}</p>
                                     </div>
-                                    <p>{cat.name}</p>
-                                </div>
                                 </a>
                             </div>)
                         })}
@@ -158,16 +163,16 @@ const Shop = () => {
                 </div>
             </section>
 
-           
+
             <section className="downld_sec mt-4 py-5">
                 <div className="container">
                     <div className="row align-items-center">
                         <div className="col-md-9 mb-2 text-left">
                             <h5>DOWNLOAD THE BIG4 HEALTH APP NOW</h5>
                             <p>Enjoy best practices to reshape your health to maintain a healthy lifestyle. Lifestyle modification can be
-                            painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
-                            No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
-                                    sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
+                                painful or uncomfortable, the BIG4 Health app presents a seamless way to adapt to a healthier lifestyle.
+                                No matter how your health condition is, the BIG4 Health app makes it easier for you to watch your blood
+                                sugar, blood pressure, cholesterol and your BMI*. Let’s make it a day at a time!</p>
                         </div>
                         <div className="col-md-3">
                             <a className="" href="/#">
@@ -182,6 +187,7 @@ const Shop = () => {
                     </div>
                 </div>
             </section>
+            <Footer />
         </>
     )
 }

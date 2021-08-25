@@ -403,10 +403,18 @@ footer .fa{
     opacity: 0;
     cursor: pointer;
 }
+.popular a h6, .blog_title {
+    color: hsl(0, 0%, 34%);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+   -webkit-box-orient: vertical; 
+}
 
 .camera_box img{
-    height: 200px;
-    width: 200px;
+    max-width: 146px;
+    max-height: 146px;
 }
 .react-tel-input .flag-dropdown {
     background-color: white !important;
@@ -426,6 +434,7 @@ footer .fa{
     border-right: none;
     padding: 10px 0px;
     height: 46px;
+    
 }
 
 .PhoneInputInput{
@@ -622,11 +631,31 @@ section.product-area-box {
 }
 .product-list-image.text-center {
     height: 210px;
-    margin: 17px 19px;
+    /* margin: 17px 19px; */
     display: flex;
     align-items: center;
+    position: relative;
 }
+.product-list-details .cancelorder_btn{
+    color: #fff;
+    /* background-color: #00c9ff; */
+    border-color: #00c9ff;
+    font-weight: 500;
+    font-size: 15px;
+    width: 100%;
+    padding: 9px;
+    height: 44px;
 
+    background-image: linear-gradient(#fff, #fff), linear-gradient(#00c9ff, #00c9ff);
+    background-size: 0 100%, auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transition: all .2s ease-out;
+}
+.product-list-details .cancelorder_btn:hover{
+    background-size: 100% 100%, auto;
+    color: #00c9ff !important;
+}
 .product-list-box {
     background: white;
     border: 1px solid #bdbdbd;
@@ -635,7 +664,7 @@ section.product-area-box {
     margin: 15px 0;
 }
 .product-list-box h4 {
-    font-size: 15px;
+    font-size: 16px;
     color: #000;
 }
 .product-list-box h6  {
@@ -935,9 +964,23 @@ a.favourite-bt i{
     font-weight: 500;
 }
 .description-area {
-    margin: 50px 0;
+    margin: 50px 0 0;
 }
-
+.success_payment h1{
+    color: #4ba647;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 17px;
+    margin-bottom: 10px;
+}
+.success_payment p{
+    font-size: 17px;
+    margin-bottom: 0;
+    font-weight: 400;
+}
+.success_payment p:last-child{
+    margin-bottom: 20px;
+}
 .review-detail-rightside h6 {
     margin: 19px 0;
 }

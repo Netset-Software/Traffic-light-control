@@ -142,7 +142,7 @@ function updateQuantity(params) {
 }
 
 function addCard(params) {
-    let url = `${config.apiUrl}/cart`;
+    let url = `${config.apiUrl}/card`;
     return axios.post(url, params, configJsonHeaders);
 }
 

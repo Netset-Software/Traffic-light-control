@@ -4,8 +4,9 @@ import { Navbar, Nav, Dropdown } from 'react-bootstrap'
 import { toast } from 'react-toastify';
 import Loader from './Loader';
 import {userService} from '../../services';
+import {config} from '../../config/config'
 
-const Header = () => {
+const Header = (props) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [countData, setCountData] = useState('');
@@ -15,8 +16,10 @@ const Header = () => {
         { label: "French", value: 43 },
     ];
     const [isUserPresent, setIsUserPresent] = useState(false);
+    const [profileImage, setProfileImage] = useState('');
 
     useEffect(() => {
+        setProfileImage(localStorage.getItem('image'));
         let isUser = localStorage.getItem('user_id');
         if (isUser) setIsUserPresent(true);
         getProductCount();
@@ -62,17 +65,17 @@ const Header = () => {
                                 <li>
                                     <a href={isUserPresent ? '/' : '/signin'}>
                                         <i className="fa fa-bell-o" aria-hidden="true"></i>
-                                        <span className="notification_circle">
-                                            2
-                                </span>
+                                        {isUserPresent && <span className="notification_circle">
+                                            0
+                                </span>}
                                     </a>
                                 </li>
                                 <li>
                                     <a href={isUserPresent ? '/my_favorites' : '/signin'}>
                                         <i className="fa fa-heart-o" aria-hidden="true"></i>
-                                        <span className="notification_circle">
-                                        {countData?.favCount}
-                                </span>
+                                        {isUserPresent && <span className="notification_circle" id="fav-count">
+                                        {props.favCount || props.favCount === 0 ? props.favCount : countData?.favCount}
+                                </span>}
                                     </a>
                                 </li>
                                
@@ -81,7 +84,7 @@ const Header = () => {
                                     <Dropdown  className="user_dropdown">
                                         <Dropdown.Toggle id="dropdown-basic">
                                             <span>
-                                            <img src={require('../../images/placeholder.png').default} alt="" width="100" />
+                                            <img src={profileImage ? config.imageUrl + profileImage : require('../../images/placeholder.png').default} alt="" width="100" style={{borderRadius: '50%'}}/>
                                             </span>
                                             <i className="fa fa-angle-down"></i>
                                         </Dropdown.Toggle>
@@ -109,18 +112,19 @@ const Header = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="nav1">
-                                <Navbar expand="lg" >
+                                <Navbar expand="lg" className="pl-0">
                                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                     <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="mr-auto">
-                                            <Nav.Link href="/#">HOME</Nav.Link>
+                                            <Nav.Link href="/">HOME</Nav.Link>
                                             <Nav.Link href="/about">ABOUT</Nav.Link>
-                                            <Nav.Link href="#benifits_section">BENIFITS</Nav.Link>
-                                            <Nav.Link href="#foundation">FOUNDATIONS</Nav.Link>
+                                            <Nav.Link href="/#benifits_section">BENIFITS</Nav.Link>
+                                            <Nav.Link href="/#foundation">FOUNDATIONS</Nav.Link>
                                             <Nav.Link href="/foodoption">FOOD OPTIONS</Nav.Link>
                                             <Nav.Link href="/faq">FAQ</Nav.Link>
                                             <Nav.Link href="/blog">BLOGS</Nav.Link>
                                             <Nav.Link href="/contact">CONTACT</Nav.Link>
+                                            <Nav.Link href="/my_orders">MY ORDERS</Nav.Link>
                                         </Nav>
                                     </Navbar.Collapse>
 
@@ -131,7 +135,7 @@ const Header = () => {
                                 </div> */}
                                 <div className="text-right carticon_row">
                                     <a href={isUserPresent ? "/cart" : "/signin"}>
-                                        <span className="cart_count">{countData?.cartCount}</span>
+                                    {isUserPresent && <span className="cart_count" id="cart-count">{props.cartCount || props.cartCount === 0 ? props.cartCount : countData?.cartCount}</span>}
                                         <i className="fa fa-shopping-cart fa-2x text-white" aria-hidden="true"></i>
                                     </a>
                                 </div>
