@@ -170,7 +170,7 @@ const SignIn = () => {
                           <span className="google_btn">
                             {/* <button className="btn">GOOGLE</button> */}
                             <GoogleLogin
-                              clientId={config.googleClientId}
+                              clientId={`${config.googleClientId}`}
                               render={renderProps => (
                                 <a onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn" >GOOGLE</a>
                               )}
