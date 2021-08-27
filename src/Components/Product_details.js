@@ -175,6 +175,55 @@ const Product_details = () => {
                     </p> */}
                 </div>
             </section>
+            
+            <div className="container">
+                <hr className="my-4" />
+            </div>
+           
+            <section className="subscribe_section">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-12 mb-2">
+                            <h3>SUBSCRIBE & SAVE</h3>
+                        </div>
+                        <div className="col-md-4 mb-2">
+                            <div className="subs_firstbox subscribe_list">
+                                <span>
+                                    <div class="form-check pl-0">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"/>
+                                    </div>
+                                </span>
+                                <h5>EVERY 30 DAYS</h5>
+                                <h4>& SAVE 10%</h4>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-2">
+                            <div className="subs_secondbox subscribe_list">
+                                <span>
+                                    <div class="form-check pl-0">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"/>
+                                    </div>
+                                </span>
+                                <h5>EVERY 45 DAYS</h5>
+                                <h4>& SAVE 5%</h4>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4 mb-2">
+                            <div className="subs_thirdbox subscribe_list">
+                                <span>
+                                    <div class="form-check pl-0">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"/>
+                                    </div>
+                                </span>
+                                <h5>EVERY 60 DAYS</h5>
+                                <h4>& SAVE 2%</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 
             <section className="downld_sec mt-4 py-5">

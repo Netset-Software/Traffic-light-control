@@ -112,7 +112,7 @@ const Header = (props) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="nav1">
-                                <Navbar expand="lg" >
+                                <Navbar expand="lg" className="pl-0">
                                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                     <Navbar.Collapse id="basic-navbar-nav">
                                         <Nav className="mr-auto">
@@ -124,6 +124,7 @@ const Header = (props) => {
                                             <Nav.Link href="/faq">FAQ</Nav.Link>
                                             <Nav.Link href="/blog">BLOGS</Nav.Link>
                                             <Nav.Link href="/contact">CONTACT</Nav.Link>
+                                            <Nav.Link href="/my_orders">MY ORDERS</Nav.Link>
                                         </Nav>
                                     </Navbar.Collapse>
 

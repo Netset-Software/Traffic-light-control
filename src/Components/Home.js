@@ -250,7 +250,7 @@ const Home = () => {
                     </div>
                 </section>
             }
-            <section className="banner pt-0 pb-4">
+            <section className="banner py-4">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
