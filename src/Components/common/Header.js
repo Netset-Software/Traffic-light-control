@@ -60,6 +60,9 @@ const Header = (props) => {
                                     <a href="/shop">SHOP</a>
                                 </li>
                                 <li>
+                                    <a href="/my_orders">MY ORDERS</a>
+                                </li>
+                                <li>
                                     <a href="/offer">OFFERS</a>
                                 </li>
                                 <li>
@@ -124,7 +127,8 @@ const Header = (props) => {
                                             <Nav.Link href="/faq">FAQ</Nav.Link>
                                             <Nav.Link href="/blog">BLOGS</Nav.Link>
                                             <Nav.Link href="/contact">CONTACT</Nav.Link>
-                                            <Nav.Link href="/my_orders">MY ORDERS</Nav.Link>
+                                            {/* <Nav.Link href="/my_orders">MY ORDERS</Nav.Link> */}
+                                            <div id="google_translate_element"></div>
                                         </Nav>
                                     </Navbar.Collapse>
 

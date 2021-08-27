@@ -1160,7 +1160,17 @@ header .signup_btn .btn {
     color: white !important;
     font-weight: 500;
     padding: 0 30px 0 0 !important;
+    line-height: 37px;
 }
+
+.skiptranslate.goog-te-gadget {
+    height: 33px;
+    overflow: hidden;
+}
+.skiptranslate {
+    display: none;
+}
+
 .navbar-light .navbar-toggler {
     color: rgba(0,0,0,.5);
     border-color: rgba(0,0,0,.1);
@@ -1426,6 +1436,13 @@ input[type="file"]{
     font-weight: 500;
     color: grey;
     font-size: 15px;
+}
+select.goog-te-combo {
+    max-width: 130px;
+    height: 30px;
+    border: none;
+    background: #fff;
+    border-radius: 5px;
 }
 .sharebtn .btn{
     background: #00c9ff;

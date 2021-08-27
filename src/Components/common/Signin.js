@@ -174,6 +174,7 @@ const SignIn = () => {
                               render={renderProps => (
                                 <a onClick={renderProps.onClick} disabled={renderProps.disabled} className="btn" >GOOGLE</a>
                               )}
+                              redirectUri="https://www.big4health.com/"
                               buttonText="Login"
                               onSuccess={responseGoogle}
                               onFailure={responseGoogle}
