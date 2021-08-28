@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         imageView7!!.setImageResource(R.drawable.remove_shadow)
         imageView10!!.setImageResource(R.drawable.remove_shadow)
 
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView1!!.text = time.toString()
@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         imageView10!!.setImageResource(R.drawable.remove_shadow)
 
 
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView2!!.text = time.toString()
@@ -185,7 +185,7 @@ class MainActivity : AppCompatActivity() {
         imageView8!!.setImageResource(R.drawable.shadow)
         imageView9!!.setImageResource(R.drawable.shadow)
         imageView4!!.setImageResource(R.drawable.shadow)
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView3!!.text = time.toString()
@@ -204,7 +204,7 @@ class MainActivity : AppCompatActivity() {
         imageView11!!.setImageResource(R.drawable.shadow)
         imageView12!!.setImageResource(R.drawable.shadow)
         imageView7!!.setImageResource(R.drawable.shadow)
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView4!!.text = time.toString()
@@ -237,7 +237,7 @@ class MainActivity : AppCompatActivity() {
         imageView4!!.setImageResource(R.drawable.remove_shadow)
         imageView10!!.setImageResource(R.drawable.remove_shadow)
 
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView3!!.text = time.toString()
@@ -285,7 +285,7 @@ class MainActivity : AppCompatActivity() {
         imageView4!!.setImageResource(R.drawable.remove_shadow)
         imageView7!!.setImageResource(R.drawable.remove_shadow)
 
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView4!!.text = time.toString()
@@ -307,7 +307,7 @@ class MainActivity : AppCompatActivity() {
         imageView1!!.setImageResource(R.drawable.remove_shadow)
         imageView2!!.setImageResource(R.drawable.shadow)
         imageView3!!.setImageResource(R.drawable.shadow)
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView1!!.text = time.toString()
@@ -325,7 +325,7 @@ class MainActivity : AppCompatActivity() {
         imageView1!!.setImageResource(R.drawable.shadow)
         imageView3!!.setImageResource(R.drawable.shadow)
 
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView1!!.text = time.toString()
@@ -344,7 +344,7 @@ class MainActivity : AppCompatActivity() {
         imageView5!!.setImageResource(R.drawable.shadow)
         imageView6!!.setImageResource(R.drawable.shadow)
 
-        object : CountDownTimer(60000, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val time = millisUntilFinished / 1000
                 textView2!!.text = time.toString()
