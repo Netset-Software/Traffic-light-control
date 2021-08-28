@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/llLight1"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/black"
+        android:gravity="center_horizontal"
+        android:paddingVertical="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardRed1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/light_red">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardOrange1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/light_orange"
+            android:layout_marginTop="10dp"
+       >
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardgreen1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/light_green"
+            android:layout_marginTop="10dp"
+            >
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llLight2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/black"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingVertical="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardRed2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardBackgroundColor="@color/light_red"
+            app:cardCornerRadius="10dp">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardOrange2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/light_orange"
+            app:cardCornerRadius="10dp">
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardgreen2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/light_green"
+            app:cardCornerRadius="10dp">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llLight3"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/black"
+        android:gravity="center_horizontal"
+        android:paddingVertical="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardRed3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/light_red">
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardOrange3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/light_orange"
+            android:layout_marginTop="10dp">
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardgreen3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardCornerRadius="10dp"
+            app:cardBackgroundColor="@color/light_green"
+            android:layout_marginTop="10dp">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llLight4"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/black"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingVertical="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardRed4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:cardBackgroundColor="@color/light_red"
+            app:cardCornerRadius="10dp">
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardOrange4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/light_orange"
+            app:cardCornerRadius="10dp">
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mCardgreen4"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/light_green"
+            app:cardCornerRadius="10dp">
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+   <!-- <View
+        android:layout_width="1dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toEndOf="@id/llLight1"
+        android:background="black"/>-->
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#673AB7"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
