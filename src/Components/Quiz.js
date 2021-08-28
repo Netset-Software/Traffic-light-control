@@ -29,13 +29,13 @@ const Quiz = (props) => {
 
 
 
-    useEffect(() => {
-        if (localStorage.getItem('done') === "true") window.location.href = '/';
-        localStorage.setItem('done', true);
-        let query = new URLSearchParams(window.location.search);
-        setQuizId(query.get('id'));
-        getQuizData(query.get('id'));
-    }, []);
+    // useEffect(() => {
+    //     // if (localStorage.getItem('done') === "true") window.location.href = '/';
+    //     // localStorage.setItem('done', true);
+    //     // let query = new URLSearchParams(window.location.search);
+    //     // setQuizId(query.get('id'));
+    //     // getQuizData(query.get('id'));
+    // }, []);
 
     function getQuizData(id) {
         setIsLoading(true);
@@ -184,13 +184,128 @@ const Quiz = (props) => {
         setAnswerList(tmp2);
     }
 
+
+    // let time = new Date();
+    //                 setMaxQuizTime(120);
+    //                 setQuizTime(new Date().setSeconds(time.getSeconds() + 120));
+
+    const a = 30
+
+// let time = new Date()
+
+          const [eastT, setEastT] =useState('')          
+          const [southT, setSouthT] =useState('')     
+          const [westT, setWestT] =useState('')     
+          const [northT, setNorthT] =useState('')  
+          const [loader, setLoader] =useState(true)  
+
+
+          
+    useEffect(() => {
+        let time = new Date()
+        setEastT(time.setSeconds(time.getSeconds() + a))
+        time = new Date()
+        setSouthT(time.setSeconds(time.getSeconds() + a + a))
+        time = new Date()
+        setWestT(time.setSeconds(time.getSeconds() + a + a+a))
+        time = new Date()
+        setNorthT(time.setSeconds(time.getSeconds() + a + a+a+a))
+    }, []);
+
+    function onTimeExpireE(type) {
+        // if (collectedAnswer.questions[0].answer === 0){
+        //     alert("Your Time is Up.")
+        //     window.location.href = '/';
+        // }else{
+        //     if (isAutoSubmit) calculateResult(getFormatedTime(0));
+        // }
+        // if (isAutoSubmit) calculateResult(getFormatedTime(0));
+        
+        // debugger
+        let t = new Date()
+            let val = t.setSeconds(t.getSeconds() + 120);
+        if (type === 'e'){
+            
+            setEastT('');
+        setEastT(val)
+        } else if(type === 's'){
+            
+            setSouthT('')
+            setSouthT(val)
+        }
+        else if(type === 'w'){
+     
+            setWestT('');
+            setWestT(val)
+        }
+        else if(type === 'n'){
+      
+            setNorthT('');
+            setNorthT(val)
+        }
+
+        setLoader(!loader)
+    }
+          
     return (
         <div>
-            <Header/>
+
+
+
+
+{/* 
+<div style= {{position: 'absolute', border: '1px solid red', width: '200px', height: '200px', top: '147px', right:'1500px'}}>
+
+<span style={{position: 'relative', top: '84px', right: '0px'}}>{eastT && <Timer expiryTimestamp={eastT} onTimeExpire={() => onTimeExpireE('e')} />}</span>
+<span style={{position: 'relative', top: '-10px', right: '-64px'}}>{southT && <Timer expiryTimestamp={southT} onTimeExpire={() => onTimeExpireE('s')} />}</span>
+<span style={{position: 'relative', top: '13px', right: '-133px'}}>{westT && <Timer expiryTimestamp={westT} onTimeExpire={() => onTimeExpireE('w')} />}</span>
+<span style={{position: 'absolute', top: '300px', right: '1574px'}}>{northT && <Timer expiryTimestamp={northT} onTimeExpire={() => onTimeExpireE('n')} />}</span>
+</div> */}
+
+
+
+<span style={{position: 'absolute', top: '236px', right: '1632px'}}>{eastT && <Timer expiryTimestamp={eastT} onTimeExpire={() => onTimeExpireE('e')} />}</span>
+<span style={{position: 'absolute', top: '180px', right: '1574px'}}>{southT && <Timer expiryTimestamp={southT} onTimeExpire={() => onTimeExpireE('s')} />}</span>
+<span style={{position: 'absolute', top: '236px', right: '1510px'}}>{westT && <Timer expiryTimestamp={westT} onTimeExpire={() => onTimeExpireE('w')} />}</span>
+<span style={{position: 'absolute', top: '300px', right: '1574px'}}>{northT && <Timer expiryTimestamp={northT} onTimeExpire={() => onTimeExpireE('n')} />}</span>
+
+<span style={{position: 'absolute', backgroundColor: 'black', width: '30px',height: '30px', borderRadius: '30px', top: '236px', right: '1587px'}}></span>
+<div  class="row">
+<div className="div-1"></div>
+<div className="vertice-div-1"></div>
+<div className="div-2"></div>
+
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<div  class="row">
+
+<div className="div-3"></div>
+<div className="vertice-div-1"></div>
+<div className="div-4"></div>
+
+</div>
+
+
+
+
+
+            {/* <Header/> */}
             {isLoading && <Loader/>}
                 <React.Fragment>
                     <section className="quiz_section py-4">
                         <div className="container">
+
+
+                            <div style={{ border: 'black', }}>
+
+                            </div>
+
+
+
+
                             {quizData.questions && quizData.questions.length > 0 &&
                                 <div className="row">
                                     <div className="col-md-12">
@@ -203,7 +318,7 @@ const Quiz = (props) => {
                                             <div className="col-sm-6 mob_col">
                                                 <div className="time_box">
                                                     <p>Time Left</p>
-                                                    {quizTime && <Timer expiryTimestamp={quizTime} onTimeExpire={() => onTimeExpire()} />}
+                                                    {/* {quizTime && <Timer expiryTimestamp={quizTime} onTimeExpire={() => onTimeExpire()} />} */}
                                                     {/* <h6>00 : 00</h6> */}
                                                 </div>
                                             </div>
@@ -223,7 +338,7 @@ const Quiz = (props) => {
                         </div>
                     </section>
 
-                    <section className="downld_sec mt-4 py-5">
+                    {/* <section className="downld_sec mt-4 py-5">
                         <div className="container">
                             <div className="row align-items-center">
                                 <div className="col-md-9 mb-2 text-left">
@@ -244,7 +359,7 @@ const Quiz = (props) => {
 
                             </div>
                         </div>
-                    </section>
+                    </section> */}
                     <Modal show={showHide} className="quizmodal1"
                         aria-labelledby="contained-modal-title-vcenter"
                         centered
@@ -292,7 +407,7 @@ const Quiz = (props) => {
                     </Modal>
 
                 </React.Fragment>
-                <Footer/>
+                {/* <Footer/> */}
         </div>
 
     );

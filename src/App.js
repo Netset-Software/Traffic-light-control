@@ -48,7 +48,7 @@ function App() {
     <Router>
     {/* <Header /> */}
       <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Quiz} />
             <Route  path="/signin" component={SignIn} />
             <Route  path="/forgotpassword" component={Forgotpassword} />
             <Route  path="/signup" component={Signup} />

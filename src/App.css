@@ -1167,9 +1167,10 @@ header .signup_btn .btn {
     height: 33px;
     overflow: hidden;
 }
-.skiptranslate {
-    display: none;
-}
+/* .skiptranslate #root, .skiptranslate .goog-te-banner-frame{
+    display: none !important;
+} */
+
 
 .navbar-light .navbar-toggler {
     color: rgba(0,0,0,.5);
@@ -2805,4 +2806,48 @@ select.goog-te-combo {
         border-radius: 7px;
         font-size: 19px;
         }
+    }
+
+
+
+
+
+    .div-1{
+        /* border-bottom: 1px solid black;
+        border-right: 1px solid black; */
+        background-color: #85ff0094;
+        border-radius: 0px 0px 50px 0px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .vertice-div-1{
+        width: 100px;
+        height: 200px;
+    }
+
+    .div-2{
+        /* border-bottom: 1px solid black;
+        border-left: 1px solid black; */
+        background-color: #85ff0094;
+        border-radius: 0px 0px 0px 50px;
+        width: 200px;
+        height: 200px;
+    }
+
+    .div-4{
+        /* border-top: 1px solid black;
+        border-left: 1px solid black; */
+        background-color: #85ff0094;
+        border-radius: 50px 0px 0px 0px;
+                width: 200px;
+        height: 200px;
+    }
+    .div-3{
+        /* border-top: 1px solid black;
+        border-right: 1px solid black; */
+        background-color: #85ff0094;
+        border-radius: 0px 50px 0px 0px;
+                width: 200px;
+        height: 200px;
     }

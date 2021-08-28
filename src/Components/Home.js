@@ -31,7 +31,7 @@ const Home = () => {
         setIsUserLogin(user_id ? true : false);
         // getAllQuizes("Sahibzada Ajit Singh Nagar");
         // getAllQuizes("");
-        setCurrentLocation();
+        // setCurrentLocation();
         // }
     }, []);
 
