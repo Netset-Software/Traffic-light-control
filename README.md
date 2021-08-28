@@ -1,3 +1,3 @@
 <p align="center">
-  <img src="https://github.com/Netset-Software/Traffic-light-control/tree/aahanverma/art/demo.gif">
+  <img src="https://github.com/Netset-Software/Traffic-light-control/blob/aahanverma/art/demo.gif">
 </p>
