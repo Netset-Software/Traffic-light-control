@@ -1,17 +1,2 @@
-<!DOCTYPE html> 
-<html> 
-<body> 
 
-<video width="400" controls>
-  <source src="mov_bbb.mp4" type="video/mp4">
-  <source src="mov_bbb.ogg" type="video/ogg">
-  Your browser does not support HTML video.
-</video>
-
-<p>
-Video courtesy of 
-<a href="https://www.bigbuckbunny.org/" target="_blank">Big Buck Bunny</a>.
-</p>
-
-</body> 
-</html>
+<iframe width="560" height="315" src="https://github.com/Netset-Software/Traffic-light-control/tree/aahanverma/art/demo.mp4 title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
