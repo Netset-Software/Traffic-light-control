@@ -1,3 +1,7 @@
+![alt text](https://github.com/Netset-Software/Traffic-light-control/blob/prabhkirat/ezgif.com-gif-maker.gif "")
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
