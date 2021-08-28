@@ -51,22 +51,22 @@ $(document).ready(function() {
         }
 
         if(nextI == 0) {
-            $("#"+directions[0]).children('.count').text(cnt+(1*5));
-            $("#"+directions[1]).children('.count').text(cnt+(2*5));
-            $("#"+directions[2]).children('.count').text(cnt+(3*5));
+            $("#"+directions[0]).children('.count').text(cnt+(1*startCount));
+            $("#"+directions[1]).children('.count').text(cnt+(2*startCount));
+            $("#"+directions[2]).children('.count').text(cnt+(3*startCount));
         } else if(nextI == 1) {
-            $("#"+directions[1]).children('.count').text(cnt+(1*5));
-            $("#"+directions[2]).children('.count').text(cnt+(2*5));
-            $("#"+directions[3]).children('.count').text(cnt+(3*5));
+            $("#"+directions[1]).children('.count').text(cnt+(1*startCount));
+            $("#"+directions[2]).children('.count').text(cnt+(2*startCount));
+            $("#"+directions[3]).children('.count').text(cnt+(3*startCount));
         } else if(nextI == 2) {
-            $("#"+directions[2]).children('.count').text(cnt+(1*5));
-            $("#"+directions[3]).children('.count').text(cnt+(2*5));
-            $("#"+directions[0]).children('.count').text(cnt+(3*5));
+            $("#"+directions[2]).children('.count').text(cnt+(1*startCount));
+            $("#"+directions[3]).children('.count').text(cnt+(2*startCount));
+            $("#"+directions[0]).children('.count').text(cnt+(3*startCount));
         } else if(nextI == 3) {
             console.info('*********', nextI)
-            $("#"+directions[3]).children('.count').text(cnt+(1*5));
-            $("#"+directions[0]).children('.count').text(cnt+(2*5));
-            $("#"+directions[1]).children('.count').text(cnt+(3*5));
+            $("#"+directions[3]).children('.count').text(cnt+(1*startCount));
+            $("#"+directions[0]).children('.count').text(cnt+(2*startCount));
+            $("#"+directions[1]).children('.count').text(cnt+(3*startCount));
         }
         
 
