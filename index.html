@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="./style.css">
+<script src="./jquery.min.js"></script>
+
+<div id="east" class="light active"> 
+    <span class="red"></span>
+    <span class="orange"></span>
+    <span class="active green"></span>
+    <h6 class="count"></h6>
+</div>
+
+<div id="west" class="light">
+    <span class="red active"></span>
+    <span class="orange"></span>
+    <span class="green"></span>
+    <h6 class="count"></h6>
+</div>
+
+<div class="chowk"><span>Lights Chowk</span></div>
+
+<div id="north" class="light">
+    <span class="red active"></span>
+    <span class="orange"></span>
+    <span class="green"></span>
+    <h6 class="count"></h6>
+</div>
+
+<div id="south" class="light">
+    <span class="red active"></span>
+    <span class="orange"></span>
+    <span class="green"></span>
+    <h6 class="count"></h6>
+</div>
+
+<script>
+$(document).ready(function() {
+    var activeDirection = 'east';
+    var directions = ['east', 'west', 'north', 'south'];
+    var startCount = 10;
+
+    function dir(cnt) {
+        var activeDir = $(".light.active");
+        activeDir.children('.count').text(cnt);
+        var actId = activeDir.attr('id');
+        console.info('activeDir: ', actId)
+        var count = activeDir.children('.count').text();
+        var cuurentDir = directions.indexOf(actId);
+
+        var nextI = cuurentDir + 1;
+        if(cuurentDir == 3) {
+            nextI = 0;
+        }
+
+        if(nextI == 0) {
+            $("#"+directions[0]).children('.count').text(cnt+(1*5));
+            $("#"+directions[1]).children('.count').text(cnt+(2*5));
+            $("#"+directions[2]).children('.count').text(cnt+(3*5));
+        } else if(nextI == 1) {
+            $("#"+directions[1]).children('.count').text(cnt+(1*5));
+            $("#"+directions[2]).children('.count').text(cnt+(2*5));
+            $("#"+directions[3]).children('.count').text(cnt+(3*5));
+        } else if(nextI == 2) {
+            $("#"+directions[2]).children('.count').text(cnt+(1*5));
+            $("#"+directions[3]).children('.count').text(cnt+(2*5));
+            $("#"+directions[0]).children('.count').text(cnt+(3*5));
+        } else if(nextI == 3) {
+            console.info('*********', nextI)
+            $("#"+directions[3]).children('.count').text(cnt+(1*5));
+            $("#"+directions[0]).children('.count').text(cnt+(2*5));
+            $("#"+directions[1]).children('.count').text(cnt+(3*5));
+        }
+        
+
+        console.info('count: ', count)
+
+        var myInterface = setInterval(function() {
+            console.info(count);
+            var getCount
+
+            if(count > 0 ) {
+                count = count - 1;
+                // activeDir.children('.count').text(count); 
+                $(".count").each(function(i) {
+                    var val = $(this).text();
+                    $(this).text(val-1);
+                    console.info('count: ========', val)
+                })
+            } else {
+                var dirCnt = directions.indexOf(actId);
+                var nextIndex = dirCnt + 1;
+                if(dirCnt == 3) {
+                    nextIndex = 0;
+                }
+                var nextDir = directions[nextIndex]
+                $("#"+actId).removeClass("active");
+                $("#"+actId).children('span').removeClass("active");
+                $("#"+actId).children('span.orange').addClass("active");
+                setTimeout(function() {
+
+                    $("#"+actId).children('span').removeClass("active");
+                    $("#"+actId).children('span.red').addClass("active");
+
+
+                    $("#"+nextDir).addClass("active");
+                    $("#"+nextDir).children('span').removeClass("active");
+                    $("#"+nextDir).children('span.green').addClass("active");
+
+                    clearInterval(myInterface);
+                    dir(startCount);
+                },1000)
+                clearInterval(myInterface);
+            }
+        }, 1000);
+    }
+    dir(startCount);
+})
+
+$('button').on('click', function() {
+    
+    // Caching
+    var self = $('.active');
+    
+    // Check if another element exists after the currently active one otherwise
+    // find the parent and start again
+    if (self.next().length) {
+        self
+            .removeClass('active')
+            .next()
+            .addClass('active');
+    } else {
+        self
+            .removeClass('active')
+            .parent()
+            .find('span:first')
+            .addClass('active');
+    }
+});
+
+</script>

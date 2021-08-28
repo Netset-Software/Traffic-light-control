@@ -1,0 +1,79 @@
+body {
+    background-color: #666;
+    margin: 10px;
+}
+
+/*! Light */
+.light {
+    background-color: #000;
+    box-shadow: 0 0 5px rgba(0,0,0, .8);
+    overflow: hidden;
+    padding: 0 0 4px;
+    width: 40px;
+    /* transform:rotate(270deg); */
+}
+.count {
+    color: red;
+    font-size: 20px;
+    padding: 0;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.light span {
+    border-radius: 50px;
+    display: block;
+    height: 30px;
+    margin: 4px auto 0;
+    opacity: .5;
+    width: 30px;
+}
+
+/*! Light colours */
+.red    { background-color: red; }
+.orange { background-color: orange; }
+.green  { background-color: #26c426; }
+
+/*! Active states */
+.light span.active    { opacity: 1; }
+.light .red.active    { box-shadow: 0 0 10px red; }
+.light .orange.active { box-shadow: 0 0 10px orange; }
+.light .green.active  { box-shadow: 0 0 10px green; }
+
+/*! Toggle button */
+button {
+    margin-top: 10px;
+}
+
+#east {
+    margin: auto;
+    margin-bottom: 140px;
+}
+#west {
+    margin-left: 600px;
+    float: left;
+}
+#north {
+    margin-left: 1200px;
+}
+#south {
+    margin: auto;
+    margin-top: 140px;
+}
+
+.chowk {
+    height: 100px;
+    width: 100px;
+    border: 4px solid;
+    position: absolute;
+    left: 47%;
+    top: 33%;
+    border-radius: 64%;
+}
+.chowk span {
+    position: absolute;
+    top: 30px;
+    left: -1px;
+    text-align: center;
+    color: #fff;
+}
