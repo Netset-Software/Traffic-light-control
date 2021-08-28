@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OgT-FO-Ukf">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Traffic Light View Controller-->
+        <scene sceneID="aTD-fD-Wqr">
+            <objects>
+                <viewController id="OgT-FO-Ukf" customClass="TrafficLightViewController" customModule="TrafficLight" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="saE-8p-wqU"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Cu-82-y6e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AXA-my-3Rx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red" translatesAutoresizingMaskIntoConstraints="NO" id="ZGZ-CD-JJx">
+                                <rect key="frame" x="330" y="384" width="64" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="5Cu-Nb-Zut"/>
+                                    <constraint firstAttribute="height" constant="128" id="UQX-MU-752"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red" translatesAutoresizingMaskIntoConstraints="NO" id="uqW-7P-xwn">
+                                <rect key="frame" x="175" y="44" width="64" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="iUu-EJ-85K"/>
+                                    <constraint firstAttribute="height" constant="128" id="lKx-1Y-yE4"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red" translatesAutoresizingMaskIntoConstraints="NO" id="D6E-E2-zdq">
+                                <rect key="frame" x="20" y="384" width="64" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="9gP-0H-Z8V"/>
+                                    <constraint firstAttribute="width" constant="64" id="eV9-GW-CEb"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red" translatesAutoresizingMaskIntoConstraints="NO" id="zdF-L6-mt4">
+                                <rect key="frame" x="175" y="714" width="64" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="A4R-NM-iyI"/>
+                                    <constraint firstAttribute="height" constant="128" id="GOc-9d-HHo"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybb-hr-AZU">
+                                <rect key="frame" x="182" y="438" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="C6d-lO-Jg1"/>
+                                    <constraint firstAttribute="height" constant="30" id="Rer-vh-nol"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5b3-ip-LOV"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZGZ-CD-JJx" firstAttribute="centerY" secondItem="AXA-my-3Rx" secondAttribute="centerY" id="1F0-fQ-gIB"/>
+                            <constraint firstItem="zdF-L6-mt4" firstAttribute="centerX" secondItem="5b3-ip-LOV" secondAttribute="centerX" id="1rs-eU-VW4"/>
+                            <constraint firstItem="5b3-ip-LOV" firstAttribute="trailing" secondItem="ZGZ-CD-JJx" secondAttribute="trailing" constant="20" id="34w-FF-qEo"/>
+                            <constraint firstItem="Ybb-hr-AZU" firstAttribute="centerY" secondItem="5b3-ip-LOV" secondAttribute="centerY" id="7P4-Yg-Pb6"/>
+                            <constraint firstItem="D6E-E2-zdq" firstAttribute="centerY" secondItem="ZGZ-CD-JJx" secondAttribute="centerY" id="Dvh-iw-0Wf"/>
+                            <constraint firstItem="Ybb-hr-AZU" firstAttribute="centerX" secondItem="5b3-ip-LOV" secondAttribute="centerX" id="Iot-lM-UWK"/>
+                            <constraint firstItem="5b3-ip-LOV" firstAttribute="bottom" secondItem="zdF-L6-mt4" secondAttribute="bottom" constant="20" id="cdy-K4-aBI"/>
+                            <constraint firstItem="uqW-7P-xwn" firstAttribute="top" secondItem="saE-8p-wqU" secondAttribute="bottom" id="iK4-r8-LWp"/>
+                            <constraint firstItem="uqW-7P-xwn" firstAttribute="centerX" secondItem="AXA-my-3Rx" secondAttribute="centerX" id="jkH-Sg-KwX"/>
+                            <constraint firstItem="D6E-E2-zdq" firstAttribute="leading" secondItem="5b3-ip-LOV" secondAttribute="leading" constant="20" id="zz8-Zc-PD4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="eastLight" destination="ZGZ-CD-JJx" id="DSo-z0-L8w"/>
+                        <outlet property="elapsedTime" destination="Ybb-hr-AZU" id="qmw-YN-yd8"/>
+                        <outlet property="northLight" destination="uqW-7P-xwn" id="1Ea-BB-kwf"/>
+                        <outlet property="southLight" destination="zdF-L6-mt4" id="hJ3-is-IOB"/>
+                        <outlet property="westLight" destination="D6E-E2-zdq" id="WCm-Bb-fyj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K3i-UJ-W9B" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-307.24637681159425" y="114.50892857142857"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="red" width="64" height="128"/>
+    </resources>
+</document>
