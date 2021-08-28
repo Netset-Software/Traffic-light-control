@@ -189,7 +189,7 @@ const Quiz = (props) => {
     //                 setMaxQuizTime(120);
     //                 setQuizTime(new Date().setSeconds(time.getSeconds() + 120));
 
-    const a = 30
+    const a = 20
 
 // let time = new Date()
 
@@ -223,7 +223,7 @@ const Quiz = (props) => {
         
         // debugger
         let t = new Date()
-            let val = t.setSeconds(t.getSeconds() + 120);
+            let val = t.setSeconds(t.getSeconds() + 80);
         if (type === 'e'){
             
             setEastT('');

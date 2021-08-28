@@ -16,7 +16,7 @@ function Timer(props) {
         if ( ((minuts*60) + seconds) <= 3 ){
             return false
         }
-        else if (((minuts*60) + seconds) <= 30){
+        else if (((minuts*60) + seconds) <=20){
             return true;
         }
         return false;
@@ -24,7 +24,7 @@ function Timer(props) {
     }
 
     function yellocolor(minuts, seconds){
-        return (((minuts*60) + seconds) <= 33 || ((minuts*60) + seconds) <= 3 ) ? true : false
+        return (((minuts*60) + seconds) <= 23 || ((minuts*60) + seconds) <= 3 ) ? true : false
     }
 
     // function redcolor(minuts, seconds){
