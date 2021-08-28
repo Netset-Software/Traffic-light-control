@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .trafficlight {
+            width: 60px;
+            margin: auto;
+        }
+        
+        .box {
+            height: 120px;
+            width: 60px;
+            background: black;
+            border: 6px solid lightgrey;
+        }
+        
+        .box1 {
+            height: 120px;
+            width: 60px;
+            background: black;
+            border: 6px solid lightgrey;
+        }
+        
+        .box2 {
+            height: 120px;
+            width: 60px;
+            background: black;
+            border: 6px solid lightgrey;
+        }
+        
+        .box3 {
+            height: 120px;
+            width: 60px;
+            background: black;
+            border: 6px solid lightgrey;
+        }
+        
+        .toppole {
+            height: 60px;
+            width: 30px;
+            background: black;
+            margin-left: 21px;
+        }
+        
+        .smallbox {
+            height: 60px;
+            width: 50px;
+            background: black;
+            border: 6px solid lightgrey;
+            margin-left: 5px;
+        }
+        
+        .word {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        
+        .walk {
+            color: green;
+            margin-top: 7px;
+        }
+        
+        .stay {
+            color: red;
+            margin-top: 10px;
+            opacity: 0.4;
+        }
+        
+        .bottompole {
+            height: 200px;
+            width: 30px;
+            background: black;
+            margin-left: 21px;
+        }
+        
+        .light {
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            margin-left: 15px;
+            margin-top: 8px;
+        }
+        
+        .red {
+            background-color: red;
+        }
+        
+        .orange {
+            background-color: orange;
+            opacity: 0.4;
+        }
+        
+        .green {
+            background-color: green;
+            opacity: 0.4;
+        }
+    </style>
+    <script src="jquery.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="trafficlight">
+        <div class="box">
+            <div class="red light red_light_left" data-value="red" id="redlight">
+            </div>
+            <div class="orange light orange_light_left" data-value="orange" id="orangelight">
+            </div>
+            <div class="green light green_light_left"  data-value="green" id="greenlight">
+            </div>
+        </div>
+        <p>
+            Left
+        </p>
+        <br>
+        <div class="box1">
+            <div class="red light red_light_right" id="redlight">
+            </div>
+            <div class="orange light orange_light_right" id="orangelight">
+            </div>
+            <div class="green light green_light_right" id="greenlight">
+            </div>
+        </div>
+        <br>
+        <p>
+            Right
+        </p>
+        <div class="box2">
+            <div class="red light red_light_up" id="redlight">
+            </div>
+            <div class="orange light orange_light_up" id="orangelight">
+            </div>
+            <div class="green light green_light_up" id="greenlight">
+            </div>
+        </div>
+        <br>
+        <p>
+            up
+        </p>
+        <div class="box3">
+            <div class="red light red_light_down" id="redlight">
+            </div>
+            <div class="orange light orange_light_down" id="orangelight">
+            </div>
+            <div class="green light green_light_down" id="greenlight">
+            </div>
+        </div>
+
+        Down
+    </div>
+    <script>
+
+        $(document).ready(function(){
+            var interval = 0;
+            $('.red_light_left').css('opacity', 1);
+            $('.red_light_right').css('opacity', 0.4);
+            $('.green_light_right').css('opacity', 1);
+            $('.red_light_down').css('opacity', 1);
+            $('.red_light_up').css('opacity', 1);
+            setInterval(for_yellow_alert, 4000);
+            var first = setInterval(traffic, 8000);
+
+        function for_yellow_alert(){
+            if(interval == 0){
+               $('.orange_light_right').css('opacity', 1);
+               $('.green_light_right').css('opacity', 0.4);
+            }
+            if(interval == 1){
+                $('.red_light_left').css('opacity', 0.4);
+                $('.orange_light_left').css('opacity', 1);
+                $('.green_light_left').css('opacity', 0.4);
+            }
+
+            if(interval == 2){
+                $('.red_light_up').css('opacity', 0.4);
+                $('.orange_light_up').css('opacity', 1);
+                $('.green_light_up').css('opacity', 0.4);
+            }
+            if(interval == 3){
+                $('.red_light_down').css('opacity', 0.4);
+                $('.orange_light_down').css('opacity', 1);
+                $('.green_light_down').css('opacity', 0.4);
+            }
+        }
+
+       function traffic(){
+        if(interval == 1){
+            $('.green_light_up').css('opacity', 1);
+            $('.red_light_up').css('opacity', 0.4);
+            $('.green_light_left').css('opacity', 0.4);
+            $('.red_light_left').css('opacity', 1);
+            $('.orange_light_left').css('opacity', 0.4);
+            interval = interval+1;
+            return false;
+        }
+        if(interval == 2){
+            $('.green_light_up').css('opacity',  0.4);
+            $('.orange_light_up').css('opacity', 0.4);
+            $('.red_light_up').css('opacity',1);
+
+            $('.red_light_down').css('opacity',  0.4);
+            $('.orange_light_down').css('opacity', 0.4);
+            $('.green_light_down').css('opacity',1);
+            interval = interval+1;
+            return false;
+        }
+        if(interval == 3){
+            $('.green_light_down').css('opacity',  0.4);
+            $('.orange_light_down').css('opacity', 0.4);
+            $('.red_light_down').css('opacity',1);
+            $('.red_light_right').css('opacity', 0.4);
+            $('.orange_light_right').css('opacity', 0.4);
+            $('.green_light_right').css('opacity', 1);
+            interval = 0;
+            return false;   
+        }
+        
+        $('.red_light_right').css('opacity', 1);
+        $('.green_light_right').css('opacity', 0.4);
+        $('.orange_light_right').css('opacity', 0.4);
+        $('.red_light_left').css('opacity', 0.4);
+        $('.green_light_left').css('opacity', 1);
+        var red_left_light = $('.red_light_left').data('value');
+        interval = 1;
+
+       }
+
+
+
+    })
+
+    </script>
+
+
+</body>
+
+</html>
