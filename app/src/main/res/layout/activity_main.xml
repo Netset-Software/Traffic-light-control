@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<!--    east Layout-->
+    <LinearLayout
+        android:id="@+id/eastLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/red_light"  />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/yellow_light"
+            />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/green_light" />
+
+    </LinearLayout>
+
+    <!--    west Layout-->
+    <LinearLayout
+        android:id="@+id/westLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/red_light"  />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/yellow_light"  />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/green_light"/>
+
+
+    </LinearLayout>
+
+<!--    south Layout-->
+    <LinearLayout
+        android:id="@+id/southLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/red_light" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/yellow_light"  />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/green_light" />
+
+
+    </LinearLayout>
+
+<!--    north Layout-->
+    <LinearLayout
+        android:id="@+id/northLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:gravity="center"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/red_light"/>
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/yellow_light"  />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/shadow"
+            android:background="@drawable/green_light"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
