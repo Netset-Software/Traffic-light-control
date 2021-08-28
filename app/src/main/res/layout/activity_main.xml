@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_grey"
+    android:padding="50dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:background="@drawable/rectangular_back_challenges"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/northLight"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/green" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/northLightCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="30dp"
+            android:text="60" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:background="@drawable/rectangular_back_challenges"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/eastLight"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#F42B2B" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/eastLightCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:paddingBottom="30dp"
+            android:text="60" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rectangular_back_challenges"
+        android:padding="5dp"
+        android:layout_marginTop="300dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/southtLight"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#F42B2B" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/southLightCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginBottom="30dp"
+            android:text="60" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/rectangular_back_challenges"
+        android:padding="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="160dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/westLight"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#F42B2B" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/westLightCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="60" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/road"/>
+
+</RelativeLayout>
