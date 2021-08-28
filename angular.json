@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "traffic-light"
+    }
+  },
+  "defaultProject": "traffic-light",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url(./assets/bootstrap.css);
+.block {
+  height: 400px;
+  border: 2px solid gray;
+  padding: 100px;
+}
+
+.white {
+  background-color: white;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.timer {
+  border-radius: 50%;
+  border: 2px solid black;
+  padding: 20px;
+  background: red;
+  width: 80px;
+  text-align: center;
+}
